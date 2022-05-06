@@ -3,11 +3,13 @@
 using UnityEngine;
 
 public class Bow : MonoBehaviour{       //bow mouse follow and shot when click
-
+	
+	[Header("Refferences")]
     public GameObject arrow;
-    public float launchForce;
     public Transform shotPoint;
-
+	
+	[Header("Variables")]
+    public float launchForce;
 	public float fireRate;
 	private float nextFire = 0f;
 	
