@@ -13,6 +13,10 @@ public class Bow : MonoBehaviour{       //bow mouse follow and shot when click
 	public float fireRate;
 	private float nextFire = 0f;
 	
+	void Start(){
+		
+	}
+	
     void Update(){
         Vector2 bowPosition = transform.position;
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
