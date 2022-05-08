@@ -1,51 +1,108 @@
-//using System.Collections;
-//using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour{
-
-	public float speed;      	//Enemy speed
-	public int life;            //Enemy life
-	public int damage;          //Enemy damage per hitt
-
-	public Transform stopCheck;	//Raycast start
-	public float length;		//Raycast lenth
-	private bool stop;			//Bool if player is stoped
-	private RaycastHit2D hit;
-
-	private GameObject target;
+	
+	Rigidbody2D rb;
+	Animator anim;
+	
+	[Header("Refferences")]
+	[SerializeField] Transform groundCheck;
+	[SerializeField] LayerMask groundLayer;
+	
+	[Header("Variables")]
+	[SerializeField] float speed;				//Enemy speed
+	[SerializeField] int damage;				//Enemy damage
+	[SerializeField] int life;					//Enemy life
+	
+	[Header("Raycast")]
+	[SerializeField] Transform stopCheck;		//Raycast start
+	[SerializeField] float length;				//Raycast lenth
+	RaycastHit2D hit;							//Raycast hit
+	bool stop;									//Bool if player is stoped
+	
+	GameObject target;							//Attack refference
+	bool isGrounded;							//Checking if enemy is grounded
 
 	void Start(){
-		this.GetComponent<Animator>().Play("Enemy_Walking", -1, Random.Range(0.0f, 1.0f));
+		anim = GetComponent<Animator>();
+		rb = GetComponent<Rigidbody2D>();
+		anim.Play("Enemy_Walking", -1, Random.Range(0.0f, 1.0f));
 	}
 
-
 	void Update(){
+		
+		CheckForEnemy();
+		Walk();
+		Death();
+		GroundCheck();
+		
+		Debug.Log(rb.velocity);
+	}
+	
+	void OnTriggerEnter2D(Collider2D other) {			//Arrow physics
+		if(other.gameObject.tag.Equals("Arrow")){                                                       //Getting hit by an arrow
+			life -= GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().damage;     //Getting the damage that the player does
+		}
+	}
+
+	void OnCollisionEnter2D(Collision2D other) {
+		if(other.gameObject.tag.Equals("Player")){
+			anim.SetBool("EnemyAttacks", true);		//Playing attack animation
+			target = other.gameObject;				//Passing player object on a variable
+		}
+	}
+
+	void OnCollisionExit2D(Collision2D other) {
+		if(other.gameObject.tag.Equals("Enemy")){
+			anim.SetBool("EnemyIsStill", false);           //Ending idling animation
+		}
+	}
+	
+	void GroundCheck(){
+		if(groundCheck != null){
+			isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
+			if(isGrounded){
+				rb.gravityScale = 1f;
+			}else{
+				rb.gravityScale = 4f;
+			}
+		}
+	}
+	
+	void Walk(){
+		if(stop == false){
+			rb.velocity = new Vector2(-speed, 0);	//Making enemy move
+		}
+	}
+	
+	void CheckForEnemy(){
 		if(life > 0){
-			hit = Physics2D.Raycast(stopCheck.position, transform.TransformDirection(Vector2.left), length); //Check if there is an enemy close in front
+			//Check if there is another enemy close in front
+			hit = Physics2D.Raycast(stopCheck.position, transform.TransformDirection(Vector2.left), length);
 		}
 		
 		if (hit){
 			if (hit.collider.gameObject.tag.Equals("Enemy")){
-				this.GetComponent<Animator>().SetBool("EnemyIsStill", true);
+				anim.SetBool("EnemyIsStill", true);
 				stop = true;
 			}
 		}else{
-			this.GetComponent<Animator>().SetBool("EnemyIsStill", false);
+			anim.SetBool("EnemyIsStill", false);
 			stop = false;
 		}
-		
-		
-		if(stop == false){
-			this.GetComponent<Rigidbody2D>().velocity = new Vector2(-speed, 0);    //Making enemy move
-		}
-		
+	}
+	
+	void AttackEnable(){
+		target.GetComponent<PlayerScript>().life -= damage;
+	}
+	
+	void Death(){
 		if (life <= 0){														//Enemy death physics
-			this.GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);//Stoping enemy
-			this.GetComponent<CapsuleCollider2D>().enabled = false;			//Disabling colliders
-			this.GetComponent<CircleCollider2D>().enabled = false;			//Disabling colliders
-			this.GetComponent<Animator>().SetBool("EnemyIsDead", true);		//Playing death animation
-			this.GetComponent<Rigidbody2D>().gravityScale = 0;				//Removing gravity
+			rb.velocity = new Vector2(0f, 0f);								//Stoping enemy
+			GetComponent<CapsuleCollider2D>().enabled = false;				//Disabling colliders
+			GetComponent<CircleCollider2D>().enabled = false;				//Disabling colliders
+			anim.SetBool("EnemyIsDead", true);								//Playing death animation
+			rb.gravityScale = 0;											//Removing gravity
 			
 			int i = 0;
 			foreach (Transform child in transform) {						//Removing arrows
@@ -56,38 +113,8 @@ public class Enemy : MonoBehaviour{
 		}
 	}
 	
-	//Arrow physics
-	void OnTriggerEnter2D(Collider2D other) {
-		if(other.gameObject.tag.Equals("Arrow")){                                                       //Getting hit by an arrow
-			life -= GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().damage;     //Getting the damage that the player does
-		}
-	}
-
-	void OnCollisionEnter2D(Collision2D other) {
-
-		if(other.gameObject.tag.Equals("Player")){
-			this.GetComponent<Animator>().SetBool("EnemyAttacks", true);        //Playing attack animation
-			target = other.gameObject;                                          //Passing player object on a variable
-		}
-		
-		//if(other.gameObject.tag.Equals("Enemy")){
-		//	this.GetComponent<Animator>().SetBool("EnemyIsStill", true);        //Playing idle animation
-		//}
-	}
-
-	 void OnCollisionExit2D(Collision2D other) {
-		if(other.gameObject.tag.Equals("Enemy")){
-			//this.GetComponent<Enemy>().stop = false;
-			this.GetComponent<Animator>().SetBool("EnemyIsStill", false);           //Ending idling animation
-		}
-	}
-
-	void AttackEnable(){
-		target.GetComponent<PlayerScript>().life -= damage;
-		//Debug.Log(target.GetComponent<PlayerScript>().life);
-	}
-	
 	void OnDrawGizmosSelected(){
         Gizmos.DrawWireSphere(stopCheck.position, length);
+        Gizmos.DrawWireSphere(groundCheck.position, 0.1f);
     }
 }

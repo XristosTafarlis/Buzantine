@@ -3,12 +3,14 @@
 using UnityEngine;
 
 public class CameraScript : MonoBehaviour{
+	[Header("Refferences")]
+	[SerializeField] Transform target;
 	
-	public Transform target;
-	public float smoothing;
-	
-	public Vector2 minPos;
-	public Vector2 maxPos;
+	[Header("Variables")]
+	[Range(1 , 50)]
+	[SerializeField] float smoothing;
+	[SerializeField] Vector2 minPos;
+	[SerializeField] Vector2 maxPos;
 	
 	private void FixedUpdate(){
 		if(transform.position != target.position){
@@ -17,7 +19,7 @@ public class CameraScript : MonoBehaviour{
 			targetPos.x = Mathf.Clamp(targetPos.x, minPos.x, maxPos.y);
 			targetPos.y = Mathf.Clamp(targetPos.y, minPos.y, maxPos.y);
 			
-			transform.position = Vector3.Lerp(transform.position, targetPos, smoothing);
+			transform.position = Vector3.Lerp(transform.position, targetPos, smoothing / 100);
 		}
 	}
 }

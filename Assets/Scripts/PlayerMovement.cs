@@ -4,54 +4,90 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour{
+	
+	//[Header("Refferences")]
+	Rigidbody2D rb;
+	
+	[Header("Variables")]
+	[SerializeField] float moveSpeed = 5f;
+	[SerializeField] float runSpeed = 8f;
+	
+	float finalSpeed;
+	string location = null;
 
-    public float moveSpeed = 5f;
-    public Rigidbody2D rb;
-    private string Location = null;
+	Vector2 movement;
+	
+	void Start() {
+		rb = gameObject.GetComponent<Rigidbody2D>();
+		finalSpeed = moveSpeed;
+	}
+	
+	void Update(){
+		MovementRead();
+		LocationUpdate();	
+		Run();
+	}
 
-    Vector2 movement;
-    
-    void Update(){
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
+	void FixedUpdate(){
+		rb.MovePosition(rb.position + movement * finalSpeed * Time.fixedDeltaTime);
+	}
 
-        if (Input.GetKey(KeyCode.Space)){
-            if (Location == "Macedonia")
-                SceneManager.LoadScene(1);
-        }
-
-    }
-
-    void FixedUpdate(){
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
-    }
-
-    private void OnTriggerEnter2D(Collider2D other) {
-        if(other.name == "Macedonia")
-            Location = "Macedonia";
-        else if(other.name == "Thracia")
-            Location ="Thracia";
-        else if(other.name == "Dacia")
-            Location = "Dacia";
-        else if(other.name == "Quaestura Exercitus")
-            Location = "Quaestura Exercitus";
-        else if(other.name == "Illyricum")
-            Location = "Illyricum";
-        else if(other.name == "Italia Annonaria")
-            Location = "Italia Annonaria";
-        else if(other.name == "Italia Suburbicaria")
-            Location = "Italia Suburbicaria";
-        else if(other.name == "Pontica")
-            Location = "Pontica";
-        else if(other.name == "Asiana")
-            Location = "Asiana";
-        else if(other.name == "Oriens")
-            Location = "Oriens";
-        else if(other.name == "Aegyptus")
-            Location = "Aegyptus";
-        else if(other.name == "Africa")
-            Location = "Africa";
-        else if(other.name == "Spaniae")
-            Location = "Spaniae";
-    }
+	void OnTriggerEnter2D(Collider2D other) {
+		if(other.name == "Macedonia")
+			location = "Macedonia";
+		else if(other.name == "Thracia")
+			location ="Thracia";
+		else if(other.name == "Dacia")
+			location = "Dacia";
+		else if(other.name == "Quaestura Exercitus")
+			location = "Quaestura Exercitus";
+		else if(other.name == "Illyricum")
+			location = "Illyricum";
+		else if(other.name == "Italia Annonaria")
+			location = "Italia Annonaria";
+		else if(other.name == "Italia Suburbicaria")
+			location = "Italia Suburbicaria";
+		else if(other.name == "Pontica")
+			location = "Pontica";
+		else if(other.name == "Asiana")
+			location = "Asiana";
+		else if(other.name == "Oriens")
+			location = "Oriens";
+		else if(other.name == "Aegyptus")
+			location = "Aegyptus";
+		else if(other.name == "Africa")
+			location = "Africa";
+		else if(other.name == "Spaniae")
+			location = "Spaniae";
+	}
+	
+	void OnTriggerExit2D(Collider2D other) {
+		location = null;
+	}
+	
+	void MovementRead(){
+		movement.x = Input.GetAxisRaw("Horizontal");
+		movement.y = Input.GetAxisRaw("Vertical");
+	}
+	
+	void Run(){
+		if(Input.GetKeyUp(KeyCode.LeftShift)){
+			finalSpeed = moveSpeed;
+		}if(Input.GetKeyDown(KeyCode.LeftShift)){
+			finalSpeed = runSpeed;
+		}
+	}
+	
+	void LocationUpdate(){
+		if (Input.GetKey(KeyCode.Space)){
+			if (location == "Macedonia"){
+				Debug.Log("Macedonia");
+				SceneManager.LoadScene(1);
+			}
+			if (location == "Spaniae"){
+				Debug.Log("Spaniae");
+				SceneManager.LoadScene(2);
+			}
+		}
+	}
 }

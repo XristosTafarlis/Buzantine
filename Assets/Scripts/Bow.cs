@@ -2,14 +2,14 @@
 //using System.Collections.Generic;
 using UnityEngine;
 
-public class Bow : MonoBehaviour{       //bow mouse follow and shot when click
+public class Bow : MonoBehaviour{	//bow mouse follow and shot when click
 	
 	[Header("Refferences")]
-    public GameObject arrow;
-    public Transform shotPoint;
+	public GameObject arrow;
+	public Transform shotPoint;
 	
 	[Header("Variables")]
-    public float launchForce;
+	public float launchForce;
 	public float fireRate;
 	private float nextFire = 0f;
 	
@@ -17,20 +17,20 @@ public class Bow : MonoBehaviour{       //bow mouse follow and shot when click
 		
 	}
 	
-    void Update(){
-        Vector2 bowPosition = transform.position;
-        Vector2 mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-        Vector2 direction = mousePosition - bowPosition;
-        transform.right = direction;
+	void Update(){
+		Vector2 bowPosition = transform.position;
+		Vector2 mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+		Vector2 direction = mousePosition - bowPosition;
+		transform.right = direction;
 
-        if (Input.GetMouseButtonDown(0) && Time.time >= nextFire){
+		if (Input.GetMouseButtonDown(0) && Time.time >= nextFire){
 			nextFire = Time.time + 1f/fireRate; 
-            Shoot();
-        }
-    }
+			Shoot();
+		}
+	}
 
-    void Shoot() {
-        GameObject newArrow = Instantiate(arrow, shotPoint.position, shotPoint.rotation);
-        newArrow.GetComponent<Rigidbody2D>().velocity = transform.right * launchForce;
-    }
+	void Shoot() {
+		GameObject newArrow = Instantiate(arrow, shotPoint.position, shotPoint.rotation);
+		newArrow.GetComponent<Rigidbody2D>().velocity = transform.right * launchForce;
+	}
 }
