@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour{
 	[Header("Refferences")]
 	[SerializeField] Transform groundCheck;
 	[SerializeField] LayerMask groundLayer;
+	[SerializeField] LayerMask enemyLayer;
 	
 	[Header("Variables")]
 	[SerializeField] float speed;				//Enemy speed
@@ -30,13 +31,10 @@ public class Enemy : MonoBehaviour{
 	}
 
 	void Update(){
-		
-		CheckForEnemy();
 		Walk();
+		CheckForEnemy();
 		Death();
 		GroundCheck();
-		
-		Debug.Log(rb.velocity);
 	}
 	
 	void OnTriggerEnter2D(Collider2D other) {			//Arrow physics
@@ -78,13 +76,15 @@ public class Enemy : MonoBehaviour{
 	void CheckForEnemy(){
 		if(life > 0){
 			//Check if there is another enemy close in front
-			hit = Physics2D.Raycast(stopCheck.position, transform.TransformDirection(Vector2.left), length);
+			hit = Physics2D.Raycast(stopCheck.position, Vector2.left, length);
 		}
 		
 		if (hit){
 			if (hit.collider.gameObject.tag.Equals("Enemy")){
-				anim.SetBool("EnemyIsStill", true);
-				stop = true;
+				if(rb.velocity.x > -0.1f){
+					anim.SetBool("EnemyIsStill", true);
+					stop = true;
+				}
 			}
 		}else{
 			anim.SetBool("EnemyIsStill", false);

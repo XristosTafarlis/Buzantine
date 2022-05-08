@@ -29,7 +29,8 @@ public class PlayerMovement : MonoBehaviour{
 	}
 
 	void FixedUpdate(){
-		rb.MovePosition(rb.position + movement * finalSpeed * Time.fixedDeltaTime);
+		//rb.MovePosition(rb.position + movement * finalSpeed * Time.fixedDeltaTime);
+		rb.velocity = new Vector2(movement.x * finalSpeed, movement.y * finalSpeed);
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
@@ -80,13 +81,25 @@ public class PlayerMovement : MonoBehaviour{
 	
 	void LocationUpdate(){
 		if (Input.GetKey(KeyCode.Space)){
-			if (location == "Macedonia"){
-				Debug.Log("Macedonia");
-				SceneManager.LoadScene(1);
-			}
 			if (location == "Spaniae"){
 				Debug.Log("Spaniae");
+				SceneManager.LoadScene(1);
+			}
+			if (location == "Italia Annonaria"){
+				Debug.Log("Italia Annonaria");
 				SceneManager.LoadScene(2);
+			}
+			if (location == "Italia Suburbicaria"){
+				Debug.Log("Italia Suburbicaria");
+				SceneManager.LoadScene(3);
+			}
+			if (location == "Macedonia"){
+				Debug.Log("Macedonia");
+				SceneManager.LoadScene(4);
+			}
+			if (location == "Illyricum"){
+				Debug.Log("Illyricum");
+				SceneManager.LoadScene(5);
 			}
 		}
 	}

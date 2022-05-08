@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8260747704470185832}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 5623426136656217211}
   - component: {fileID: 5623426136656217210}
   - component: {fileID: 1369832509}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -188,7 +188,10 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  speed: 1.5
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  speed: 1.1
   damage: 10
   life: 20
   stopCheck: {fileID: 7101807876733155219}
@@ -221,7 +224,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7101807876733155219}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: StopCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,7 +239,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6802869849125437134}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.58, y: 0.61, z: 0}
+  m_LocalPosition: {x: -1.849, y: 0.388, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5623426136656217209}
