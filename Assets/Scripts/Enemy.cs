@@ -11,30 +11,35 @@ public class Enemy : MonoBehaviour{
 	[SerializeField] LayerMask enemyLayer;
 	
 	[Header("Variables")]
-	[SerializeField] float speed;				//Enemy speed
-	[SerializeField] int damage;				//Enemy damage
-	[SerializeField] int life;					//Enemy life
+	[SerializeField] float speed;								//Enemy speed
+	[SerializeField] int damage;								//Enemy damage
+	[SerializeField] int life;									//Enemy life
 	
-	[Header("Raycast")]
-	[SerializeField] Transform stopCheck;		//Raycast start
-	[SerializeField] float length;				//Raycast lenth
-	RaycastHit2D hit;							//Raycast hit
-	bool stop;									//Bool if player is stoped
+	[Header("Circle")]	
+	[SerializeField] Transform stopCheckUpper;					//Circle start
+	[SerializeField] Transform stopCheckMiddle;					//Circle start
+	//[SerializeField] Transform stopCheckLower;					//Circle start
+	[SerializeField] float length;								//Circle radious
+	[HideInInspector] public bool isStoped;										//Bool if player is stoped
 	
-	GameObject target;							//Attack refference
-	bool isGrounded;							//Checking if enemy is grounded
-
+	Collider2D enemyColliderA;
+	Collider2D enemyColliderB;
+	//Collider2D enemyColliderC;
+	GameObject target;											//Attack refference
+	bool isGrounded;											//Checking if enemy is grounded
+	bool isFighting;											//Checking if enemy is fighting
+	
 	void Start(){
 		anim = GetComponent<Animator>();
 		rb = GetComponent<Rigidbody2D>();
 		anim.Play("Enemy_Walking", -1, Random.Range(0.0f, 1.0f));
 	}
-
+	
 	void Update(){
+		GroundCheck();
 		Walk();
 		CheckForEnemy();
 		Death();
-		GroundCheck();
 	}
 	
 	void OnTriggerEnter2D(Collider2D other) {			//Arrow physics
@@ -42,14 +47,16 @@ public class Enemy : MonoBehaviour{
 			life -= GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().damage;     //Getting the damage that the player does
 		}
 	}
-
+	
 	void OnCollisionEnter2D(Collision2D other) {
 		if(other.gameObject.tag.Equals("Player")){
 			anim.SetBool("EnemyAttacks", true);		//Playing attack animation
 			target = other.gameObject;				//Passing player object on a variable
+			isFighting = true;
+			isStoped = true;
 		}
 	}
-
+	
 	void OnCollisionExit2D(Collision2D other) {
 		if(other.gameObject.tag.Equals("Enemy")){
 			anim.SetBool("EnemyIsStill", false);           //Ending idling animation
@@ -62,33 +69,58 @@ public class Enemy : MonoBehaviour{
 			if(isGrounded){
 				rb.gravityScale = 1f;
 			}else{
-				rb.gravityScale = 4f;
+				rb.gravityScale = 8f;
 			}
 		}
 	}
 	
 	void Walk(){
-		if(stop == false){
+		if(isStoped == false){
 			rb.velocity = new Vector2(-speed, 0);	//Making enemy move
+		}else{
+			rb.velocity = Vector2.zero;
+			rb.gravityScale = 0f;
 		}
 	}
 	
 	void CheckForEnemy(){
 		if(life > 0){
-			//Check if there is another enemy close in front
-			hit = Physics2D.Raycast(stopCheck.position, Vector2.left, length);
-		}
-		
-		if (hit){
-			if (hit.collider.gameObject.tag.Equals("Enemy")){
-				if(rb.velocity.x > -0.1f){
-					anim.SetBool("EnemyIsStill", true);
-					stop = true;
+			enemyColliderA = Physics2D.OverlapCircle(stopCheckUpper.position, length, enemyLayer);		//Casting the 3 circles
+			enemyColliderB = Physics2D.OverlapCircle(stopCheckMiddle.position, length, enemyLayer);
+			//enemyColliderC = Physics2D.OverlapCircle(stopCheckLower.position, length, enemyLayer);
+			
+			//Upper circle
+			if(enemyColliderA && enemyColliderA.tag.Equals("Enemy")){				//Checking if circle is overlaping an enemy in front
+				if(enemyColliderA.GetComponent<Enemy>().isStoped == true){			//Checking if enemy in front is stoped
+					anim.SetBool("EnemyIsStill", true);								//Playing idle animation
+					isStoped = true;												//Stoping
 				}
+			}else if(!isFighting){													//If this enemy is not fighting
+				anim.SetBool("EnemyIsStill", false);								//Play walking animation again and...
+				isStoped = false;													//...Start moving
 			}
-		}else{
-			anim.SetBool("EnemyIsStill", false);
-			stop = false;
+			
+			//Middle circle
+			if(enemyColliderB && enemyColliderB.tag.Equals("Enemy")){				//Same as above
+				if(enemyColliderB.GetComponent<Enemy>().isStoped == true){
+					anim.SetBool("EnemyIsStill", true);
+					isStoped = true;
+				}
+			}else if(!isFighting){
+				anim.SetBool("EnemyIsStill", false);
+				isStoped = false;
+			}
+			
+			//Lower circle
+			//if(enemyColliderC && enemyColliderC.tag.Equals("Enemy")){				//Same as above
+			//	if(enemyColliderC.GetComponent<Enemy>().isStoped == true){
+			//		anim.SetBool("EnemyIsStill", true);
+			//		isStoped = true;
+			//	}
+			//}else if(!isFighting){
+			//	anim.SetBool("EnemyIsStill", false);
+			//	isStoped = false;
+			//}
 		}
 	}
 	
@@ -114,7 +146,9 @@ public class Enemy : MonoBehaviour{
 	}
 	
 	void OnDrawGizmosSelected(){
-        Gizmos.DrawWireSphere(stopCheck.position, length);
+        Gizmos.DrawWireSphere(stopCheckUpper.position, length);				//Debug gizmos
+        Gizmos.DrawWireSphere(stopCheckMiddle.position, length);
+        //Gizmos.DrawWireSphere(stopCheckLower.position, length);
         Gizmos.DrawWireSphere(groundCheck.position, 0.1f);
     }
 }

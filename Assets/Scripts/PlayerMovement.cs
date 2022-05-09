@@ -93,13 +93,25 @@ public class PlayerMovement : MonoBehaviour{
 				Debug.Log("Italia Suburbicaria");
 				SceneManager.LoadScene(3);
 			}
-			if (location == "Macedonia"){
-				Debug.Log("Macedonia");
-				SceneManager.LoadScene(4);
-			}
 			if (location == "Illyricum"){
 				Debug.Log("Illyricum");
+				SceneManager.LoadScene(4);
+			}
+			if (location == "Dacia"){
+				Debug.Log("Dacia");
 				SceneManager.LoadScene(5);
+			}
+			if (location == "Macedonia"){
+				Debug.Log("Macedonia");
+				SceneManager.LoadScene(6);
+			}
+			if (location == "Quaestura Exercitus"){
+				Debug.Log("Quaestura Exercitus");
+				SceneManager.LoadScene(7);
+			}
+			if (location == "Thracia"){
+				Debug.Log("Thracia");
+				SceneManager.LoadScene(8);
 			}
 		}
 	}

@@ -98,7 +98,7 @@ MonoBehaviour:
   arrow: {fileID: 3047456184375522784, guid: 67caec667301065428a358e191f95026, type: 3}
   shotPoint: {fileID: 6662656591308010188}
   launchForce: 10
-  fireRate: 1
+  fireRate: 5
 --- !u!1 &6662656592083033574
 GameObject:
   m_ObjectHideFlags: 0

@@ -161,7 +161,7 @@ MonoBehaviour:
     enemy: {fileID: 5623426136656217209, guid: 4f4d36b82b5880f4bb04865d776a5a12, type: 3}
     count: 7
     rate: 0.5
-  - name: Wave 2
+  - name: Wave 3
     enemy: {fileID: 5623426136656217209, guid: 4f4d36b82b5880f4bb04865d776a5a12, type: 3}
     count: 8
     rate: 0.6
