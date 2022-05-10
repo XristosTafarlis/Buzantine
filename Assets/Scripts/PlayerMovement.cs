@@ -29,7 +29,6 @@ public class PlayerMovement : MonoBehaviour{
 	}
 
 	void FixedUpdate(){
-		//rb.MovePosition(rb.position + movement * finalSpeed * Time.fixedDeltaTime);
 		rb.velocity = new Vector2(movement.x * finalSpeed, movement.y * finalSpeed);
 	}
 
@@ -112,6 +111,26 @@ public class PlayerMovement : MonoBehaviour{
 			if (location == "Thracia"){
 				Debug.Log("Thracia");
 				SceneManager.LoadScene(8);
+			}
+			if (location == "Pontica"){
+				Debug.Log("Pontica");
+				SceneManager.LoadScene(9);
+			}
+			if (location == "Asiana"){
+				Debug.Log("Asiana");
+				SceneManager.LoadScene(10);
+			}
+			if (location == "Oriens"){
+				Debug.Log("Oriens");
+				SceneManager.LoadScene(11);
+			}
+			if (location == "Aegyptus"){
+				Debug.Log("Aegyptus");
+				SceneManager.LoadScene(12);
+			}
+			if (location == "Africa"){
+				Debug.Log("Africa");
+				SceneManager.LoadScene(13);
 			}
 		}
 	}

@@ -32,4 +32,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Thracia.unity
     guid: c2cc0b317290f4748bd3ccb3610b3e1d
+  - enabled: 1
+    path: Assets/Scenes/Pontica.unity
+    guid: c2f12f65b75828941a6f5ef6dc0683a9
+  - enabled: 1
+    path: Assets/Scenes/Asiana.unity
+    guid: d32d8fd1bdd0a7d4cad96510c0f10d62
+  - enabled: 1
+    path: Assets/Scenes/Oriens.unity
+    guid: 689193026c5a91648b23f73bfdd5d5bf
+  - enabled: 1
+    path: Assets/Scenes/Aegyptus.unity
+    guid: 75e798828ac29574d82186548ff5ace4
+  - enabled: 1
+    path: Assets/Scenes/Africa.unity
+    guid: 19216b910f513fe4c8a58b85eed89232
   m_configObjects: {}

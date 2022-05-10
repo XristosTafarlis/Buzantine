@@ -17,6 +17,7 @@ public class WaveSpawner : MonoBehaviour{
 	[SerializeField] Wave[] waves;
 	[SerializeField] Transform spawnPoint;
 	[SerializeField] float timeBetweenWaves = 2f;
+	public static bool wavesFinished = false;
 	
 	int nextWave = 0;
 	float waveCountdown;
@@ -53,8 +54,8 @@ public class WaveSpawner : MonoBehaviour{
 		waveCountdown = timeBetweenWaves;
 
 		if (nextWave + 1 > waves.Length - 1){
-			nextWave = 0;
-			Debug.Log("Waves complete, looping"); //Add here game finished
+			//nextWave = 0;
+			wavesFinished = true;
 		}else{
 			nextWave++;
 		}
