@@ -18,13 +18,11 @@ public class Enemy : MonoBehaviour{
 	[Header("Circle")]	
 	[SerializeField] Transform stopCheckUpper;					//Circle start
 	[SerializeField] Transform stopCheckMiddle;					//Circle start
-	//[SerializeField] Transform stopCheckLower;					//Circle start
 	[SerializeField] float length;								//Circle radious
 	[HideInInspector] public bool isStoped;										//Bool if player is stoped
 	
 	Collider2D enemyColliderA;
 	Collider2D enemyColliderB;
-	//Collider2D enemyColliderC;
 	GameObject target;											//Attack refference
 	bool isGrounded;											//Checking if enemy is grounded
 	bool isFighting;											//Checking if enemy is fighting
@@ -110,17 +108,6 @@ public class Enemy : MonoBehaviour{
 				anim.SetBool("EnemyIsStill", false);
 				isStoped = false;
 			}
-			
-			//Lower circle
-			//if(enemyColliderC && enemyColliderC.tag.Equals("Enemy")){				//Same as above
-			//	if(enemyColliderC.GetComponent<Enemy>().isStoped == true){
-			//		anim.SetBool("EnemyIsStill", true);
-			//		isStoped = true;
-			//	}
-			//}else if(!isFighting){
-			//	anim.SetBool("EnemyIsStill", false);
-			//	isStoped = false;
-			//}
 		}
 	}
 	
