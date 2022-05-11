@@ -4,31 +4,40 @@ using UnityEngine.SceneManagement;
 public class PlayerScript : MonoBehaviour{
 	
 	[Header("Variables")]
-	public int life = 100;
 	public int damage = 5;
+	int life;
 	
 	GameObject[] enemys;
 	bool hasWon;
 	
 	void Start(){
-		
+		InvokeRepeating("HasWon", 20f, 1f);
+		life = PlayerAttributes.health;
 	}
 
 	void Update(){
 		Death();
-		Invoke("HasWon", 1f);
+		Debug.Log(life);
 	}
 	
 	void HasWon(){
 		if(WaveSpawner.wavesFinished == true){
+			
+			WaveSpawner.wavesFinished = false;
 			hasWon = true;
 			Invoke("MainMenu", 1f);
 		}
 	}
 	
 	void MainMenu(){
-		if(hasWon) Debug.Log("Going back as a winner");
-		else Debug.Log("Going back as a loser");
+		if(hasWon){
+			Debug.Log("Going back as a winner");
+			hasWon = false;
+			LevelSystem.xpOnWin = 20;
+		}
+		else {
+			Debug.Log("Going back as a loser");
+		}
 		
 		SceneManager.LoadScene(0);
 	}

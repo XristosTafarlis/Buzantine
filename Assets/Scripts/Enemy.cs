@@ -5,7 +5,7 @@ public class Enemy : MonoBehaviour{
 	Rigidbody2D rb;
 	Animator anim;
 	
-	[Header("Refferences")]
+	[Header("References")]
 	[SerializeField] Transform groundCheck;
 	[SerializeField] LayerMask groundLayer;
 	[SerializeField] LayerMask enemyLayer;
@@ -112,7 +112,7 @@ public class Enemy : MonoBehaviour{
 	}
 	
 	void AttackEnable(){
-		target.GetComponent<PlayerScript>().life -= damage;
+		PlayerAttributes.health -= damage;
 	}
 	
 	void Death(){

@@ -3,7 +3,7 @@
 using UnityEngine;
 
 public class CameraScript : MonoBehaviour{
-	[Header("Refferences")]
+	[Header("References")]
 	[SerializeField] Transform target;
 	[SerializeField] Rigidbody2D rb;
 	

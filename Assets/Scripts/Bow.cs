@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class Bow : MonoBehaviour{	//bow mouse follow and shot when click
 	
-	[Header("Refferences")]
+	[Header("References")]
 	public GameObject arrow;
 	public Transform shotPoint;
 	
 	[Header("Variables")]
 	public float launchForce;
-	public float fireRate;
-	private float nextFire = 0f;
+	float fireRate;
+	float nextFire = 0f;
 	
 	void Start(){
-		
 	}
 	
 	void Update(){
+		fireRate = PlayerAttributes.fireRate;
+		
 		Vector2 bowPosition = transform.position;
 		Vector2 mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 		Vector2 direction = mousePosition - bowPosition;

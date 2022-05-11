@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour{
 	
-	//[Header("Refferences")]
+	//[Header("References")]
 	Rigidbody2D rb;
 	
 	[Header("Variables")]
