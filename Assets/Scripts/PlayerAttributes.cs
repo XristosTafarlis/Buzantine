@@ -9,6 +9,7 @@ public class PlayerAttributes : MonoBehaviour{
 	void Start(){
 		IncreaseFireRate(1);
 		IncreaseHealth(1);
+		health = 100;
 	}
 	
 	void Update(){

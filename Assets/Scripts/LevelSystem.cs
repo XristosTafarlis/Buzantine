@@ -26,8 +26,8 @@ public class LevelSystem : MonoBehaviour{
 		frontXpBar.fillAmount = currentXp / requiredXp;
 		backXpBar.fillAmount = currentXp / requiredXp;
 		
-		//currentXp = PlayerPrefs.GetFloat("xp");
-		//level = PlayerPrefs.GetInt("lvl");
+		currentXp = PlayerPrefs.GetFloat("xp");
+		level = PlayerPrefs.GetInt("lvl");
 		
 		requiredXp = CalculateRequiredXp();
 	}

@@ -85,7 +85,6 @@ public class Enemy : MonoBehaviour{
 		if(life > 0){
 			enemyColliderA = Physics2D.OverlapCircle(stopCheckUpper.position, length, enemyLayer);		//Casting the 3 circles
 			enemyColliderB = Physics2D.OverlapCircle(stopCheckMiddle.position, length, enemyLayer);
-			//enemyColliderC = Physics2D.OverlapCircle(stopCheckLower.position, length, enemyLayer);
 			
 			//Upper circle
 			if(enemyColliderA && enemyColliderA.tag.Equals("Enemy")){				//Checking if circle is overlaping an enemy in front
