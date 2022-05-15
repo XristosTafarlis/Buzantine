@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//Main map script
+
 public class LevelSystem : MonoBehaviour{
-	
-	[Header("References")]
-	public GameObject thisGameObject;
-	
 	[Header("Variables")]
-	public int level;
+	public static int level;
 	public float currentXp;
 	public float requiredXp;
 	
@@ -23,11 +21,22 @@ public class LevelSystem : MonoBehaviour{
 	public static float xpOnWin;
 	
 	void Start(){
+		PlayerPrefs.DeleteAll();
 		frontXpBar.fillAmount = currentXp / requiredXp;
 		backXpBar.fillAmount = currentXp / requiredXp;
 		
-		currentXp = PlayerPrefs.GetFloat("xp");
-		level = PlayerPrefs.GetInt("lvl");
+		if(PlayerPrefs.HasKey("xp") == true){
+			currentXp = PlayerPrefs.GetFloat("xp");
+		}else{
+			currentXp = 0;
+		}
+		
+		if(PlayerPrefs.HasKey("lvl") == true){
+			level = PlayerPrefs.GetInt("lvl");
+		}
+		else{
+			level = 1;
+		}
 		
 		requiredXp = CalculateRequiredXp();
 	}
@@ -45,22 +54,25 @@ public class LevelSystem : MonoBehaviour{
 			GainExperienceFlatRate(xpOnWin);
 		}
 		
-		PlayerPrefs.SetFloat("xp", currentXp);
-		PlayerPrefs.SetInt("lvl", level);
+		Debug.Log(level);
 	}
 	
 	public void UpdateXpUI(){
 		float xpFraction = currentXp / requiredXp;
 		float FXP = frontXpBar.fillAmount;
 		
-		if(FXP < xpFraction){
-			delayTimer += Time.deltaTime;
-			backXpBar.fillAmount = xpFraction;
-			if(delayTimer > 1){
-				lerpTimer += Time.deltaTime;
-				float percentComplete = lerpTimer / 100;
-				frontXpBar.fillAmount = Mathf.Lerp(FXP, backXpBar.fillAmount, percentComplete);
+		if(level < 10){
+			if(FXP < xpFraction){
+				delayTimer += Time.deltaTime;
+				backXpBar.fillAmount = xpFraction;
+				if(delayTimer > 1){
+					lerpTimer += Time.deltaTime;
+					float percentComplete = lerpTimer / 100;
+					frontXpBar.fillAmount = Mathf.Lerp(FXP, backXpBar.fillAmount, percentComplete);
+				}
 			}
+		}else{
+			frontXpBar.fillAmount = 1;
 		}
 	}
 	
@@ -69,6 +81,7 @@ public class LevelSystem : MonoBehaviour{
 		lerpTimer = 0f;
 		delayTimer = 0f;
 		xpOnWin = 0;
+		PlayerPrefs.SetFloat("xp", currentXp);
 	}
 	
 	void LevelUp(){
@@ -78,8 +91,10 @@ public class LevelSystem : MonoBehaviour{
 		currentXp = Mathf.RoundToInt(currentXp - requiredXp);
 		requiredXp = CalculateRequiredXp();
 		
-		GetComponent<PlayerAttributes>().IncreaseHealth(level);
-		GetComponent<PlayerAttributes>().IncreaseFireRate(level);
+		PlayerPrefs.SetInt("lvl", level);
+		
+		//GetComponent<PlayerAttributes>().IncreaseHealth(level);
+		//GetComponent<PlayerAttributes>().IncreaseFireRate(level);
 		//Chage health and fire rate
 	}
 	

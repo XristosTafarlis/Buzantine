@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Spaniae.unity
     guid: d21533d62cddd4641b792c766f8d0480
   - enabled: 1
-    path: Assets/Scenes/ItaliaAnnonaria.unity
+    path: Assets/Scenes/Italia Annonaria.unity
     guid: 049760a183078f441933ee704176c3ba
   - enabled: 1
     path: Assets/Scenes/Italia Suburbicaria.unity

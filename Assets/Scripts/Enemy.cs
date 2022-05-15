@@ -111,7 +111,7 @@ public class Enemy : MonoBehaviour{
 	}
 	
 	void AttackEnable(){
-		PlayerAttributes.health -= damage;
+		GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().TakeDamage(damage);
 	}
 	
 	void Death(){
