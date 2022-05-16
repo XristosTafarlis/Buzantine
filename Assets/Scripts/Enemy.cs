@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour{
 	[SerializeField] Transform stopCheckUpper;					//Circle start
 	[SerializeField] Transform stopCheckMiddle;					//Circle start
 	[SerializeField] float length;								//Circle radious
-	[HideInInspector] public bool isStoped;										//Bool if player is stoped
+	[HideInInspector] public bool isStoped;						//Bool if player is stoped
 	
 	Collider2D enemyColliderA;
 	Collider2D enemyColliderB;
