@@ -59,6 +59,8 @@ public class PlayerMovement : MonoBehaviour{
 			location = "Africa";
 		else if(other.name == "Spaniae")
 			location = "Spaniae";
+		else if(other.name == "Spaniae")
+			rb.velocity = Vector2.zero;
 	}
 	
 	void OnTriggerExit2D(Collider2D other) {

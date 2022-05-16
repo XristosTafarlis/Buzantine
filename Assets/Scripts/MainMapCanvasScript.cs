@@ -67,15 +67,15 @@ public class MainMapCanvasScript : MonoBehaviour{
 		if(LevelSystem.level == 1){
 			fireRateText.text = "1 arrow per second";
 		}else if(LevelSystem.level == 2){
-			fireRateText.text = "1.1 arrow per second";
+			fireRateText.text = "1.1 arrows per second";
 		}else if(LevelSystem.level == 3){
-			fireRateText.text = "1.2 arrow per second";
+			fireRateText.text = "1.2 arrows per second";
 		}else if(LevelSystem.level == 4){
-			fireRateText.text = "1.3 arrow per second";
+			fireRateText.text = "1.3 arrows per second";
 		}else if(LevelSystem.level == 5){
 			fireRateText.text = "1.5 arrow per second";
 		}else if(LevelSystem.level == 6){
-			fireRateText.text = "1.8 arrow per second";
+			fireRateText.text = "1.8 arrows per second";
 		}else if(LevelSystem.level == 7){
 			fireRateText.text = "2.3 arrows per second";
 		}else if(LevelSystem.level == 8){
@@ -83,7 +83,7 @@ public class MainMapCanvasScript : MonoBehaviour{
 		}else if(LevelSystem.level == 9){
 			fireRateText.text = "4.4 arrows per second";
 		}else if(LevelSystem.level >= 10){
-			fireRateText.text = "6.5 arros per second (Max)";
+			fireRateText.text = "6.5 arrows per second (Max)";
 		}
 	}
 }

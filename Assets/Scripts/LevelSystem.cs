@@ -21,7 +21,7 @@ public class LevelSystem : MonoBehaviour{
 	public static float xpOnWin;
 	
 	void Start(){
-		PlayerPrefs.DeleteAll();
+		//PlayerPrefs.DeleteAll();
 		frontXpBar.fillAmount = currentXp / requiredXp;
 		backXpBar.fillAmount = currentXp / requiredXp;
 		
@@ -65,9 +65,9 @@ public class LevelSystem : MonoBehaviour{
 			if(FXP < xpFraction){
 				delayTimer += Time.deltaTime;
 				backXpBar.fillAmount = xpFraction;
-				if(delayTimer > 1){
+				if(delayTimer > 0.5){
 					lerpTimer += Time.deltaTime;
-					float percentComplete = lerpTimer / 100;
+					float percentComplete = lerpTimer / 50;
 					frontXpBar.fillAmount = Mathf.Lerp(FXP, backXpBar.fillAmount, percentComplete);
 				}
 			}
