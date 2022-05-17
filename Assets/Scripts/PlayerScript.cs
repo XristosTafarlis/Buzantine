@@ -1,22 +1,34 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 // In-game script
 
 public class PlayerScript : MonoBehaviour{
+	[Header("References")]
+	[SerializeField] Image healthBar; 
+	
 	[Header("Variables")]
 	public int damage = 5;
 	public int life;
-	
+	int maxLife;
 	GameObject[] enemys;
 	
 	void Start(){
 		SetPlayerLife();
+		maxLife = life;
 	}
 
 	void Update(){
 		Death();
 		GameFinished();
+		HealthRender();
+		Debug.Log((float)life / maxLife);
+	}
+	
+	void HealthRender(){
+		if(healthBar != null)
+			healthBar.fillAmount = Mathf.Lerp(healthBar.fillAmount, (float)life / maxLife, 0.05f);
 	}
 	
 	void SetPlayerLife(){

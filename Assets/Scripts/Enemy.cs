@@ -43,7 +43,6 @@ public class Enemy : MonoBehaviour{
 		CheckForEnemy();
 		Death();
 		HealthRender();
-		//Debug.Log(life);
 	}
 	
 	void OnTriggerEnter2D(Collider2D other) {			//Arrow physics
@@ -68,7 +67,8 @@ public class Enemy : MonoBehaviour{
 	}
 	
 	void HealthRender(){
-		healthBar.fillAmount = life / maxLife;
+		if(healthBar != null)
+			healthBar.fillAmount = Mathf.Lerp(healthBar.fillAmount, (float)life / maxLife, 0.05f);
 	}
 	
 	void GroundCheck(){
@@ -132,10 +132,11 @@ public class Enemy : MonoBehaviour{
 			anim.SetBool("EnemyIsDead", true);								//Playing death animation
 			rb.gravityScale = 0;											//Removing gravity
 			
-			int i = 0;
 			foreach (Transform child in transform) {						//Removing arrows
-				i += 1;
-				Destroy(child.gameObject);
+				if(child.name != "Canvas")
+					Destroy(child.gameObject);
+				else
+					Destroy(child.gameObject, 0.09f);
 			}
 			Destroy(gameObject, 1);											//Removing enemy's sprite
 		}
@@ -144,7 +145,6 @@ public class Enemy : MonoBehaviour{
 	void OnDrawGizmosSelected(){
         Gizmos.DrawWireSphere(stopCheckUpper.position, length);				//Debug gizmos
         Gizmos.DrawWireSphere(stopCheckMiddle.position, length);
-        //Gizmos.DrawWireSphere(stopCheckLower.position, length);
         Gizmos.DrawWireSphere(groundCheck.position, 0.1f);
     }
 }
