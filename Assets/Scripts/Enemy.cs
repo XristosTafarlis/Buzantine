@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour{
 	
@@ -9,11 +10,13 @@ public class Enemy : MonoBehaviour{
 	[SerializeField] Transform groundCheck;
 	[SerializeField] LayerMask groundLayer;
 	[SerializeField] LayerMask enemyLayer;
+	[SerializeField] Image healthBar; 
 	
 	[Header("Variables")]
 	[SerializeField] float speed;								//Enemy speed
 	[SerializeField] int damage;								//Enemy damage
 	[SerializeField] int life;									//Enemy life
+	int maxLife;
 	
 	[Header("Circle")]	
 	[SerializeField] Transform stopCheckUpper;					//Circle start
@@ -28,6 +31,7 @@ public class Enemy : MonoBehaviour{
 	bool isFighting;											//Checking if enemy is fighting
 	
 	void Start(){
+		maxLife = life;
 		anim = GetComponent<Animator>();
 		rb = GetComponent<Rigidbody2D>();
 		anim.Play("Enemy_Walking", -1, Random.Range(0.0f, 1.0f));
@@ -38,6 +42,8 @@ public class Enemy : MonoBehaviour{
 		Walk();
 		CheckForEnemy();
 		Death();
+		HealthRender();
+		//Debug.Log(life);
 	}
 	
 	void OnTriggerEnter2D(Collider2D other) {			//Arrow physics
@@ -59,6 +65,10 @@ public class Enemy : MonoBehaviour{
 		if(other.gameObject.tag.Equals("Enemy")){
 			anim.SetBool("EnemyIsStill", false);           //Ending idling animation
 		}
+	}
+	
+	void HealthRender(){
+		healthBar.fillAmount = life / maxLife;
 	}
 	
 	void GroundCheck(){
