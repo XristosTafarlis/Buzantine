@@ -11,6 +11,8 @@ public class MainMapCanvasScript : MonoBehaviour{
 	[SerializeField] Text levelText;
 	[SerializeField] Text lifeText;
 	[SerializeField] Text fireRateText;
+	[Space(20)]
+	[SerializeField] Text joinFrontRateText;
 	
 	void Start(){
 		
@@ -21,6 +23,7 @@ public class MainMapCanvasScript : MonoBehaviour{
 		XPText();
 		LifeText();
 		FireRateText();
+		JoinFrontRateText();
 	}
 	
 	void LevelText(){
@@ -85,5 +88,22 @@ public class MainMapCanvasScript : MonoBehaviour{
 		}else if(LevelSystem.level >= 10){
 			fireRateText.text = "6.5 arrows per second (Max)";
 		}
+	}
+	
+	void JoinFrontRateText(){
+		if(PlayerMovement.location == null)								joinFrontRateText.text = " ";
+			else if(PlayerMovement.location == "Macedonia")				joinFrontRateText.text = "Press Space to joint Macedonia";
+			else if(PlayerMovement.location == "Thracia")				joinFrontRateText.text = "Press Space to joint Thracia";
+			else if(PlayerMovement.location == "Dacia")					joinFrontRateText.text = "Press Space to joint Dacia";
+			else if(PlayerMovement.location == "Quaestura Exercitus")	joinFrontRateText.text = "Press Space to joint Quaestura Exercitus";
+			else if(PlayerMovement.location == "Illyricum")				joinFrontRateText.text = "Press Space to joint Illyricum";
+			else if(PlayerMovement.location == "Italia Annonaria")		joinFrontRateText.text = "Press Space to joint Italia Annonaria";
+			else if(PlayerMovement.location == "Italia Suburbicaria")	joinFrontRateText.text = "Press Space to joint Italia Suburbicaria";
+			else if(PlayerMovement.location == "Pontica")				joinFrontRateText.text = "Press Space to joint Pontica";
+			else if(PlayerMovement.location == "Asiana")				joinFrontRateText.text = "Press Space to joint Asiana";
+			else if(PlayerMovement.location == "Oriens")				joinFrontRateText.text = "Press Space to joint Oriens";
+			else if(PlayerMovement.location == "Aegyptus")				joinFrontRateText.text = "Press Space to joint Aegyptus";
+			else if(PlayerMovement.location == "Africa")				joinFrontRateText.text = "Press Space to joint Africa";
+			else if(PlayerMovement.location == "Spaniae")				joinFrontRateText.text = "Press Space to joint Spaniae";
 	}
 }

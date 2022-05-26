@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour{
 	[SerializeField] float runSpeed = 8f;
 	
 	float finalSpeed;
-	[SerializeField] string location = null;
+	public static string location = null;
 
 	Vector2 movement;
 	
