@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+//using System.Collections;
+//using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,37 +10,37 @@ public class LevelSystem : MonoBehaviour{
 	public static int level;
 	public float currentXp;
 	public float requiredXp;
-	
+
 	private float lerpTimer;
 	private float delayTimer;
-	
+
 	[Header("UI")]
 	public Image frontXpBar;
 	public Image backXpBar;
-	
+
 	public static float xpOnWin;
-	
+
 	void Start(){
-		//PlayerPrefs.DeleteAll();
+		PlayerPrefs.DeleteAll();							//Removes the level
 		frontXpBar.fillAmount = currentXp / requiredXp;
 		backXpBar.fillAmount = currentXp / requiredXp;
-		
+
 		if(PlayerPrefs.HasKey("xp") == true){
 			currentXp = PlayerPrefs.GetFloat("xp");
 		}else{
 			currentXp = 0;
 		}
-		
+
 		if(PlayerPrefs.HasKey("lvl") == true){
 			level = PlayerPrefs.GetInt("lvl");
 		}
 		else{
 			level = 1;
 		}
-		
+
 		requiredXp = CalculateRequiredXp();
 	}
-	
+
 	void Update(){
 		UpdateXpUI();
 		if(Input.GetKeyDown(KeyCode.K)){
@@ -49,18 +49,18 @@ public class LevelSystem : MonoBehaviour{
 		if(currentXp >= requiredXp){
 			LevelUp();
 		}
-		
+
 		if (xpOnWin > 10){
 			GainExperienceFlatRate(xpOnWin);
 		}
-		
+
 		Debug.Log(level);
 	}
-	
+
 	public void UpdateXpUI(){
 		float xpFraction = currentXp / requiredXp;
 		float FXP = frontXpBar.fillAmount;
-		
+
 		if(level < 10){
 			if(FXP < xpFraction){
 				delayTimer += Time.deltaTime;
@@ -75,7 +75,7 @@ public class LevelSystem : MonoBehaviour{
 			frontXpBar.fillAmount = 1;
 		}
 	}
-	
+
 	public void GainExperienceFlatRate(float xpGained){
 		currentXp += xpGained;
 		lerpTimer = 0f;
@@ -83,21 +83,21 @@ public class LevelSystem : MonoBehaviour{
 		xpOnWin = 0;
 		PlayerPrefs.SetFloat("xp", currentXp);
 	}
-	
+
 	void LevelUp(){
 		level++;
 		frontXpBar.fillAmount = 0f;
 		backXpBar.fillAmount = 0f;
 		currentXp = Mathf.RoundToInt(currentXp - requiredXp);
 		requiredXp = CalculateRequiredXp();
-		
+
 		PlayerPrefs.SetInt("lvl", level);
-		
+
 		//GetComponent<PlayerAttributes>().IncreaseHealth(level);
 		//GetComponent<PlayerAttributes>().IncreaseFireRate(level);
 		//Chage health and fire rate
 	}
-	
+
 	int CalculateRequiredXp(){
 		int solveForRequiredXp = 0;
 		for (int levelCycle = 1; levelCycle <= level; levelCycle++){

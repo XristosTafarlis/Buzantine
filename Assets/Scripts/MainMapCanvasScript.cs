@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+//using System.Collections;
+//using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MainMapCanvasScript : MonoBehaviour{
-	
+
 	[Header("Refferences")]
 	[SerializeField] GameObject playerRefference;
 	[SerializeField] Text xpText;
@@ -13,11 +13,11 @@ public class MainMapCanvasScript : MonoBehaviour{
 	[SerializeField] Text fireRateText;
 	[Space(20)]
 	[SerializeField] Text joinFrontRateText;
-	
+
 	void Start(){
-		
+
 	}
-	
+
 	void Update(){
 		LevelText();
 		XPText();
@@ -25,7 +25,7 @@ public class MainMapCanvasScript : MonoBehaviour{
 		FireRateText();
 		JoinFrontRateText();
 	}
-	
+
 	void LevelText(){
 		if(LevelSystem.level < 10){
 			levelText.text = "Level " + LevelSystem.level;
@@ -33,7 +33,7 @@ public class MainMapCanvasScript : MonoBehaviour{
 			levelText.text = "Level 10 (Max)";
 		}
 	}
-	
+
 	void XPText(){
 		if(LevelSystem.level < 10){
 			xpText.text = playerRefference.GetComponent<LevelSystem>().currentXp + " of " + playerRefference.GetComponent<LevelSystem>().requiredXp;
@@ -41,7 +41,7 @@ public class MainMapCanvasScript : MonoBehaviour{
 			xpText.text = "Max XP";
 		}
 	}
-	
+
 	void LifeText(){
 		if(LevelSystem.level == 1){
 			lifeText.text = "Life : 100";
@@ -65,7 +65,7 @@ public class MainMapCanvasScript : MonoBehaviour{
 			lifeText.text = "Life : 650 (Max)";
 		}
 	}
-	
+
 	void FireRateText(){
 		if(LevelSystem.level == 1){
 			fireRateText.text = "1 arrow per second";
@@ -89,7 +89,7 @@ public class MainMapCanvasScript : MonoBehaviour{
 			fireRateText.text = "6.5 arrows per second (Max)";
 		}
 	}
-	
+
 	void JoinFrontRateText(){
 		if(PlayerMovement.location == null)								joinFrontRateText.text = " ";
 			else if(PlayerMovement.location == "Macedonia")				joinFrontRateText.text = "Press Space to joint Macedonia";
