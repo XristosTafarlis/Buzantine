@@ -46,8 +46,8 @@ public class Enemy : MonoBehaviour{
 	}
 	
 	void OnTriggerEnter2D(Collider2D other) {			//Arrow physics
-		if(other.gameObject.tag.Equals("Arrow")){                                                       //Getting hit by an arrow
-			life -= GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().damage;     //Getting the damage that the player does
+		if(other.gameObject.tag.Equals("Arrow")){														//Getting hit by an arrow
+			life -= GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().damage;		//Getting the damage that the player does
 		}
 	}
 	
@@ -62,7 +62,7 @@ public class Enemy : MonoBehaviour{
 	
 	void OnCollisionExit2D(Collision2D other) {
 		if(other.gameObject.tag.Equals("Enemy")){
-			anim.SetBool("EnemyIsStill", false);           //Ending idling animation
+			anim.SetBool("EnemyIsStill", false);			//Ending idling animation
 		}
 	}
 	
@@ -143,8 +143,8 @@ public class Enemy : MonoBehaviour{
 	}
 	
 	void OnDrawGizmosSelected(){
-        Gizmos.DrawWireSphere(stopCheckUpper.position, length);				//Debug gizmos
-        Gizmos.DrawWireSphere(stopCheckMiddle.position, length);
-        Gizmos.DrawWireSphere(groundCheck.position, 0.1f);
-    }
+		Gizmos.DrawWireSphere(stopCheckUpper.position, length);				//Debug gizmos
+		Gizmos.DrawWireSphere(stopCheckMiddle.position, length);
+		Gizmos.DrawWireSphere(groundCheck.position, 0.1f);
+	}
 }

@@ -1,16 +1,16 @@
 using UnityEngine;
 
 public class Arrow : MonoBehaviour{	
-
+	
 	Rigidbody2D rb;
 	bool hasHit;
-
+	
 	public Sprite HittSprite;
-
+	
 	void Start(){
 		rb = GetComponent<Rigidbody2D>();
 	}
-
+	
 	void Update(){
 		//Arrow rotation mathematics
 		if(hasHit == false){
@@ -18,7 +18,7 @@ public class Arrow : MonoBehaviour{
 			transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 		}
 	}
-
+	
 	void OnTriggerEnter2D(Collider2D other){					/*[Arrow on hit physics]*/
 		
 		if(other.gameObject.tag.Equals("Enemy"))				//Remove tip of arrow if target is an Enemy
