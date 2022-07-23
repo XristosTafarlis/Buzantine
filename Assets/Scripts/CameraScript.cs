@@ -16,6 +16,10 @@ public class CameraScript : MonoBehaviour{
 	[Tooltip("Top right")]
 	[SerializeField] Vector2 maxPos;
 
+	void Start() {
+		transform.position = new Vector3(PlayerPrefs.GetFloat("X"), PlayerPrefs.GetFloat("Y"), -10);
+	}
+
 	private void FixedUpdate(){
 		if(transform.position != target.position){
 			Vector3 targetPos = new Vector3(target.position.x, target.position.y, transform.position.z);

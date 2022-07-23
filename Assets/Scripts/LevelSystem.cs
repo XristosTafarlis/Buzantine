@@ -21,7 +21,7 @@ public class LevelSystem : MonoBehaviour{
 	public static float xpOnWin;
 
 	void Start(){
-		PlayerPrefs.DeleteAll();							//Removes the level
+		//PlayerPrefs.DeleteAll();							//Removes the level
 		frontXpBar.fillAmount = currentXp / requiredXp;
 		backXpBar.fillAmount = currentXp / requiredXp;
 
@@ -53,8 +53,6 @@ public class LevelSystem : MonoBehaviour{
 		if (xpOnWin > 10){
 			GainExperienceFlatRate(xpOnWin);
 		}
-
-		Debug.Log(level);
 	}
 
 	public void UpdateXpUI(){

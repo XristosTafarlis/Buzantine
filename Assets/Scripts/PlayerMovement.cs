@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour{
 	Vector2 movement;
 	
 	void Start() {
+		Load();
 		rb = gameObject.GetComponent<Rigidbody2D>();
 		finalSpeed = moveSpeed;
 	}
@@ -26,6 +27,7 @@ public class PlayerMovement : MonoBehaviour{
 		MovementRead();
 		LocationUpdate();	
 		Run();
+		Save();
 	}
 
 	void FixedUpdate(){
@@ -63,6 +65,15 @@ public class PlayerMovement : MonoBehaviour{
 		}if(Input.GetKeyDown(KeyCode.LeftShift)){
 			finalSpeed = runSpeed;
 		}
+	}
+	
+	void Load(){
+		transform.position = new Vector3(PlayerPrefs.GetFloat("X"), PlayerPrefs.GetFloat("Y"), 0);
+	}
+	
+	void Save(){
+		PlayerPrefs.SetFloat("X", transform.position.x);
+		PlayerPrefs.SetFloat("Y", transform.position.y);
 	}
 	
 	void LocationUpdate(){
@@ -120,5 +131,5 @@ public class PlayerMovement : MonoBehaviour{
 				SceneManager.LoadScene(13);
 			}
 		}
-	}
+	}	
 }
