@@ -1,5 +1,3 @@
-//using System.Collections;
-//using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -34,23 +32,24 @@ public class PlayerMovement : MonoBehaviour{
 		rb.velocity = new Vector2(movement.x * finalSpeed, movement.y * finalSpeed);
 	}
 
-	void OnTriggerEnter2D(Collider2D other) {
-		if(other.name == "Macedonia")					location = "Macedonia";
-		else if(other.name == "Thracia")				location = "Thracia";
-		else if(other.name == "Dacia")					location = "Dacia";
-		else if(other.name == "Quaestura Exercitus")	location = "Quaestura Exercitus";
-		else if(other.name == "Illyricum")				location = "Illyricum";
-		else if(other.name == "Italia Annonaria")		location = "Italia Annonaria";
-		else if(other.name == "Italia Suburbicaria")	location = "Italia Suburbicaria";
-		else if(other.name == "Pontica")				location = "Pontica";
-		else if(other.name == "Asiana")					location = "Asiana";
-		else if(other.name == "Oriens")					location = "Oriens";
-		else if(other.name == "Aegyptus")				location = "Aegyptus";
-		else if(other.name == "Africa")					location = "Africa";
-		else if(other.name == "Spaniae")				location = "Spaniae";
+	void OnTriggerEnter2D(Collider2D collider) {
+		if(collider.name == "Macedonia")					location = "Macedonia";
+		else if(collider.name == "Thracia")					location = "Thracia";
+		else if(collider.name == "Dacia")					location = "Dacia";
+		else if(collider.name == "Quaestura Exercitus")		location = "Quaestura Exercitus";
+		else if(collider.name == "Illyricum")				location = "Illyricum";
+		else if(collider.name == "Italia Annonaria")		location = "Italia Annonaria";
+		else if(collider.name == "Italia Suburbicaria")		location = "Italia Suburbicaria";
+		else if(collider.name == "Pontica")					location = "Pontica";
+		else if(collider.name == "Asiana")					location = "Asiana";
+		else if(collider.name == "Oriens")					location = "Oriens";
+		else if(collider.name == "Aegyptus")				location = "Aegyptus";
+		else if(collider.name == "Africa")					location = "Africa";
+		else if(collider.name == "Spaniae")					location = "Spaniae";
+		else if(collider.name == "Dara")					location = "Dara";
 	}
 	
-	void OnTriggerExit2D(Collider2D other) {
+	void OnTriggerExit2D(Collider2D collider) {
 		location = null;
 	}
 	
@@ -130,6 +129,10 @@ public class PlayerMovement : MonoBehaviour{
 				Debug.Log("Africa");
 				SceneManager.LoadScene(13);
 			}
+			if (location == "Dara"){
+				Debug.Log("Dara");
+				SceneManager.LoadScene(14);
+			}
 		}
-	}	
+	}
 }

@@ -91,19 +91,51 @@ public class MainMapCanvasScript : MonoBehaviour{
 	}
 	
 	void JoinFrontRateText(){
-		if(PlayerMovement.location == null)								joinFrontRateText.text = " ";
-			else if(PlayerMovement.location == "Macedonia")				joinFrontRateText.text = "Press Space to joint Macedonia";
-			else if(PlayerMovement.location == "Thracia")				joinFrontRateText.text = "Press Space to joint Thracia";
-			else if(PlayerMovement.location == "Dacia")					joinFrontRateText.text = "Press Space to joint Dacia";
-			else if(PlayerMovement.location == "Quaestura Exercitus")	joinFrontRateText.text = "Press Space to joint Quaestura Exercitus";
-			else if(PlayerMovement.location == "Illyricum")				joinFrontRateText.text = "Press Space to joint Illyricum";
-			else if(PlayerMovement.location == "Italia Annonaria")		joinFrontRateText.text = "Press Space to joint Italia Annonaria";
-			else if(PlayerMovement.location == "Italia Suburbicaria")	joinFrontRateText.text = "Press Space to joint Italia Suburbicaria";
-			else if(PlayerMovement.location == "Pontica")				joinFrontRateText.text = "Press Space to joint Pontica";
-			else if(PlayerMovement.location == "Asiana")				joinFrontRateText.text = "Press Space to joint Asiana";
-			else if(PlayerMovement.location == "Oriens")				joinFrontRateText.text = "Press Space to joint Oriens";
-			else if(PlayerMovement.location == "Aegyptus")				joinFrontRateText.text = "Press Space to joint Aegyptus";
-			else if(PlayerMovement.location == "Africa")				joinFrontRateText.text = "Press Space to joint Africa";
-			else if(PlayerMovement.location == "Spaniae")				joinFrontRateText.text = "Press Space to joint Spaniae";
+		if(PlayerMovement.location == null){
+			joinFrontRateText.text = " ";
+			joinFrontRateText.color = Color.white;
+		}else if(PlayerMovement.location == "Macedonia"){
+			joinFrontRateText.text = "Press Space to joint Macedonia";
+			joinFrontRateText.color = Color.white;
+		}else if(PlayerMovement.location == "Thracia"){
+			joinFrontRateText.text = "Press Space to joint Thracia";
+			joinFrontRateText.color = Color.white;
+		}else if(PlayerMovement.location == "Dacia"){
+			joinFrontRateText.text = "Press Space to joint Dacia";
+			joinFrontRateText.color = Color.white;
+		}else if(PlayerMovement.location == "Quaestura Exercitus"){
+			joinFrontRateText.text = "Press Space to joint Quaestura Exercitus";
+			joinFrontRateText.color = Color.white;
+		}else if(PlayerMovement.location == "Illyricum"){
+			joinFrontRateText.text = "Press Space to joint Illyricum";
+			joinFrontRateText.color = Color.white;
+		}else if(PlayerMovement.location == "Italia Annonaria"){
+			joinFrontRateText.text = "Press Space to joint Italia Annonaria";
+			joinFrontRateText.color = Color.white;
+		}else if(PlayerMovement.location == "Italia Suburbicaria"){
+			joinFrontRateText.text = "Press Space to joint Italia Suburbicaria";
+			joinFrontRateText.color = Color.white;
+		}else if(PlayerMovement.location == "Pontica"){
+			joinFrontRateText.text = "Press Space to joint Pontica";
+			joinFrontRateText.color = Color.white;
+		}else if(PlayerMovement.location == "Asiana"){
+			joinFrontRateText.text = "Press Space to joint Asiana";
+			joinFrontRateText.color = Color.white;
+		}else if(PlayerMovement.location == "Oriens"){
+			joinFrontRateText.text = "Press Space to joint Oriens";
+			joinFrontRateText.color = Color.white;
+		}else if(PlayerMovement.location == "Aegyptus"){
+			joinFrontRateText.text = "Press Space to joint Aegyptus";
+			joinFrontRateText.color = Color.white;
+		}else if(PlayerMovement.location == "Africa"){
+			joinFrontRateText.text = "Press Space to joint Africa";
+			joinFrontRateText.color = Color.white;
+		}else if(PlayerMovement.location == "Spaniae"){
+			joinFrontRateText.text = "Press Space to joint Spaniae";
+			joinFrontRateText.color = Color.white;
+		}else if(PlayerMovement.location == "Dara"){
+			joinFrontRateText.text = "Press Space to joint the Battle of Dara";
+			joinFrontRateText.color = Color.red;
+		}
 	}
 }
