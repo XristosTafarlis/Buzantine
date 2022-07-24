@@ -1,5 +1,3 @@
-//using System.Collections;
-//using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,10 +11,6 @@ public class MainMapCanvasScript : MonoBehaviour{
 	[SerializeField] Text fireRateText;
 	[Space(20)]
 	[SerializeField] Text joinFrontRateText;
-	
-	void Start(){
-		
-	}
 	
 	void Update(){
 		LevelText();
