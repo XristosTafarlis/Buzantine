@@ -94,6 +94,8 @@ public class PlayerScript : MonoBehaviour{
 			LevelSystem.xpOnWin = 140;
 		}else if(SceneManager.GetActiveScene().name == "Africa"){
 			LevelSystem.xpOnWin = 150;
+		}else if(SceneManager.GetActiveScene().name == "Dara"){
+			LevelSystem.xpOnWin = 300;
 		}
 	}
 	

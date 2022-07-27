@@ -70,7 +70,7 @@ public class MainMapCanvasScript : MonoBehaviour{
 		}else if(LevelSystem.level == 4){
 			fireRateText.text = "1.3 arrows per second";
 		}else if(LevelSystem.level == 5){
-			fireRateText.text = "1.5 arrow per second";
+			fireRateText.text = "1.5 arrows per second";
 		}else if(LevelSystem.level == 6){
 			fireRateText.text = "1.8 arrows per second";
 		}else if(LevelSystem.level == 7){
@@ -129,6 +129,9 @@ public class MainMapCanvasScript : MonoBehaviour{
 			joinFrontRateText.color = Color.white;
 		}else if(PlayerMovement.location == "Dara"){
 			joinFrontRateText.text = "Press Space to joint the Battle of Dara";
+			joinFrontRateText.color = Color.red;
+		}else if(PlayerMovement.location == "Taginae"){
+			joinFrontRateText.text = "Press Space to joint the Battle of Taginae";
 			joinFrontRateText.color = Color.red;
 		}
 	}

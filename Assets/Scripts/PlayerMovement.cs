@@ -47,6 +47,7 @@ public class PlayerMovement : MonoBehaviour{
 		else if(collider.name == "Africa")					location = "Africa";
 		else if(collider.name == "Spaniae")					location = "Spaniae";
 		else if(collider.name == "Dara")					location = "Dara";
+		else if(collider.name == "Taginae")					location = "Taginae";
 	}
 	
 	void OnTriggerExit2D(Collider2D collider) {
@@ -132,6 +133,10 @@ public class PlayerMovement : MonoBehaviour{
 			if (location == "Dara"){
 				Debug.Log("Dara");
 				SceneManager.LoadScene(14);
+			}
+			if (location == "Taginae"){
+				Debug.Log("Taginae");
+				SceneManager.LoadScene(15);
 			}
 		}
 	}
