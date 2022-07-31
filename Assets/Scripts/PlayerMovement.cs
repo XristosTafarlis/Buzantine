@@ -4,13 +4,14 @@ using UnityEngine.SceneManagement;
 public class PlayerMovement : MonoBehaviour{
 	
 	//[Header("References")]
-	Rigidbody2D rb;
 	
 	[Header("Variables")]
 	[SerializeField] float moveSpeed = 5f;
 	[SerializeField] float runSpeed = 8f;
 	
 	float finalSpeed;
+	
+	Rigidbody2D rb;
 	public static string location = null;
 
 	Vector2 movement;

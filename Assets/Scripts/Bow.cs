@@ -3,8 +3,9 @@ using UnityEngine;
 public class Bow : MonoBehaviour{
 	
 	[Header("References")]
-	public GameObject arrow;
-	public Transform shotPoint;
+	[SerializeField] GameObject arrow;
+	[SerializeField] Transform shotPoint;
+	[SerializeField] AudioSource shotSource;
 	
 	[Header("Variables")]
 	float launchForce;
@@ -16,7 +17,7 @@ public class Bow : MonoBehaviour{
 		SetLaunchForce();
 	}
 	
-	//bow mouse follow and shot when click
+	//Bow mouse follow and shot when click
 	
 	void Update(){	
 		Vector2 bowPosition = transform.position;
@@ -65,6 +66,8 @@ public class Bow : MonoBehaviour{
 	}
 
 	void Shoot() {
+		shotSource.pitch = Random.Range(0.95f, 1.05f);
+		shotSource.Play();
 		GameObject newArrow = Instantiate(arrow, shotPoint.position, shotPoint.rotation);
 		newArrow.GetComponent<Rigidbody2D>().velocity = transform.right * launchForce;
 	}

@@ -70,35 +70,35 @@ public class PlayerScript : MonoBehaviour{
 		if(SceneManager.GetActiveScene().name == "Spaniae"){
 			LevelSystem.xpOnWin = 20;
 		}else if(SceneManager.GetActiveScene().name == "Italia Annonaria"){
-			LevelSystem.xpOnWin = 30;
+			LevelSystem.xpOnWin = 25;
 		}else if(SceneManager.GetActiveScene().name == "Italia Suburbicaria"){
-			LevelSystem.xpOnWin = 40;
+			LevelSystem.xpOnWin = 30;
 		}else if(SceneManager.GetActiveScene().name == "Illyricum"){
-			LevelSystem.xpOnWin = 45;
+			LevelSystem.xpOnWin = 35;
 		}else if(SceneManager.GetActiveScene().name == "Dacia"){
-			LevelSystem.xpOnWin = 50;
+			LevelSystem.xpOnWin = 40;
 		}else if(SceneManager.GetActiveScene().name == "Macedonia"){
-			LevelSystem.xpOnWin = 60;
+			LevelSystem.xpOnWin = 45;
 		}else if(SceneManager.GetActiveScene().name == "Thracia"){
-			LevelSystem.xpOnWin = 65;
+			LevelSystem.xpOnWin = 50;
 		}else if(SceneManager.GetActiveScene().name == "Quaestura Exercitus"){
-			LevelSystem.xpOnWin = 70;
+			LevelSystem.xpOnWin = 55;
 		}else if(SceneManager.GetActiveScene().name == "Pontica"){
-			LevelSystem.xpOnWin = 80;
+			LevelSystem.xpOnWin = 60;
 		}else if(SceneManager.GetActiveScene().name == "Asiana"){
-			LevelSystem.xpOnWin = 85;
+			LevelSystem.xpOnWin = 65;
 		}else if(SceneManager.GetActiveScene().name == "Oriens"){
-			LevelSystem.xpOnWin = 90;
+			LevelSystem.xpOnWin = 70;
 		}else if(SceneManager.GetActiveScene().name == "Aegyptus"){
-			LevelSystem.xpOnWin = 100;
+			LevelSystem.xpOnWin = 75;
 		}else if(SceneManager.GetActiveScene().name == "Africa"){
-			LevelSystem.xpOnWin = 105;
+			LevelSystem.xpOnWin = 80;
 		}else if(SceneManager.GetActiveScene().name == "Dara"){
 			MainMapCanvasScript.hasWonSassanids = true;
-			LevelSystem.xpOnWin = 120;
+			LevelSystem.xpOnWin = 110;
 		}else if(SceneManager.GetActiveScene().name == "Taginae"){
 			MainMapCanvasScript.hasWonOstrogoths = true;
-			LevelSystem.xpOnWin = 105;
+			LevelSystem.xpOnWin = 100;
 		}
 	}
 	
