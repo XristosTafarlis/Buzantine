@@ -50,4 +50,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Dara.unity
     guid: 27e3d3b95aa97974f81df16cb32ca65f
+  - enabled: 1
+    path: Assets/Scenes/Taginae.unity
+    guid: 9504ff2f28936364fad45d2000a0975f
   m_configObjects: {}

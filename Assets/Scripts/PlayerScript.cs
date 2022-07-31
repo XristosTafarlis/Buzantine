@@ -23,7 +23,6 @@ public class PlayerScript : MonoBehaviour{
 		Death();
 		GameFinished();
 		HealthRender();
-		Debug.Log((float)life / maxLife);
 	}
 	
 	void HealthRender(){
@@ -71,31 +70,35 @@ public class PlayerScript : MonoBehaviour{
 		if(SceneManager.GetActiveScene().name == "Spaniae"){
 			LevelSystem.xpOnWin = 20;
 		}else if(SceneManager.GetActiveScene().name == "Italia Annonaria"){
-			LevelSystem.xpOnWin = 40;
+			LevelSystem.xpOnWin = 30;
 		}else if(SceneManager.GetActiveScene().name == "Italia Suburbicaria"){
-			LevelSystem.xpOnWin = 50;
+			LevelSystem.xpOnWin = 40;
 		}else if(SceneManager.GetActiveScene().name == "Illyricum"){
-			LevelSystem.xpOnWin = 60;
+			LevelSystem.xpOnWin = 45;
 		}else if(SceneManager.GetActiveScene().name == "Dacia"){
-			LevelSystem.xpOnWin = 70;
+			LevelSystem.xpOnWin = 50;
 		}else if(SceneManager.GetActiveScene().name == "Macedonia"){
-			LevelSystem.xpOnWin = 80;
+			LevelSystem.xpOnWin = 60;
 		}else if(SceneManager.GetActiveScene().name == "Thracia"){
-			LevelSystem.xpOnWin = 90;
+			LevelSystem.xpOnWin = 65;
 		}else if(SceneManager.GetActiveScene().name == "Quaestura Exercitus"){
-			LevelSystem.xpOnWin = 100;
+			LevelSystem.xpOnWin = 70;
 		}else if(SceneManager.GetActiveScene().name == "Pontica"){
-			LevelSystem.xpOnWin = 110;
+			LevelSystem.xpOnWin = 80;
 		}else if(SceneManager.GetActiveScene().name == "Asiana"){
-			LevelSystem.xpOnWin = 120;
+			LevelSystem.xpOnWin = 85;
 		}else if(SceneManager.GetActiveScene().name == "Oriens"){
-			LevelSystem.xpOnWin = 130;
+			LevelSystem.xpOnWin = 90;
 		}else if(SceneManager.GetActiveScene().name == "Aegyptus"){
-			LevelSystem.xpOnWin = 140;
+			LevelSystem.xpOnWin = 100;
 		}else if(SceneManager.GetActiveScene().name == "Africa"){
-			LevelSystem.xpOnWin = 150;
+			LevelSystem.xpOnWin = 105;
 		}else if(SceneManager.GetActiveScene().name == "Dara"){
-			LevelSystem.xpOnWin = 300;
+			MainMapCanvasScript.hasWonSassanids = true;
+			LevelSystem.xpOnWin = 120;
+		}else if(SceneManager.GetActiveScene().name == "Taginae"){
+			MainMapCanvasScript.hasWonOstrogoths = true;
+			LevelSystem.xpOnWin = 105;
 		}
 	}
 	

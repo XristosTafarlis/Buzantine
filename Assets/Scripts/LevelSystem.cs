@@ -1,5 +1,3 @@
-//using System.Collections;
-//using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,8 +13,8 @@ public class LevelSystem : MonoBehaviour{
 	private float delayTimer;
 
 	[Header("UI")]
-	public Image frontXpBar;
-	public Image backXpBar;
+	[SerializeField] Image frontXpBar;
+	[SerializeField] Image backXpBar;
 
 	public static float xpOnWin;
 
@@ -43,9 +41,7 @@ public class LevelSystem : MonoBehaviour{
 
 	void Update(){
 		UpdateXpUI();
-		if(Input.GetKeyDown(KeyCode.K)){
-			GainExperienceFlatRate(20);
-		}
+		
 		if(currentXp >= requiredXp){
 			LevelUp();
 		}

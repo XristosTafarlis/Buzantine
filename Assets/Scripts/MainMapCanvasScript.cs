@@ -4,13 +4,22 @@ using UnityEngine.UI;
 public class MainMapCanvasScript : MonoBehaviour{
 	
 	[Header("Refferences")]
-	[SerializeField] GameObject playerRefference;
+	[SerializeField] GameObject GAMEMANAGER;
+	[Space(20)]
+	
 	[SerializeField] Text xpText;
 	[SerializeField] Text levelText;
 	[SerializeField] Text lifeText;
 	[SerializeField] Text fireRateText;
-	[Space(20)]
+	[Space(10)]
+	
 	[SerializeField] Text joinFrontRateText;
+	[Space(20)]
+	
+	[SerializeField] GameObject sassanids;
+	public static bool hasWonSassanids;
+	[SerializeField] GameObject ostrogoths;
+	public static bool hasWonOstrogoths; 
 	
 	void Update(){
 		LevelText();
@@ -18,6 +27,7 @@ public class MainMapCanvasScript : MonoBehaviour{
 		LifeText();
 		FireRateText();
 		JoinFrontRateText();
+		ShowBattles();
 	}
 	
 	void LevelText(){
@@ -30,9 +40,18 @@ public class MainMapCanvasScript : MonoBehaviour{
 	
 	void XPText(){
 		if(LevelSystem.level < 10){
-			xpText.text = playerRefference.GetComponent<LevelSystem>().currentXp + " of " + playerRefference.GetComponent<LevelSystem>().requiredXp;
+			xpText.text = GAMEMANAGER.GetComponent<LevelSystem>().currentXp + " of " + GAMEMANAGER.GetComponent<LevelSystem>().requiredXp;
 		}else{
 			xpText.text = "Max XP";
+		}
+	}
+	
+	void ShowBattles(){
+		if(hasWonOstrogoths){
+			ostrogoths.SetActive(true);
+		}
+		if(hasWonSassanids){
+			sassanids.SetActive(true);
 		}
 	}
 	

@@ -54,7 +54,6 @@ public class WaveSpawner : MonoBehaviour{
 		waveCountdown = timeBetweenWaves;
 
 		if (nextWave + 1 > waves.Length - 1){
-			Debug.Log("Waves Finished");
 			nextWave = 0;
 			wavesFinished = true;
 			state = SpawnState.COUNTING;

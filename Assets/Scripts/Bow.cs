@@ -1,19 +1,46 @@
-//using System.Collections;
-//using System.Collections.Generic;
 using UnityEngine;
 
-public class Bow : MonoBehaviour{	//bow mouse follow and shot when click
+public class Bow : MonoBehaviour{
 	
 	[Header("References")]
 	public GameObject arrow;
 	public Transform shotPoint;
 	
 	[Header("Variables")]
-	public float launchForce;
+	float launchForce;
 	float fireRate;
 	float nextFire = 0f;
 	
 	void Start(){
+		FireRate();
+		SetLaunchForce();
+	}
+	
+	//bow mouse follow and shot when click
+	
+	void Update(){	
+		Vector2 bowPosition = transform.position;
+		Vector2 mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+		Vector2 direction = mousePosition - bowPosition;
+		transform.right = direction;
+
+		if (Input.GetMouseButtonDown(0) && Time.time >= nextFire){
+			nextFire = Time.time + 1f/fireRate; 
+			Shoot();
+		}
+	}
+	
+	void SetLaunchForce(){
+		if(MainMapCanvasScript.hasWonOstrogoths && MainMapCanvasScript.hasWonSassanids){
+			launchForce = 13f;
+		}else if(MainMapCanvasScript.hasWonOstrogoths || MainMapCanvasScript.hasWonSassanids){
+			launchForce = 11.5f;
+		}else{
+			launchForce = 10f;
+		}
+	}
+	
+	void FireRate(){
 		if(LevelSystem.level == 1){
 			fireRate = 1f;
 		}else if(LevelSystem.level == 2){
@@ -34,18 +61,6 @@ public class Bow : MonoBehaviour{	//bow mouse follow and shot when click
 			fireRate = 4.4f;
 		}else if(LevelSystem.level >= 10){
 			fireRate = 6.5f;
-		}
-	}
-	
-	void Update(){	
-		Vector2 bowPosition = transform.position;
-		Vector2 mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-		Vector2 direction = mousePosition - bowPosition;
-		transform.right = direction;
-
-		if (Input.GetMouseButtonDown(0) && Time.time >= nextFire){
-			nextFire = Time.time + 1f/fireRate; 
-			Shoot();
 		}
 	}
 
