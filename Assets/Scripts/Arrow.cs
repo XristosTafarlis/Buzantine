@@ -1,16 +1,16 @@
 using UnityEngine;
 
-public class Arrow : MonoBehaviour{	
-	
+public class Arrow : MonoBehaviour{
+
+	[SerializeField] Sprite HittSprite;
+
 	Rigidbody2D rb;
 	bool hasHit;
-	
-	public Sprite HittSprite;
-	
+
 	void Start(){
 		rb = GetComponent<Rigidbody2D>();
 	}
-	
+
 	void Update(){
 		//Arrow rotation mathematics
 		if(hasHit == false){
@@ -18,12 +18,16 @@ public class Arrow : MonoBehaviour{
 			transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 		}
 	}
-	
+
 	void OnTriggerEnter2D(Collider2D other){					/*[Arrow on hit physics]*/
-		
-		if(other.gameObject.tag.Equals("Enemy"))				//Remove tip of arrow if target is an Enemy
-			gameObject.GetComponent<SpriteRenderer>().sprite = HittSprite;
-		
+
+		if(other.gameObject.tag.Equals("Enemy")){				//Remove tip of arrow if target is an Enemy
+			GetComponent<SpriteRenderer>().sprite = HittSprite;
+		}
+		if(other.gameObject.tag.Equals("Ground")){
+			GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1.1f);
+			GetComponent<AudioSource>().Play();
+		}
 		transform.parent = other.transform;						//Child the arrow to the target
 		GetComponent<CircleCollider2D>().enabled = false;		//Disabling the coliders of thrown arrows
 		hasHit = true;											//Disablind rotation of arrow

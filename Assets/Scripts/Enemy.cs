@@ -2,41 +2,42 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour{
-	
+
 	Rigidbody2D rb;
 	Animator anim;
-	
+
 	[Header("References")]
 	[SerializeField] Transform groundCheck;
 	[SerializeField] LayerMask groundLayer;
 	[SerializeField] LayerMask enemyLayer;
-	[SerializeField] Image healthBar; 
-	
+	[SerializeField] Image healthBar;
+	[SerializeField] AudioClip[] painSounds;
+
 	[Header("Variables")]
 	[SerializeField] float speed;								//Enemy speed
 	[SerializeField] int damage;								//Enemy damage
 	[SerializeField] int life;									//Enemy life
 	int maxLife;
-	
-	[Header("Circle")]	
+
+	[Header("Circle")]
 	[SerializeField] Transform stopCheckUpper;					//Circle start
 	[SerializeField] Transform stopCheckMiddle;					//Circle start
 	[SerializeField] float length;								//Circle radious
 	[HideInInspector] public bool isStoped;						//Bool if player is stoped
-	
+
 	Collider2D enemyColliderA;
 	Collider2D enemyColliderB;
 	GameObject target;											//Attack refference
 	bool isGrounded;											//Checking if enemy is grounded
 	bool isFighting;											//Checking if enemy is fighting
-	
+
 	void Start(){
 		maxLife = life;
 		anim = GetComponent<Animator>();
 		rb = GetComponent<Rigidbody2D>();
 		anim.Play("Enemy_Walking", -1, Random.Range(0.0f, 1.0f));
 	}
-	
+
 	void Update(){
 		GroundCheck();
 		Walk();
@@ -44,13 +45,14 @@ public class Enemy : MonoBehaviour{
 		Death();
 		HealthRender();
 	}
-	
+
 	void OnTriggerEnter2D(Collider2D other) {			//Arrow physics
 		if(other.gameObject.tag.Equals("Arrow")){														//Getting hit by an arrow
 			life -= GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().damage;		//Getting the damage that the player does
+			GetComponent<AudioSource>().PlayOneShot(painSounds[Random.Range(0, painSounds.Length)]);
 		}
 	}
-	
+
 	void OnCollisionEnter2D(Collision2D other) {
 		if(other.gameObject.tag.Equals("Player")){
 			anim.SetBool("EnemyAttacks", true);		//Playing attack animation
@@ -59,18 +61,18 @@ public class Enemy : MonoBehaviour{
 			isStoped = true;
 		}
 	}
-	
+
 	void OnCollisionExit2D(Collision2D other) {
 		if(other.gameObject.tag.Equals("Enemy")){
 			anim.SetBool("EnemyIsStill", false);			//Ending idling animation
 		}
 	}
-	
+
 	void HealthRender(){
 		if(healthBar != null)
 			healthBar.fillAmount = Mathf.Lerp(healthBar.fillAmount, (float)life / maxLife, 0.05f);
 	}
-	
+
 	void GroundCheck(){
 		if(groundCheck != null){
 			isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
@@ -81,7 +83,7 @@ public class Enemy : MonoBehaviour{
 			}
 		}
 	}
-	
+
 	void Walk(){
 		if(isStoped == false){
 			rb.velocity = new Vector2(-speed, 0);	//Making enemy move
@@ -90,12 +92,12 @@ public class Enemy : MonoBehaviour{
 			rb.gravityScale = 0f;
 		}
 	}
-	
+
 	void CheckForEnemy(){
 		if(life > 0){
 			enemyColliderA = Physics2D.OverlapCircle(stopCheckUpper.position, length, enemyLayer);		//Casting the 3 circles
 			enemyColliderB = Physics2D.OverlapCircle(stopCheckMiddle.position, length, enemyLayer);
-			
+
 			//Upper circle
 			if(enemyColliderA && enemyColliderA.tag.Equals("Enemy")){				//Checking if circle is overlaping an enemy in front
 				if(enemyColliderA.GetComponent<Enemy>().isStoped == true){			//Checking if enemy in front is stoped
@@ -106,7 +108,7 @@ public class Enemy : MonoBehaviour{
 				anim.SetBool("EnemyIsStill", false);								//Play walking animation again and...
 				isStoped = false;													//...Start moving
 			}
-			
+
 			//Middle circle
 			if(enemyColliderB && enemyColliderB.tag.Equals("Enemy")){				//Same as above
 				if(enemyColliderB.GetComponent<Enemy>().isStoped == true){
@@ -119,11 +121,11 @@ public class Enemy : MonoBehaviour{
 			}
 		}
 	}
-	
+
 	void AttackEnable(){
 		GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().TakeDamage(damage);
 	}
-	
+
 	void Death(){
 		if (life <= 0){														//Enemy death physics
 			rb.velocity = new Vector2(0f, 0f);								//Stoping enemy
@@ -131,17 +133,17 @@ public class Enemy : MonoBehaviour{
 			GetComponent<CircleCollider2D>().enabled = false;				//Disabling colliders
 			anim.SetBool("EnemyIsDead", true);								//Playing death animation
 			rb.gravityScale = 0;											//Removing gravity
-			
+
 			foreach (Transform child in transform) {						//Removing arrows
 				if(child.name != "Canvas")
 					Destroy(child.gameObject);
 				else
 					Destroy(child.gameObject, 0.09f);
 			}
-			Destroy(gameObject, 1);											//Removing enemy's sprite
+			Destroy(gameObject, 2.5f);											//Removing enemy's sprite
 		}
 	}
-	
+
 	void OnDrawGizmosSelected(){
 		Gizmos.DrawWireSphere(stopCheckUpper.position, length);				//Debug gizmos
 		Gizmos.DrawWireSphere(stopCheckMiddle.position, length);
