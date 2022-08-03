@@ -6,14 +6,15 @@ using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour{
 	[Header("References")]
-	[SerializeField] Image healthBar; 
-	
+	[SerializeField] Image healthBar;
+	[SerializeField] GameObject bow;
+
 	[Header("Variables")]
 	public int damage = 5;
 	public int life;
 	int maxLife;
 	GameObject[] enemys;
-	
+
 	void Start(){
 		SetPlayerLife();
 		maxLife = life;
@@ -24,12 +25,12 @@ public class PlayerScript : MonoBehaviour{
 		GameFinished();
 		HealthRender();
 	}
-	
+
 	void HealthRender(){
 		if(healthBar != null)
 			healthBar.fillAmount = Mathf.Lerp(healthBar.fillAmount, (float)life / maxLife, 0.05f);
 	}
-	
+
 	void SetPlayerLife(){
 		if(LevelSystem.level == 1){
 			life = 100;
@@ -53,11 +54,11 @@ public class PlayerScript : MonoBehaviour{
 			life = 650;
 		}
 	}
-	
+
 	public void TakeDamage(int dmg){
 		life -= dmg;
 	}
-	
+
 	void GameFinished(){
 		if(WaveSpawner.wavesFinished == true){
 			WaveSpawner.wavesFinished = false;
@@ -65,7 +66,7 @@ public class PlayerScript : MonoBehaviour{
 			Invoke("MainMenu", 1f);
 		}
 	}
-	
+
 	void XpWon(){
 		if(SceneManager.GetActiveScene().name == "Spaniae"){
 			LevelSystem.xpOnWin = 20;
@@ -101,13 +102,14 @@ public class PlayerScript : MonoBehaviour{
 			LevelSystem.xpOnWin = 100;
 		}
 	}
-	
+
 	void MainMenu(){
 		SceneManager.LoadScene(0);
 	}
-	
+
 	void Death(){
 		if(life <= 0){
+			bow.GetComponent<Bow>().enabled = false;
 			enemys = GameObject.FindGameObjectsWithTag("Enemy");
 			//Freeze enemies
 			foreach(GameObject _enemy in enemys){

@@ -11,7 +11,13 @@ public class Enemy : MonoBehaviour{
 	[SerializeField] LayerMask groundLayer;
 	[SerializeField] LayerMask enemyLayer;
 	[SerializeField] Image healthBar;
+
+	[Header("Aidio References")]
+	[SerializeField] AudioSource deathAudioSource;
 	[SerializeField] AudioClip[] painSounds;
+	[Space(5)]
+	[SerializeField] AudioSource swordHitAudioSource;
+	[SerializeField] AudioClip[] swordHitSounds;
 
 	[Header("Variables")]
 	[SerializeField] float speed;								//Enemy speed
@@ -49,7 +55,7 @@ public class Enemy : MonoBehaviour{
 	void OnTriggerEnter2D(Collider2D other) {			//Arrow physics
 		if(other.gameObject.tag.Equals("Arrow")){														//Getting hit by an arrow
 			life -= GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().damage;		//Getting the damage that the player does
-			GetComponent<AudioSource>().PlayOneShot(painSounds[Random.Range(0, painSounds.Length)]);
+			deathAudioSource.PlayOneShot(painSounds[Random.Range(0, painSounds.Length)]);
 		}
 	}
 
@@ -122,8 +128,10 @@ public class Enemy : MonoBehaviour{
 		}
 	}
 
-	void AttackEnable(){
-		GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().TakeDamage(damage);
+	void AttackEnable(){	//Called in animator
+		//GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().TakeDamage(damage);
+		target.GetComponent<PlayerScript>().TakeDamage(damage);
+		swordHitAudioSource.PlayOneShot(swordHitSounds[Random.Range(0, swordHitSounds.Length)]);
 	}
 
 	void Death(){
@@ -140,7 +148,7 @@ public class Enemy : MonoBehaviour{
 				else
 					Destroy(child.gameObject, 0.09f);
 			}
-			Destroy(gameObject, 2.5f);											//Removing enemy's sprite
+			Destroy(gameObject, 1f);											//Removing enemy's sprite
 		}
 	}
 

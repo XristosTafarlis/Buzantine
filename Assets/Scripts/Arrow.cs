@@ -20,10 +20,7 @@ public class Arrow : MonoBehaviour{
 	}
 
 	void OnTriggerEnter2D(Collider2D other){					/*[Arrow on hit physics]*/
-
-		if(other.gameObject.tag.Equals("Enemy")){				//Remove tip of arrow if target is an Enemy
-			GetComponent<SpriteRenderer>().sprite = HittSprite;
-		}
+		GetComponent<SpriteRenderer>().sprite = HittSprite;		//Remove tip of arrow
 		if(other.gameObject.tag.Equals("Ground")){
 			GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1.1f);
 			GetComponent<AudioSource>().Play();

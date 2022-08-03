@@ -1,36 +1,36 @@
 using UnityEngine;
 
 public class Bow : MonoBehaviour{
-	
+
 	[Header("References")]
 	[SerializeField] GameObject arrow;
 	[SerializeField] Transform shotPoint;
 	[SerializeField] AudioSource shotSource;
-	
+
 	[Header("Variables")]
 	float launchForce;
 	float fireRate;
 	float nextFire = 0f;
-	
+
 	void Start(){
 		FireRate();
 		SetLaunchForce();
 	}
-	
+
 	//Bow mouse follow and shot when click
-	
-	void Update(){	
+
+	void Update(){
 		Vector2 bowPosition = transform.position;
 		Vector2 mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 		Vector2 direction = mousePosition - bowPosition;
 		transform.right = direction;
 
 		if (Input.GetMouseButtonDown(0) && Time.time >= nextFire){
-			nextFire = Time.time + 1f/fireRate; 
+			nextFire = Time.time + 1f/fireRate;
 			Shoot();
 		}
 	}
-	
+
 	void SetLaunchForce(){
 		if(MainMapCanvasScript.hasWonOstrogoths && MainMapCanvasScript.hasWonSassanids){
 			launchForce = 13f;
@@ -40,7 +40,7 @@ public class Bow : MonoBehaviour{
 			launchForce = 10f;
 		}
 	}
-	
+
 	void FireRate(){
 		if(LevelSystem.level == 1){
 			fireRate = 1f;
