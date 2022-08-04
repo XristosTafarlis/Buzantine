@@ -1,8 +1,9 @@
 using UnityEngine;
 
 public class Arrow : MonoBehaviour{
-
+	[Header("References")]
 	[SerializeField] Sprite HittSprite;
+
 
 	Rigidbody2D rb;
 	bool hasHit;
@@ -22,7 +23,7 @@ public class Arrow : MonoBehaviour{
 	void OnTriggerEnter2D(Collider2D other){					/*[Arrow on hit physics]*/
 		GetComponent<SpriteRenderer>().sprite = HittSprite;		//Remove tip of arrow
 		if(other.gameObject.tag.Equals("Ground")){
-			GetComponent<AudioSource>().pitch = Random.Range(0.9f, 1.1f);
+			GetComponent<AudioSource>().pitch = Random.Range(0.85f, 1.15f);
 			GetComponent<AudioSource>().Play();
 		}
 		transform.parent = other.transform;						//Child the arrow to the target

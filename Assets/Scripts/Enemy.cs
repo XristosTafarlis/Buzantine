@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour{
 	[SerializeField] LayerMask groundLayer;
 	[SerializeField] LayerMask enemyLayer;
 	[SerializeField] Image healthBar;
+	[SerializeField] GameObject bloodEffect;
 
 	[Header("Aidio References")]
 	[SerializeField] AudioSource deathAudioSource;
@@ -55,6 +56,7 @@ public class Enemy : MonoBehaviour{
 	void OnTriggerEnter2D(Collider2D other) {			//Arrow physics
 		if(other.gameObject.tag.Equals("Arrow")){														//Getting hit by an arrow
 			life -= GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().damage;		//Getting the damage that the player does
+			Instantiate(bloodEffect, new Vector3(transform.position.x, other.transform.position.y), other.transform.rotation);
 			deathAudioSource.PlayOneShot(painSounds[Random.Range(0, painSounds.Length)]);
 		}
 	}

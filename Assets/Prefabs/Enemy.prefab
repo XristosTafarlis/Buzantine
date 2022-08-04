@@ -402,6 +402,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   healthBar: {fileID: 8752327942191631045}
+  bloodEffect: {fileID: 1639720569121179937, guid: 01c01614e86568246903d85f9c6bda0d, type: 3}
   deathAudioSource: {fileID: 7700613496985516080}
   painSounds:
   - {fileID: 8300000, guid: 121d5793069a21946ae72e25ccde9fb3, type: 3}
