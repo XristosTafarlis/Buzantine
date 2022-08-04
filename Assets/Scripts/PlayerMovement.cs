@@ -1,30 +1,32 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+//Main scene script
+
 public class PlayerMovement : MonoBehaviour{
-	
+
 	//[Header("References")]
-	
+
 	[Header("Variables")]
 	[SerializeField] float moveSpeed = 5f;
 	[SerializeField] float runSpeed = 8f;
-	
+
 	float finalSpeed;
-	
+
 	Rigidbody2D rb;
 	public static string location = null;
 
 	Vector2 movement;
-	
+
 	void Start() {
 		Load();
 		rb = gameObject.GetComponent<Rigidbody2D>();
 		finalSpeed = moveSpeed;
 	}
-	
+
 	void Update(){
 		MovementRead();
-		LocationUpdate();	
+		LocationUpdate();
 		Run();
 		Save();
 	}
@@ -50,16 +52,16 @@ public class PlayerMovement : MonoBehaviour{
 		else if(collider.name == "Dara")					location = "Dara";
 		else if(collider.name == "Taginae")					location = "Taginae";
 	}
-	
+
 	void OnTriggerExit2D(Collider2D collider) {
 		location = null;
 	}
-	
+
 	void MovementRead(){
 		movement.x = Input.GetAxis("Horizontal");
 		movement.y = Input.GetAxis("Vertical");
 	}
-	
+
 	void Run(){
 		if(Input.GetKeyUp(KeyCode.LeftShift)){
 			finalSpeed = moveSpeed;
@@ -67,16 +69,16 @@ public class PlayerMovement : MonoBehaviour{
 			finalSpeed = runSpeed;
 		}
 	}
-	
+
 	void Load(){
 		transform.position = new Vector3(PlayerPrefs.GetFloat("X"), PlayerPrefs.GetFloat("Y"), 0);
 	}
-	
+
 	void Save(){
 		PlayerPrefs.SetFloat("X", transform.position.x);
 		PlayerPrefs.SetFloat("Y", transform.position.y);
 	}
-	
+
 	void LocationUpdate(){
 		if (Input.GetKey(KeyCode.Space)){
 			if (location == "Spaniae"){

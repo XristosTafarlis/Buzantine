@@ -8,6 +8,8 @@ public class PlayerScript : MonoBehaviour{
 	[Header("References")]
 	[SerializeField] Image healthBar;
 	[SerializeField] GameObject bow;
+	[SerializeField] AudioSource audioSource;
+	[SerializeField] AudioClip[] playerPainSounds;
 
 	[Header("Variables")]
 	public int damage = 5;
@@ -16,6 +18,7 @@ public class PlayerScript : MonoBehaviour{
 	GameObject[] enemys;
 
 	void Start(){
+		audioSource = GetComponent<AudioSource>();
 		SetPlayerLife();
 		maxLife = life;
 	}
@@ -56,6 +59,7 @@ public class PlayerScript : MonoBehaviour{
 	}
 
 	public void TakeDamage(int dmg){
+		audioSource.PlayOneShot(playerPainSounds[Random.Range(0, playerPainSounds.Length)]);
 		life -= dmg;
 	}
 
