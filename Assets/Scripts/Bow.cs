@@ -9,9 +9,9 @@ public class Bow : MonoBehaviour{
 
 	[Header("Variables")]
 	float launchForce;
-	float fireRate;
+	public float fireRate;
 	float nextFire = 0f;
-	public bool canFire = true;
+	public bool canFire = false;
 
 	void Awake() {
 		FireRate();
@@ -29,9 +29,15 @@ public class Bow : MonoBehaviour{
 		Vector2 direction = mousePosition - bowPosition;
 		transform.right = direction;
 
-		if (Input.GetMouseButtonDown(0) && Time.time >= nextFire){
-			nextFire = Time.time + 1f/fireRate;
-			Shoot();
+		if (canFire == false && Time.time >= nextFire){
+			canFire = true;
+		}
+		if(canFire == true){
+			if(Input.GetMouseButtonDown(0)){
+				canFire = false;
+				nextFire = Time.time + 1f/fireRate;
+				Shoot();
+			}
 		}
 	}
 

@@ -16,14 +16,16 @@ public class WaveSpawner : MonoBehaviour{
 	[SerializeField] Wave[] waves;
 	[SerializeField] Transform spawnPoint;
 	[SerializeField] float timeBetweenWaves = 2f;
+	public int waveCount;
 	public static bool wavesFinished = false;
-	
+
 	int nextWave = 0;
 	float waveCountdown;
 	float searchCountdown = 1f;
 	SpawnState state = SpawnState.COUNTING;
 
 	void Start() {
+		waveCount = waves.Length;
 		waveCountdown = timeBetweenWaves;
 	}
 
@@ -32,6 +34,7 @@ public class WaveSpawner : MonoBehaviour{
 			//Check if enemies are still alive
 			if(!EnemyIsAlive()){
 				//Begin new round
+				waveCount -= 1;
 				WaveCompleted();
 				return;
 			}else{
@@ -59,7 +62,6 @@ public class WaveSpawner : MonoBehaviour{
 		}else{
 			nextWave++;
 		}
-		
 	}
 
 	bool EnemyIsAlive(){
