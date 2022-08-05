@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class LevelSystem : MonoBehaviour{
 	[Header("Variables")]
 	public static int level;
-	public float currentXp;
-	public float requiredXp;
+	[HideInInspector] public float currentXp;
+	[HideInInspector] public float requiredXp;
 
 	float lerpTimer;
 	float delayTimer;
@@ -20,21 +20,16 @@ public class LevelSystem : MonoBehaviour{
 
 	void Start(){
 		//PlayerPrefs.DeleteAll();							//Removes the level
-		SetXpFillAmount();
 		PlayerPrefChecker();
-
-		//Needs fixing - Gives more XP than intended
-		requiredXp = CalculateRequiredXp();
-		if (xpOnWin != 0){
-			GainExperienceFlatRate(xpOnWin);
-		}
-		if(currentXp >= requiredXp){
-			LevelUp();
-		}
-		xpOnWin = 0;
+		CalculateRequiredXp();
+		SetXpFillAmount();
+		GainExperienceFlatRate(xpOnWin);
 	}
 
 	void Update(){
+		if(Input.GetKeyDown(KeyCode.F)){
+			GainExperienceFlatRate(5f);
+		}
 		UpdateXpUI();
 	}
 
@@ -78,10 +73,13 @@ public class LevelSystem : MonoBehaviour{
 
 	public void GainExperienceFlatRate(float xpGained){
 		currentXp += xpGained;
+		xpOnWin = 0;
 		lerpTimer = 0f;
 		delayTimer = 0f;
-		xpOnWin = 0;
 		PlayerPrefs.SetFloat("xp", currentXp);
+		if(currentXp >= requiredXp){
+			LevelUp();
+		}
 	}
 
 	void LevelUp(){
@@ -89,16 +87,21 @@ public class LevelSystem : MonoBehaviour{
 		frontXpBar.fillAmount = 0f;
 		backXpBar.fillAmount = 0f;
 		currentXp = Mathf.RoundToInt(currentXp - requiredXp);
-		requiredXp = CalculateRequiredXp();
+		CalculateRequiredXp();
 
 		PlayerPrefs.SetInt("lvl", level);
 	}
 
-	int CalculateRequiredXp(){
-		int solveForRequiredXp = 0;
-		for (int levelCycle = 1; levelCycle <= level; levelCycle++){
-			solveForRequiredXp += (int)( 100 + Mathf.Pow(level, 1.1f));
-		}
-		return solveForRequiredXp / 4;
+	void CalculateRequiredXp(){
+		if(level == 1)		requiredXp = 25f;
+		else if(level == 2) requiredXp = 51f;
+		else if(level == 3) requiredXp = 73f;
+		else if(level == 4) requiredXp = 104f;
+		else if(level == 5) requiredXp = 131f;
+		else if(level == 6) requiredXp = 160f;
+		else if(level == 7) requiredXp = 189f;
+		else if(level == 8) requiredXp = 218f;
+		else if(level == 9) requiredXp = 249f;
+		else				requiredXp = 267f;
 	}
 }

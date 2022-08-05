@@ -6,7 +6,7 @@ public class CloudScroller : MonoBehaviour{
 	Material mat;
 
 	void Start(){
-		scrollSpeed = Random.Range(0.3f, 0.7f);
+		scrollSpeed = Random.Range(0.3f, 0.7f) * (Random.Range(0,2)*2-1);
 		mat = GetComponent<Renderer>().material;
 	}
 	void Update(){

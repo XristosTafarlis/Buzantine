@@ -837,7 +837,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentXp: 0
-  requiredXp: 130
+  requiredXp: 25
   frontXpBar: {fileID: 79858266}
   backXpBar: {fileID: 1357120081}
 --- !u!4 &523355383

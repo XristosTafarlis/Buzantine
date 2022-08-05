@@ -10,8 +10,8 @@ public class PlayerScript : MonoBehaviour{
 	[SerializeField] GameObject bow;
 	[SerializeField] AudioSource audioSource;
 	[SerializeField] AudioClip[] playerPainSounds;
-
-	public bool wonTheGame;
+	[Space(10)]
+	public bool wonTheGame;	//Used fot text when level finishes
 	public bool endTheGame;
 
 	[Header("Variables")]
@@ -27,9 +27,9 @@ public class PlayerScript : MonoBehaviour{
 	}
 
 	void Update(){
-		Death();
 		GameFinished();
 		HealthRender();
+		Death();
 	}
 
 	void HealthRender(){
@@ -118,12 +118,12 @@ public class PlayerScript : MonoBehaviour{
 
 	void Death(){
 		if(life <= 0){
-			bow.GetComponent<Bow>().enabled = false;
-			enemys = GameObject.FindGameObjectsWithTag("Enemy");
-
 			endTheGame = true;
 			wonTheGame = false;
 
+			bow.GetComponent<Bow>().enabled = false;
+
+			enemys = GameObject.FindGameObjectsWithTag("Enemy");
 			foreach(GameObject _enemy in enemys){ //Freeze enemies
 				_enemy.GetComponent<Animator>().SetBool("EnemyIsStill", true);
 				_enemy.GetComponent<Animator>().SetBool("EnemyAttacks", false);

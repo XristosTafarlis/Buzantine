@@ -16,7 +16,7 @@ public class WaveSpawner : MonoBehaviour{
 	[SerializeField] Wave[] waves;
 	[SerializeField] Transform spawnPoint;
 	[SerializeField] float timeBetweenWaves = 2f;
-	public int waveCount;
+	[HideInInspector] public int waveCount;
 	public static bool wavesFinished = false;
 
 	int nextWave = 0;
