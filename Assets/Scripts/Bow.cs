@@ -11,9 +11,13 @@ public class Bow : MonoBehaviour{
 	float launchForce;
 	float fireRate;
 	float nextFire = 0f;
+	public bool canFire = true;
+
+	void Awake() {
+		FireRate();
+	}
 
 	void Start(){
-		FireRate();
 		SetLaunchForce();
 	}
 
@@ -21,7 +25,7 @@ public class Bow : MonoBehaviour{
 
 	void Update(){
 		Vector2 bowPosition = transform.position;
-		Vector2 mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+		Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 		Vector2 direction = mousePosition - bowPosition;
 		transform.right = direction;
 

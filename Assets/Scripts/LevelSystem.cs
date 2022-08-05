@@ -9,8 +9,8 @@ public class LevelSystem : MonoBehaviour{
 	public float currentXp;
 	public float requiredXp;
 
-	private float lerpTimer;
-	private float delayTimer;
+	float lerpTimer;
+	float delayTimer;
 
 	[Header("UI")]
 	[SerializeField] Image frontXpBar;
@@ -20,28 +20,14 @@ public class LevelSystem : MonoBehaviour{
 
 	void Start(){
 		//PlayerPrefs.DeleteAll();							//Removes the level
-		frontXpBar.fillAmount = currentXp / requiredXp;
-		backXpBar.fillAmount = currentXp / requiredXp;
+		SetXpFillAmount();
+		PlayerPrefChecker();
 
-		if(PlayerPrefs.HasKey("xp") == true){
-			currentXp = PlayerPrefs.GetFloat("xp");
-		}else{
-			currentXp = 0;
-		}
-
-		if(PlayerPrefs.HasKey("lvl") == true){
-			level = PlayerPrefs.GetInt("lvl");
-		}
-		else{
-			level = 1;
-		}
-
+		//Needs fixing - Gives more XP than intended
 		requiredXp = CalculateRequiredXp();
-
-		if (xpOnWin > 10){
+		if (xpOnWin != 0){
 			GainExperienceFlatRate(xpOnWin);
 		}
-
 		if(currentXp >= requiredXp){
 			LevelUp();
 		}
@@ -50,6 +36,25 @@ public class LevelSystem : MonoBehaviour{
 
 	void Update(){
 		UpdateXpUI();
+	}
+
+	void SetXpFillAmount(){
+		frontXpBar.fillAmount = currentXp / requiredXp;
+		backXpBar.fillAmount = currentXp / requiredXp;
+	}
+
+	void PlayerPrefChecker(){
+		if(PlayerPrefs.HasKey("xp") == true){
+			currentXp = PlayerPrefs.GetFloat("xp");
+		}else{
+			currentXp = 0;
+		}
+		if(PlayerPrefs.HasKey("lvl") == true){
+			level = PlayerPrefs.GetInt("lvl");
+		}
+		else{
+			level = 1;
+		}
 	}
 
 	public void UpdateXpUI(){
@@ -87,10 +92,6 @@ public class LevelSystem : MonoBehaviour{
 		requiredXp = CalculateRequiredXp();
 
 		PlayerPrefs.SetInt("lvl", level);
-
-		//GetComponent<PlayerAttributes>().IncreaseHealth(level);
-		//GetComponent<PlayerAttributes>().IncreaseFireRate(level);
-		//Chage health and fire rate
 	}
 
 	int CalculateRequiredXp(){

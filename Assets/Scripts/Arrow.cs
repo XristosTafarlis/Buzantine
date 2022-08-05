@@ -21,7 +21,7 @@ public class Arrow : MonoBehaviour{
 
 	void OnTriggerEnter2D(Collider2D other){					/*[Arrow on hit physics]*/
 		GetComponent<SpriteRenderer>().sprite = HittSprite;		//Remove tip of arrow
-		Destroy(trail, 0.2f);
+		Destroy(trail, 0.1f);
 		if(other.gameObject.tag.Equals("Ground")){
 			GetComponent<AudioSource>().pitch = Random.Range(0.85f, 1.15f);
 			GetComponent<AudioSource>().Play();

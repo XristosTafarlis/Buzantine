@@ -131,7 +131,7 @@ public class Enemy : MonoBehaviour{
 	}
 
 	void AttackEnable(){	//Called in animator
-		//GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().TakeDamage(damage);
+		Instantiate(bloodEffect, new Vector3(target.transform.position.x + 0.4f, target.transform.position.y), Quaternion.Euler(0f, 0f, 180f));
 		target.GetComponent<PlayerScript>().TakeDamage(damage);
 		swordHitAudioSource.PlayOneShot(swordHitSounds[Random.Range(0, swordHitSounds.Length)]);
 	}

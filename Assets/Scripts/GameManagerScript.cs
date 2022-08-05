@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class inFrontGameManager : MonoBehaviour{
+public class GameManagerScript : MonoBehaviour{
 	AudioSource soundtrack;
 	[SerializeField] AudioClip[] audioClips;
 
