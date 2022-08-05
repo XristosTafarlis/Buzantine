@@ -11,6 +11,9 @@ public class PlayerScript : MonoBehaviour{
 	[SerializeField] AudioSource audioSource;
 	[SerializeField] AudioClip[] playerPainSounds;
 
+	public bool wonTheGame;
+	public bool endTheGame;
+
 	[Header("Variables")]
 	public int damage = 5;
 	public int life;
@@ -66,44 +69,46 @@ public class PlayerScript : MonoBehaviour{
 	void GameFinished(){
 		if(WaveSpawner.wavesFinished == true){
 			WaveSpawner.wavesFinished = false;
+			endTheGame = true;
+			wonTheGame = true;
 			XpWon();
-			Invoke("MainMenu", 1f);
+			Invoke("MainMenu", 2f);
 		}
 	}
 
 	void XpWon(){
 		if(SceneManager.GetActiveScene().name == "Spaniae"){
-			LevelSystem.xpOnWin = 20;
+			LevelSystem.xpOnWin = 17;
 		}else if(SceneManager.GetActiveScene().name == "Italia Annonaria"){
-			LevelSystem.xpOnWin = 25;
+			LevelSystem.xpOnWin = 18.53f;
 		}else if(SceneManager.GetActiveScene().name == "Italia Suburbicaria"){
-			LevelSystem.xpOnWin = 30;
+			LevelSystem.xpOnWin = 20.2f;
 		}else if(SceneManager.GetActiveScene().name == "Illyricum"){
-			LevelSystem.xpOnWin = 35;
+			LevelSystem.xpOnWin = 22.02f;
 		}else if(SceneManager.GetActiveScene().name == "Dacia"){
-			LevelSystem.xpOnWin = 40;
+			LevelSystem.xpOnWin = 24;
 		}else if(SceneManager.GetActiveScene().name == "Macedonia"){
-			LevelSystem.xpOnWin = 45;
+			LevelSystem.xpOnWin = 26.16f;
 		}else if(SceneManager.GetActiveScene().name == "Thracia"){
-			LevelSystem.xpOnWin = 50;
+			LevelSystem.xpOnWin = 28.51f;
 		}else if(SceneManager.GetActiveScene().name == "Quaestura Exercitus"){
-			LevelSystem.xpOnWin = 55;
+			LevelSystem.xpOnWin = 31.08f;
 		}else if(SceneManager.GetActiveScene().name == "Pontica"){
-			LevelSystem.xpOnWin = 60;
+			LevelSystem.xpOnWin = 33.87f;
 		}else if(SceneManager.GetActiveScene().name == "Asiana"){
-			LevelSystem.xpOnWin = 65;
+			LevelSystem.xpOnWin = 36.92f;
 		}else if(SceneManager.GetActiveScene().name == "Oriens"){
-			LevelSystem.xpOnWin = 70;
+			LevelSystem.xpOnWin = 40.25f;
 		}else if(SceneManager.GetActiveScene().name == "Aegyptus"){
-			LevelSystem.xpOnWin = 75;
+			LevelSystem.xpOnWin = 43.87f;
 		}else if(SceneManager.GetActiveScene().name == "Africa"){
-			LevelSystem.xpOnWin = 80;
-		}else if(SceneManager.GetActiveScene().name == "Dara"){
-			MainMapCanvasScript.hasWonSassanids = true;
-			LevelSystem.xpOnWin = 110;
+			LevelSystem.xpOnWin = 47.82f;
 		}else if(SceneManager.GetActiveScene().name == "Taginae"){
 			MainMapCanvasScript.hasWonOstrogoths = true;
-			LevelSystem.xpOnWin = 100;
+			LevelSystem.xpOnWin = 75;
+		}else if(SceneManager.GetActiveScene().name == "Dara"){
+			MainMapCanvasScript.hasWonSassanids = true;
+			LevelSystem.xpOnWin = 90;
 		}
 	}
 
@@ -115,8 +120,11 @@ public class PlayerScript : MonoBehaviour{
 		if(life <= 0){
 			bow.GetComponent<Bow>().enabled = false;
 			enemys = GameObject.FindGameObjectsWithTag("Enemy");
-			//Freeze enemies
-			foreach(GameObject _enemy in enemys){
+
+			endTheGame = true;
+			wonTheGame = false;
+
+			foreach(GameObject _enemy in enemys){ //Freeze enemies
 				_enemy.GetComponent<Animator>().SetBool("EnemyIsStill", true);
 				_enemy.GetComponent<Animator>().SetBool("EnemyAttacks", false);
 				_enemy.GetComponent<Enemy>().enabled = false;

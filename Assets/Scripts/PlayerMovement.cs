@@ -71,7 +71,11 @@ public class PlayerMovement : MonoBehaviour{
 	}
 
 	void Load(){
-		transform.position = new Vector3(PlayerPrefs.GetFloat("X"), PlayerPrefs.GetFloat("Y"), 0);
+		if(PlayerPrefs.HasKey("X") == true || PlayerPrefs.HasKey("Y") == true){
+			transform.position = new Vector3(PlayerPrefs.GetFloat("X"), PlayerPrefs.GetFloat("Y"), 0);
+		}else{
+			transform.position = new Vector3(-62f, -10f, 0);
+		}
 	}
 
 	void Save(){

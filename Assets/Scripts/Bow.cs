@@ -45,28 +45,28 @@ public class Bow : MonoBehaviour{
 		if(LevelSystem.level == 1){
 			fireRate = 1f;
 		}else if(LevelSystem.level == 2){
-			fireRate = 1.1f;
+			fireRate = 1.05f;
 		}else if(LevelSystem.level == 3){
-			fireRate = 1.2f;
+			fireRate = 1.1f;
 		}else if(LevelSystem.level == 4){
-			fireRate = 1.3f;
+			fireRate = 1.2f;
 		}else if(LevelSystem.level == 5){
-			fireRate = 1.5f;
+			fireRate = 1.25f;
 		}else if(LevelSystem.level == 6){
-			fireRate = 1.8f;
+			fireRate = 1.35f;
 		}else if(LevelSystem.level == 7){
-			fireRate = 2.3f;
+			fireRate = 1.5f;
 		}else if(LevelSystem.level == 8){
-			fireRate = 3.1f;
+			fireRate = 1.8f;
 		}else if(LevelSystem.level == 9){
-			fireRate = 4.4f;
+			fireRate = 2f;
 		}else if(LevelSystem.level >= 10){
-			fireRate = 6.5f;
+			fireRate = 3.5f;
 		}
 	}
 
 	void Shoot() {
-		shotSource.pitch = Random.Range(0.95f, 1.05f);
+		shotSource.pitch = Random.Range(0.9f, 1.1f);
 		shotSource.Play();
 		GameObject newArrow = Instantiate(arrow, shotPoint.position, shotPoint.rotation);
 		newArrow.GetComponent<Rigidbody2D>().velocity = transform.right * launchForce;

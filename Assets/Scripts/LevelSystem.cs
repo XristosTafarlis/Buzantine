@@ -37,18 +37,19 @@ public class LevelSystem : MonoBehaviour{
 		}
 
 		requiredXp = CalculateRequiredXp();
-	}
-
-	void Update(){
-		UpdateXpUI();
-		
-		if(currentXp >= requiredXp){
-			LevelUp();
-		}
 
 		if (xpOnWin > 10){
 			GainExperienceFlatRate(xpOnWin);
 		}
+
+		if(currentXp >= requiredXp){
+			LevelUp();
+		}
+		xpOnWin = 0;
+	}
+
+	void Update(){
+		UpdateXpUI();
 	}
 
 	public void UpdateXpUI(){
