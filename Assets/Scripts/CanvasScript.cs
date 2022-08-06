@@ -18,7 +18,6 @@ public class CanvasScript : MonoBehaviour{
 	void Start(){
 		myCanvas = GetComponent<Canvas>();
 		fireRate = bow.GetComponent<Bow>().fireRate;
-		count = fireRate;
 	}
 
 	void Update(){
@@ -46,15 +45,15 @@ public class CanvasScript : MonoBehaviour{
 	}
 
 	void FireIndicator(){
-		//Lord showed me how to write this, cause I am not sure how I thought of it
-		if(bow.GetComponent<Bow>().canFire){
-			count = fireRate;
-			crosshair.fillAmount = 1f;
+		if(bow.GetComponent<Bow>().canFire == true || crosshair.fillAmount <= 0f /*Good enough*/ ){
+			count = 1f / fireRate;
 			crosshair.color = Color.green;
-		}else{
-			count = count - Time.deltaTime;
-			crosshair.fillAmount = 1f - count;
+			crosshair.fillAmount = 1f;
+		}
+		if(bow.GetComponent<Bow>().canFire == false){
+			count -= Time.deltaTime;
 			crosshair.color = Color.red;
+			crosshair.fillAmount = count / (1f / fireRate);
 		}
 	}
 

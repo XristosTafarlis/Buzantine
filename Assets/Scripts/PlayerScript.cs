@@ -78,37 +78,37 @@ public class PlayerScript : MonoBehaviour{
 
 	void XpWon(){
 		if(SceneManager.GetActiveScene().name == "Spaniae"){
-			LevelSystem.xpOnWin = 17;
+			LevelSystem.xpOnWin = 20;
 		}else if(SceneManager.GetActiveScene().name == "Italia Annonaria"){
-			LevelSystem.xpOnWin = 18.53f;
+			LevelSystem.xpOnWin = 25;
 		}else if(SceneManager.GetActiveScene().name == "Italia Suburbicaria"){
-			LevelSystem.xpOnWin = 20.2f;
+			LevelSystem.xpOnWin = 32;
 		}else if(SceneManager.GetActiveScene().name == "Illyricum"){
-			LevelSystem.xpOnWin = 22.02f;
+			LevelSystem.xpOnWin = 40;
 		}else if(SceneManager.GetActiveScene().name == "Dacia"){
-			LevelSystem.xpOnWin = 24;
+			LevelSystem.xpOnWin = 50;
 		}else if(SceneManager.GetActiveScene().name == "Macedonia"){
-			LevelSystem.xpOnWin = 26.16f;
+			LevelSystem.xpOnWin = 65;
 		}else if(SceneManager.GetActiveScene().name == "Thracia"){
-			LevelSystem.xpOnWin = 28.51f;
+			LevelSystem.xpOnWin = 75;
 		}else if(SceneManager.GetActiveScene().name == "Quaestura Exercitus"){
-			LevelSystem.xpOnWin = 31.08f;
+			LevelSystem.xpOnWin = 80;
 		}else if(SceneManager.GetActiveScene().name == "Pontica"){
-			LevelSystem.xpOnWin = 33.87f;
+			LevelSystem.xpOnWin = 83;
 		}else if(SceneManager.GetActiveScene().name == "Asiana"){
-			LevelSystem.xpOnWin = 36.92f;
+			LevelSystem.xpOnWin = 85;
 		}else if(SceneManager.GetActiveScene().name == "Oriens"){
-			LevelSystem.xpOnWin = 40.25f;
+			LevelSystem.xpOnWin = 90;
 		}else if(SceneManager.GetActiveScene().name == "Aegyptus"){
-			LevelSystem.xpOnWin = 43.87f;
+			LevelSystem.xpOnWin = 100;
 		}else if(SceneManager.GetActiveScene().name == "Africa"){
-			LevelSystem.xpOnWin = 47.82f;
+			LevelSystem.xpOnWin = 120;
 		}else if(SceneManager.GetActiveScene().name == "Taginae"){
 			MainMapCanvasScript.hasWonOstrogoths = true;
-			LevelSystem.xpOnWin = 75;
+			LevelSystem.xpOnWin = 110;
 		}else if(SceneManager.GetActiveScene().name == "Dara"){
 			MainMapCanvasScript.hasWonSassanids = true;
-			LevelSystem.xpOnWin = 90;
+			LevelSystem.xpOnWin = 150;
 		}
 	}
 

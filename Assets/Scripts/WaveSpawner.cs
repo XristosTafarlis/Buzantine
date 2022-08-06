@@ -30,6 +30,11 @@ public class WaveSpawner : MonoBehaviour{
 	}
 
 	void Update(){
+
+		if(Input.GetKeyDown(KeyCode.G)){
+			wavesFinished = true;
+		}
+
 		if(state == SpawnState.WAITING){
 			//Check if enemies are still alive
 			if(!EnemyIsAlive()){

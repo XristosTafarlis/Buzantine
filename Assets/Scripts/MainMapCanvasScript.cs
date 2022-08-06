@@ -2,25 +2,25 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class MainMapCanvasScript : MonoBehaviour{
-	
+
 	[Header("Refferences")]
 	[SerializeField] GameObject GAMEMANAGER;
 	[Space(20)]
-	
+
 	[SerializeField] Text xpText;
 	[SerializeField] Text levelText;
 	[SerializeField] Text lifeText;
 	[SerializeField] Text fireRateText;
 	[Space(10)]
-	
+
 	[SerializeField] Text joinFrontRateText;
 	[Space(20)]
-	
+
 	[SerializeField] GameObject sassanids;
 	public static bool hasWonSassanids;
 	[SerializeField] GameObject ostrogoths;
-	public static bool hasWonOstrogoths; 
-	
+	public static bool hasWonOstrogoths;
+
 	void Update(){
 		LevelText();
 		XPText();
@@ -29,7 +29,7 @@ public class MainMapCanvasScript : MonoBehaviour{
 		JoinFrontRateText();
 		ShowBattles();
 	}
-	
+
 	void LevelText(){
 		if(LevelSystem.level < 10){
 			levelText.text = "Level " + LevelSystem.level;
@@ -37,7 +37,7 @@ public class MainMapCanvasScript : MonoBehaviour{
 			levelText.text = "Level 10 (Max)";
 		}
 	}
-	
+
 	void XPText(){
 		if(LevelSystem.level < 10){
 			xpText.text = GAMEMANAGER.GetComponent<LevelSystem>().currentXp + " of " + GAMEMANAGER.GetComponent<LevelSystem>().requiredXp;
@@ -45,7 +45,7 @@ public class MainMapCanvasScript : MonoBehaviour{
 			xpText.text = "Max XP";
 		}
 	}
-	
+
 	void ShowBattles(){
 		if(hasWonOstrogoths){
 			ostrogoths.SetActive(true);
@@ -54,7 +54,7 @@ public class MainMapCanvasScript : MonoBehaviour{
 			sassanids.SetActive(true);
 		}
 	}
-	
+
 	void LifeText(){
 		if(LevelSystem.level == 1){
 			lifeText.text = "Life : 100";
@@ -78,31 +78,31 @@ public class MainMapCanvasScript : MonoBehaviour{
 			lifeText.text = "Life : 650 (Max)";
 		}
 	}
-	
+
 	void FireRateText(){
 		if(LevelSystem.level == 1){
 			fireRateText.text = "1 arrow per second";
 		}else if(LevelSystem.level == 2){
-			fireRateText.text = "1.1 arrows per second";
+			fireRateText.text = "1.05 arrows per second";
 		}else if(LevelSystem.level == 3){
-			fireRateText.text = "1.2 arrows per second";
+			fireRateText.text = "1.1 arrows per second";
 		}else if(LevelSystem.level == 4){
-			fireRateText.text = "1.3 arrows per second";
+			fireRateText.text = "1.2 arrows per second";
 		}else if(LevelSystem.level == 5){
-			fireRateText.text = "1.5 arrows per second";
+			fireRateText.text = "1.25 arrows per second";
 		}else if(LevelSystem.level == 6){
-			fireRateText.text = "1.8 arrows per second";
+			fireRateText.text = "1.35 arrows per second";
 		}else if(LevelSystem.level == 7){
-			fireRateText.text = "2.3 arrows per second";
+			fireRateText.text = "1.5 arrows per second";
 		}else if(LevelSystem.level == 8){
-			fireRateText.text = "3.1 arrows per second";
+			fireRateText.text = "1.8 arrows per second";
 		}else if(LevelSystem.level == 9){
-			fireRateText.text = "4.4 arrows per second";
+			fireRateText.text = "2 arrows per second";
 		}else if(LevelSystem.level >= 10){
-			fireRateText.text = "6.5 arrows per second (Max)";
+			fireRateText.text = "3.5 arrows per second (Max)";
 		}
 	}
-	
+
 	void JoinFrontRateText(){
 		if(PlayerMovement.location == null){
 			joinFrontRateText.text = " ";
