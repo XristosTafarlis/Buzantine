@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class CanvasScript : MonoBehaviour{
 	[Header("References")]
 	[SerializeField] GameObject player;
-	[SerializeField] GameObject bow;
+	[SerializeField] GameObject rotationPoint;
 	[SerializeField] GameObject GameManager;
 	[Space(10)]
 	[SerializeField] Text text;
@@ -17,7 +17,7 @@ public class CanvasScript : MonoBehaviour{
 
 	void Start(){
 		myCanvas = GetComponent<Canvas>();
-		fireRate = bow.GetComponent<Bow>().fireRate;
+		fireRate = rotationPoint.GetComponent<Bow>().fireRate;
 	}
 
 	void Update(){
@@ -45,12 +45,12 @@ public class CanvasScript : MonoBehaviour{
 	}
 
 	void FireIndicator(){
-		if(bow.GetComponent<Bow>().canFire == true || crosshair.fillAmount <= 0f /*Good enough*/ ){
+		if(rotationPoint.GetComponent<Bow>().canFire == true || crosshair.fillAmount <= 0f /*Good enough*/ ){
 			count = 1f / fireRate;
 			crosshair.color = Color.green;
 			crosshair.fillAmount = 1f;
 		}
-		if(bow.GetComponent<Bow>().canFire == false){
+		if(rotationPoint.GetComponent<Bow>().canFire == false){
 			count -= Time.deltaTime;
 			crosshair.color = Color.red;
 			crosshair.fillAmount = count / (1f / fireRate);
@@ -60,8 +60,10 @@ public class CanvasScript : MonoBehaviour{
 	void WaveCountDisplay(){
 		if(GameManager.GetComponent<WaveSpawner>().waveCount == 1){
 			wavesText.text = "Last wave";
-		}else {
-			wavesText.text = GameManager.GetComponent<WaveSpawner>().waveCount + " waves";
+		}else if(GameManager.GetComponent<WaveSpawner>().waveCount == 2){
+			wavesText.text = "Wave 2 of 3";
+		}else if(GameManager.GetComponent<WaveSpawner>().waveCount == 3){
+			wavesText.text = "Wave 1 of 3";
 		}
 	}
 }

@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &57535373 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6662656591308010189, guid: 186ab01975c802a4182e686d9d928376, type: 3}
-  m_PrefabInstance: {fileID: 293421729}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &119377097
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,7 +206,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6662656592083033569, guid: 186ab01975c802a4182e686d9d928376, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.38
+      value: 1.483
       objectReference: {fileID: 0}
     - target: {fileID: 6662656592083033569, guid: 186ab01975c802a4182e686d9d928376, type: 3}
       propertyPath: m_LocalPosition.z
@@ -254,6 +249,11 @@ PrefabInstance:
 --- !u!1 &293421730 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6662656592083033574, guid: 186ab01975c802a4182e686d9d928376, type: 3}
+  m_PrefabInstance: {fileID: 293421729}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &293421731 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1051293973269466257, guid: 186ab01975c802a4182e686d9d928376, type: 3}
   m_PrefabInstance: {fileID: 293421729}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &365211592
@@ -543,11 +543,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 671689169}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0273ef9961972ac488371b3c674b997f, type: 3}
+  m_Script: {fileID: 11500000, guid: 1b1af29e199409146b03fde6fa83faef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 293421730}
-  bow: {fileID: 57535373}
+  rotationPoint: {fileID: 293421731}
   GameManager: {fileID: 961908433}
   text: {fileID: 1162926249}
   wavesText: {fileID: 365211595}

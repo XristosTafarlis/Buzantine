@@ -387,11 +387,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 458327546}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0273ef9961972ac488371b3c674b997f, type: 3}
+  m_Script: {fileID: 11500000, guid: 1b1af29e199409146b03fde6fa83faef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1375866173}
-  bow: {fileID: 1375866174}
+  rotationPoint: {fileID: 1375866174}
   GameManager: {fileID: 1369468842}
   text: {fileID: 2013584301}
   wavesText: {fileID: 875360058}
@@ -1169,7 +1169,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1375866174 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 6662656591308010189, guid: 186ab01975c802a4182e686d9d928376, type: 3}
+  m_CorrespondingSourceObject: {fileID: 1051293973269466257, guid: 186ab01975c802a4182e686d9d928376, type: 3}
   m_PrefabInstance: {fileID: 1375866172}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2013584300

@@ -10,7 +10,8 @@ TrueTypeFontImporter:
   includeFontData: 1
   fontNames:
   - JSL Ancient
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: a07f7f780098ca148a8ea7b3bedaa0d6, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1

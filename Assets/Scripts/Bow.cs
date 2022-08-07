@@ -8,10 +8,11 @@ public class Bow : MonoBehaviour{
 	[SerializeField] AudioSource shotSource;
 
 	[Header("Variables")]
+	[HideInInspector] public float fireRate;
+	[HideInInspector] public bool canFire = false;
 	float launchForce;
-	public float fireRate;
 	float nextFire = 0f;
-	public bool canFire = false;
+	float zRotation;
 
 	void Awake() {
 		FireRate();
@@ -21,24 +22,10 @@ public class Bow : MonoBehaviour{
 		SetLaunchForce();
 	}
 
-	//Bow mouse follow and shot when click
-
 	void Update(){
-		Vector2 bowPosition = transform.position;
-		Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		Vector2 direction = mousePosition - bowPosition;
-		transform.right = direction;
-
-		if (canFire == false && Time.time >= nextFire){
-			canFire = true;
-		}
-		if(canFire == true){
-			if(Input.GetMouseButtonDown(0)){
-				canFire = false;
-				nextFire = Time.time + 1f/fireRate;
-				Shoot();
-			}
-		}
+		MouseLook();
+		ClampRotation();
+		Fire();
 	}
 
 	void SetLaunchForce(){
@@ -75,7 +62,40 @@ public class Bow : MonoBehaviour{
 		}
 	}
 
+	void Fire(){
+		//Bow followmouse and shoots when click
+		if (canFire == false && Time.time >= nextFire){
+			canFire = true;
+		}
+		if(canFire == true){
+			if(Input.GetMouseButtonDown(0)){
+				canFire = false;
+				nextFire = Time.time + 1f/fireRate;
+				Shoot();
+			}
+		}
+	}
+
+	void MouseLook(){
+		Vector2 bowPosition = transform.position;
+		Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+		Vector2 direction = mousePosition - bowPosition;
+		transform.right = direction;
+	}
+
+	void ClampRotation(){
+		zRotation = transform.eulerAngles.z;
+		if(transform.eulerAngles.z > 50f && zRotation < 180f){
+			zRotation = 49.9f;
+		}
+		else if (zRotation < 310f && zRotation > 180f){
+			zRotation = 310.1f;
+		}
+		transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, zRotation);
+	}
+
 	void Shoot() {
+		GetComponentInChildren<Animator>().Play("Player_Shoot", 0, 0f);
 		shotSource.pitch = Random.Range(0.9f, 1.1f);
 		shotSource.Play();
 		GameObject newArrow = Instantiate(arrow, shotPoint.position, shotPoint.rotation);

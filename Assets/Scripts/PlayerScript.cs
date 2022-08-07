@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class PlayerScript : MonoBehaviour{
 	[Header("References")]
 	[SerializeField] Image healthBar;
-	[SerializeField] GameObject bow;
+	[SerializeField] GameObject rotationPoint;
 	[SerializeField] AudioSource audioSource;
 	[SerializeField] AudioClip[] playerPainSounds;
 	[Space(10)]
@@ -21,7 +21,6 @@ public class PlayerScript : MonoBehaviour{
 	GameObject[] enemys;
 
 	void Start(){
-		audioSource = GetComponent<AudioSource>();
 		SetPlayerLife();
 		maxLife = life;
 	}
@@ -121,7 +120,7 @@ public class PlayerScript : MonoBehaviour{
 			endTheGame = true;
 			wonTheGame = false;
 
-			bow.GetComponent<Bow>().enabled = false;
+			rotationPoint.GetComponent<Bow>().enabled = false;
 
 			enemys = GameObject.FindGameObjectsWithTag("Enemy");
 			foreach(GameObject _enemy in enemys){ //Freeze enemies
