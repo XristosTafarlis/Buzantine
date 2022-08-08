@@ -10,6 +10,8 @@ public class CanvasScript : MonoBehaviour{
 	[SerializeField] Text text;
 	[SerializeField] Text wavesText;
 	[SerializeField] Image crosshair;
+	[Space(10)]
+	//[SerializeField] Image formations;
 
 	float fireRate;
 	float count;
@@ -18,6 +20,12 @@ public class CanvasScript : MonoBehaviour{
 	void Start(){
 		myCanvas = GetComponent<Canvas>();
 		fireRate = rotationPoint.GetComponent<Bow>().fireRate;
+
+		//if(formations != null){
+		//	GetComponent<Canvas>().sortingOrder = 5;
+		//	Invoke("DestroyFormations", 5f);
+		//}
+
 	}
 
 	void Update(){
@@ -26,6 +34,11 @@ public class CanvasScript : MonoBehaviour{
 		FireIndicator();
 		WaveCountDisplay();
 	}
+
+	//void DestroyFormations(){
+	//	GetComponent<Canvas>().sortingOrder = -5;
+	//	Destroy(formations);
+	//}
 
 	void CrosshairFolowMouse(){
 		Vector2 pos;
