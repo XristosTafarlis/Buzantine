@@ -21,22 +21,22 @@ public class Enemy : MonoBehaviour{
 	[SerializeField] AudioClip[] swordHitSounds;
 
 	[Header("Variables")]
-	[SerializeField] float speed;								//Enemy speed
-	[SerializeField] int damage;								//Enemy damage
-	[SerializeField] int life;									//Enemy life
+	[SerializeField] float speed;													//Enemy speed
+	[SerializeField] int damage;													//Enemy damage
+	[SerializeField] int life;														//Enemy life
 	int maxLife;
 
 	[Header("Circle")]
-	[SerializeField] Transform stopCheckUpper;					//Circle start
-	[SerializeField] Transform stopCheckMiddle;					//Circle start
-	[SerializeField] float length;								//Circle radious
-	[HideInInspector] public bool isStoped;						//Bool if player is stoped
+	[SerializeField] Transform stopCheckUpper;										//Circle start
+	[SerializeField] Transform stopCheckMiddle;										//Circle start
+	[SerializeField] float length;													//Circle radious
+	[HideInInspector] public bool isStoped;											//Bool if player is stoped
 
 	Collider2D enemyColliderA;
 	Collider2D enemyColliderB;
-	GameObject target;											//Attack refference
-	bool isGrounded;											//Checking if enemy is grounded
-	bool isFighting;											//Checking if enemy is fighting
+	GameObject target;																//Attack refference
+	bool isGrounded;																//Checking if enemy is grounded
+	bool isFighting;																//Checking if enemy is fighting
 
 	void Start(){
 		maxLife = life;
@@ -53,8 +53,8 @@ public class Enemy : MonoBehaviour{
 		HealthRender();
 	}
 
-	void OnTriggerEnter2D(Collider2D other) {			//Arrow physics
-		if(other.gameObject.tag.Equals("Arrow")){														//Getting hit by an arrow
+	void OnTriggerEnter2D(Collider2D other) {										//Arrow physics
+		if(other.gameObject.tag.Equals("Arrow")){									//Getting hit by an arrow
 			life -= GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerScript>().damage;		//Getting the damage that the player does
 			Instantiate(bloodEffect, new Vector3(transform.position.x, other.transform.position.y), other.transform.rotation);
 			deathAudioSource.PlayOneShot(painSounds[Random.Range(0, painSounds.Length)]);
@@ -63,8 +63,8 @@ public class Enemy : MonoBehaviour{
 
 	void OnCollisionEnter2D(Collision2D other) {
 		if(other.gameObject.tag.Equals("Player")){
-			anim.SetBool("EnemyAttacks", true);		//Playing attack animation
-			target = other.gameObject;				//Passing player object on a variable
+			anim.SetBool("EnemyAttacks", true);										//Playing attack animation
+			target = other.gameObject;												//Passing player object on a variable
 			isFighting = true;
 			isStoped = true;
 		}
@@ -72,7 +72,7 @@ public class Enemy : MonoBehaviour{
 
 	void OnCollisionExit2D(Collision2D other) {
 		if(other.gameObject.tag.Equals("Enemy")){
-			anim.SetBool("EnemyIsStill", false);			//Ending idling animation
+			anim.SetBool("EnemyIsStill", false);									//Ending idling animation
 		}
 	}
 
@@ -94,7 +94,7 @@ public class Enemy : MonoBehaviour{
 
 	void Walk(){
 		if(isStoped == false){
-			rb.velocity = new Vector2(-speed, 0);	//Making enemy move
+			rb.velocity = new Vector2(-speed, 0);									//Making enemy move
 		}else{
 			rb.velocity = Vector2.zero;
 			rb.gravityScale = 0f;
@@ -137,14 +137,14 @@ public class Enemy : MonoBehaviour{
 	}
 
 	void Death(){
-		if (life <= 0){														//Enemy death physics
-			rb.velocity = new Vector2(0f, 0f);								//Stoping enemy
-			GetComponent<CapsuleCollider2D>().enabled = false;				//Disabling colliders
-			GetComponent<CircleCollider2D>().enabled = false;				//Disabling colliders
-			anim.SetBool("EnemyIsDead", true);								//Playing death animation
-			rb.gravityScale = 0;											//Removing gravity
+		if (life <= 0){															//Enemy death physics
+			rb.velocity = new Vector2(0f, 0f);									//Stoping enemy
+			GetComponent<CapsuleCollider2D>().enabled = false;					//Disabling colliders
+			GetComponent<CircleCollider2D>().enabled = false;					//Disabling colliders
+			anim.SetBool("EnemyIsDead", true);									//Playing death animation
+			rb.gravityScale = 0;												//Removing gravity
 
-			foreach (Transform child in transform) {						//Removing arrows
+			foreach (Transform child in transform) {							//Removing arrows
 				if(child.name != "Canvas")
 					Destroy(child.gameObject);
 				else
@@ -155,7 +155,7 @@ public class Enemy : MonoBehaviour{
 	}
 
 	void OnDrawGizmosSelected(){
-		Gizmos.DrawWireSphere(stopCheckUpper.position, length);				//Debug gizmos
+		Gizmos.DrawWireSphere(stopCheckUpper.position, length);					//Debug gizmos
 		Gizmos.DrawWireSphere(stopCheckMiddle.position, length);
 		Gizmos.DrawWireSphere(groundCheck.position, 0.1f);
 	}

@@ -78,35 +78,63 @@ public class PlayerScript : MonoBehaviour{
 	void XpWon(){
 		if(SceneManager.GetActiveScene().name == "Spaniae"){
 			LevelSystem.xpOnWin = 20;
+			MainMapCanvasScript.hasWonSpaniae = true;
+			PlayerPrefs.SetInt("hasWonSpaniae", (MainMapCanvasScript.hasWonSpaniae ? 1 : 0));
 		}else if(SceneManager.GetActiveScene().name == "Italia Annonaria"){
 			LevelSystem.xpOnWin = 25;
+			MainMapCanvasScript.hasWonItaliaAnnonaria = true;
+			PlayerPrefs.SetInt("hasWonItaliaAnnonaria", (MainMapCanvasScript.hasWonItaliaAnnonaria ? 1 : 0));
 		}else if(SceneManager.GetActiveScene().name == "Italia Suburbicaria"){
 			LevelSystem.xpOnWin = 32;
+			MainMapCanvasScript.hasWonItaliaSuburbicaria = true;
+			PlayerPrefs.SetInt("hasWonItaliaSuburbicaria", (MainMapCanvasScript.hasWonItaliaSuburbicaria ? 1 : 0));
 		}else if(SceneManager.GetActiveScene().name == "Illyricum"){
 			LevelSystem.xpOnWin = 40;
+			MainMapCanvasScript.hasWonIllyricum = true;
+			PlayerPrefs.SetInt("hasWonIllyricum", (MainMapCanvasScript.hasWonIllyricum ? 1 : 0));
 		}else if(SceneManager.GetActiveScene().name == "Dacia"){
 			LevelSystem.xpOnWin = 50;
+			MainMapCanvasScript.hasWonDacia = true;
+			PlayerPrefs.SetInt("hasWonDacia", (MainMapCanvasScript.hasWonDacia ? 1 : 0));
 		}else if(SceneManager.GetActiveScene().name == "Macedonia"){
 			LevelSystem.xpOnWin = 65;
+			MainMapCanvasScript.hasWonMacedonia = true;
+			PlayerPrefs.SetInt("hasWonMacedonia", (MainMapCanvasScript.hasWonMacedonia ? 1 : 0));
 		}else if(SceneManager.GetActiveScene().name == "Thracia"){
 			LevelSystem.xpOnWin = 75;
+			MainMapCanvasScript.hasWonThracia = true;
+			PlayerPrefs.SetInt("hasWonThracia", (MainMapCanvasScript.hasWonThracia ? 1 : 0));
 		}else if(SceneManager.GetActiveScene().name == "Quaestura Exercitus"){
 			LevelSystem.xpOnWin = 80;
+			MainMapCanvasScript.hasWonQuaesturaExercitus = true;
+			PlayerPrefs.SetInt("hasWonQuaesturaExercitus", (MainMapCanvasScript.hasWonQuaesturaExercitus ? 1 : 0));
 		}else if(SceneManager.GetActiveScene().name == "Pontica"){
 			LevelSystem.xpOnWin = 83;
+			MainMapCanvasScript.hasWonPontica = true;
+			PlayerPrefs.SetInt("hasWonPontica", (MainMapCanvasScript.hasWonPontica ? 1 : 0));
 		}else if(SceneManager.GetActiveScene().name == "Asiana"){
 			LevelSystem.xpOnWin = 85;
+			MainMapCanvasScript.hasWonAsiana = true;
+			PlayerPrefs.SetInt("hasWonAsiana", (MainMapCanvasScript.hasWonAsiana ? 1 : 0));
 		}else if(SceneManager.GetActiveScene().name == "Oriens"){
 			LevelSystem.xpOnWin = 90;
+			MainMapCanvasScript.hasWonOriens = true;
+			PlayerPrefs.SetInt("hasWonOriens", (MainMapCanvasScript.hasWonOriens ? 1 : 0));
 		}else if(SceneManager.GetActiveScene().name == "Aegyptus"){
 			LevelSystem.xpOnWin = 100;
+			MainMapCanvasScript.hasWonAegyptus = true;
+			PlayerPrefs.SetInt("hasWonAegyptus", (MainMapCanvasScript.hasWonAegyptus ? 1 : 0));
 		}else if(SceneManager.GetActiveScene().name == "Africa"){
 			LevelSystem.xpOnWin = 120;
+			MainMapCanvasScript.hasWonAfrica = true;
+			PlayerPrefs.SetInt("hasWonAfrica", (MainMapCanvasScript.hasWonAfrica ? 1 : 0));
 		}else if(SceneManager.GetActiveScene().name == "Taginae"){
 			MainMapCanvasScript.hasWonOstrogoths = true;
+			PlayerPrefs.SetInt("hasWonOstrogoths", (MainMapCanvasScript.hasWonOstrogoths ? 1 : 0));
 			LevelSystem.xpOnWin = 110;
 		}else if(SceneManager.GetActiveScene().name == "Dara"){
 			MainMapCanvasScript.hasWonSassanids = true;
+			PlayerPrefs.SetInt("hasWonSassanids", (MainMapCanvasScript.hasWonSassanids ? 1 : 0));
 			LevelSystem.xpOnWin = 150;
 		}
 	}
@@ -123,10 +151,10 @@ public class PlayerScript : MonoBehaviour{
 			rotationPoint.GetComponent<Bow>().enabled = false;
 
 			enemys = GameObject.FindGameObjectsWithTag("Enemy");
-			foreach(GameObject _enemy in enemys){ //Freeze enemies
-				_enemy.GetComponent<Animator>().SetBool("EnemyIsStill", true);
-				_enemy.GetComponent<Animator>().SetBool("EnemyAttacks", false);
-				_enemy.GetComponent<Enemy>().enabled = false;
+			foreach(GameObject enemy in enemys){ //Freeze enemies
+				enemy.GetComponent<Animator>().SetBool("EnemyIsStill", true);
+				enemy.GetComponent<Animator>().SetBool("EnemyAttacks", false);
+				enemy.GetComponent<Enemy>().enabled = false;
 			}
 			Invoke("MainMenu", 2f);
 		}

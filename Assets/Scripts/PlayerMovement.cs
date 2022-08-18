@@ -11,16 +11,16 @@ public class PlayerMovement : MonoBehaviour{
 	[SerializeField] float moveSpeed = 5f;
 	[SerializeField] float runSpeed = 8f;
 
-	float finalSpeed;
-
 	Rigidbody2D rb;
+	AudioSource declineSound;
+	float finalSpeed;
 	public static string location = null;
-
 	Vector2 movement;
 
 	void Start() {
 		Load();
-		rb = gameObject.GetComponent<Rigidbody2D>();
+		rb = GetComponent<Rigidbody2D>();
+		declineSound = GetComponent<AudioSource>();
 		finalSpeed = moveSpeed;
 	}
 
@@ -86,49 +86,139 @@ public class PlayerMovement : MonoBehaviour{
 	void LocationUpdate(){
 		if (Input.GetKey(KeyCode.Space)){
 			if (location == "Spaniae"){
-				SceneManager.LoadScene(1);
+				if(MainMapCanvasScript.hasWonSpaniae){
+					if(!declineSound.isPlaying){
+						declineSound.Play();
+					}
+				}else{
+					SceneManager.LoadScene(1);
+				}
 			}
 			if (location == "Italia Annonaria"){
-				SceneManager.LoadScene(2);
+				if(MainMapCanvasScript.hasWonItaliaAnnonaria){
+					if(!declineSound.isPlaying){
+						declineSound.Play();
+					}
+				}else{
+					SceneManager.LoadScene(2);
+				}
 			}
 			if (location == "Italia Suburbicaria"){
-				SceneManager.LoadScene(3);
+				if(MainMapCanvasScript.hasWonItaliaSuburbicaria){
+					if(!declineSound.isPlaying){
+						declineSound.Play();
+					}
+				}else{
+					SceneManager.LoadScene(3);
+				}
 			}
 			if (location == "Illyricum"){
-				SceneManager.LoadScene(4);
+				if(MainMapCanvasScript.hasWonIllyricum){
+					if(!declineSound.isPlaying){
+						declineSound.Play();
+					}
+				}else{
+					SceneManager.LoadScene(4);
+				}
 			}
 			if (location == "Dacia"){
-				SceneManager.LoadScene(5);
+				if(MainMapCanvasScript.hasWonDacia){
+					if(!declineSound.isPlaying){
+						declineSound.Play();
+					}
+				}else{
+					SceneManager.LoadScene(5);
+				}
 			}
 			if (location == "Macedonia"){
-				SceneManager.LoadScene(6);
+				if(MainMapCanvasScript.hasWonMacedonia){
+					if(!declineSound.isPlaying){
+						declineSound.Play();
+					}
+				}else{
+					SceneManager.LoadScene(6);
+				}
 			}
 			if (location == "Quaestura Exercitus"){
-				SceneManager.LoadScene(7);
+				if(MainMapCanvasScript.hasWonQuaesturaExercitus){
+					if(!declineSound.isPlaying){
+						declineSound.Play();
+					}
+				}else{
+					SceneManager.LoadScene(7);
+				}
 			}
 			if (location == "Thracia"){
-				SceneManager.LoadScene(8);
+				if(MainMapCanvasScript.hasWonThracia){
+					if(!declineSound.isPlaying){
+						declineSound.Play();
+					}
+				}else{
+					SceneManager.LoadScene(8);
+				}
 			}
 			if (location == "Pontica"){
-				SceneManager.LoadScene(9);
+				if(MainMapCanvasScript.hasWonPontica){
+					if(!declineSound.isPlaying){
+						declineSound.Play();
+					}
+				}else{
+					SceneManager.LoadScene(9);
+				}
 			}
 			if (location == "Asiana"){
-				SceneManager.LoadScene(10);
+				if(MainMapCanvasScript.hasWonAsiana){
+					if(!declineSound.isPlaying){
+						declineSound.Play();
+					}
+				}else{
+					SceneManager.LoadScene(10);
+				}
 			}
 			if (location == "Oriens"){
-				SceneManager.LoadScene(11);
+				if(MainMapCanvasScript.hasWonOriens){
+					if(!declineSound.isPlaying){
+						declineSound.Play();
+					}
+				}else{
+					SceneManager.LoadScene(11);
+				}
 			}
 			if (location == "Aegyptus"){
-				SceneManager.LoadScene(12);
+				if(MainMapCanvasScript.hasWonAegyptus){
+					if(!declineSound.isPlaying){
+						declineSound.Play();
+					}
+				}else{
+					SceneManager.LoadScene(12);
+				}
 			}
 			if (location == "Africa"){
-				SceneManager.LoadScene(13);
+				if(MainMapCanvasScript.hasWonAfrica){
+					if(!declineSound.isPlaying){
+						declineSound.Play();
+					}
+				}else{
+					SceneManager.LoadScene(13);
+				}
 			}
 			if (location == "Dara"){
-				SceneManager.LoadScene(14);
+				if(MainMapCanvasScript.hasWonSassanids){
+					if(!declineSound.isPlaying){
+						declineSound.Play();
+					}
+				}else{
+					SceneManager.LoadScene(14);
+				}
 			}
 			if (location == "Taginae"){
-				SceneManager.LoadScene(15);
+				if(MainMapCanvasScript.hasWonOstrogoths){
+					if(!declineSound.isPlaying){
+						declineSound.Play();
+					}
+				}else{
+					SceneManager.LoadScene(15);
+				}
 			}
 		}
 	}

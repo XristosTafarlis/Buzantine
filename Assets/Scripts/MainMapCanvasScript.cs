@@ -21,6 +21,24 @@ public class MainMapCanvasScript : MonoBehaviour{
 	[SerializeField] GameObject ostrogoths;
 	public static bool hasWonOstrogoths;
 
+	public static bool hasWonSpaniae;
+	public static bool hasWonItaliaAnnonaria;
+	public static bool hasWonItaliaSuburbicaria;
+	public static bool hasWonIllyricum;
+	public static bool hasWonDacia;
+	public static bool hasWonMacedonia;
+	public static bool hasWonQuaesturaExercitus;
+	public static bool hasWonThracia;
+	public static bool hasWonAsiana;
+	public static bool hasWonPontica;
+	public static bool hasWonOriens;
+	public static bool hasWonAegyptus;
+	public static bool hasWonAfrica;
+
+	void Start() {
+		SetPlayerPrefs();
+	}
+
 	void Update(){
 		LevelText();
 		XPText();
@@ -28,6 +46,23 @@ public class MainMapCanvasScript : MonoBehaviour{
 		FireRateText();
 		JoinFrontRateText();
 		ShowBattles();
+	}
+
+	void SetPlayerPrefs(){
+		hasWonSpaniae = (PlayerPrefs.GetInt("hasWonSpaniae") != 0);
+		hasWonItaliaAnnonaria = (PlayerPrefs.GetInt("hasWonItaliaAnnonaria") != 0);
+		hasWonItaliaSuburbicaria = (PlayerPrefs.GetInt("hasWonItaliaSuburbicaria") != 0);
+		hasWonIllyricum = (PlayerPrefs.GetInt("hasWonIllyricum") != 0);
+		hasWonDacia = (PlayerPrefs.GetInt("hasWonDacia") != 0);
+		hasWonMacedonia = (PlayerPrefs.GetInt("hasWonMacedonia") != 0);
+		hasWonThracia = (PlayerPrefs.GetInt("hasWonThracia") != 0);
+		hasWonQuaesturaExercitus = (PlayerPrefs.GetInt("hasWonQuaesturaExercitus") != 0);
+		hasWonPontica = (PlayerPrefs.GetInt("hasWonPontica") != 0);
+		hasWonAsiana = (PlayerPrefs.GetInt("hasWonAsiana") != 0);
+		hasWonAegyptus = (PlayerPrefs.GetInt("hasWonAegyptus") != 0);
+		hasWonAfrica = (PlayerPrefs.GetInt("hasWonAfrica") != 0);
+		hasWonOstrogoths = (PlayerPrefs.GetInt("hasWonOstrogoths") != 0);
+		hasWonSassanids = (PlayerPrefs.GetInt("hasWonSassanids") != 0);
 	}
 
 	void LevelText(){
@@ -108,50 +143,125 @@ public class MainMapCanvasScript : MonoBehaviour{
 			joinFrontRateText.text = " ";
 			joinFrontRateText.color = Color.white;
 		}else if(PlayerMovement.location == "Macedonia"){
-			joinFrontRateText.text = "Press Space to joint Macedonia";
-			joinFrontRateText.color = Color.white;
+			if(hasWonMacedonia) {
+				joinFrontRateText.text = "Already won Macedonia";
+				joinFrontRateText.color = Color.green;
+			}else{
+				joinFrontRateText.text = "Press Space to join Macedonia";
+				joinFrontRateText.color = Color.white;
+			}
 		}else if(PlayerMovement.location == "Thracia"){
-			joinFrontRateText.text = "Press Space to joint Thracia";
-			joinFrontRateText.color = Color.white;
+			if(hasWonThracia){
+				joinFrontRateText.text = "Already won Thracia";
+				joinFrontRateText.color = Color.green;
+			}else{
+				joinFrontRateText.text = "Press Space to join Thracia";
+				joinFrontRateText.color = Color.white;
+			}
 		}else if(PlayerMovement.location == "Dacia"){
-			joinFrontRateText.text = "Press Space to joint Dacia";
-			joinFrontRateText.color = Color.white;
+			if(hasWonDacia){
+				joinFrontRateText.text = "Already won Dacia";
+				joinFrontRateText.color = Color.green;
+			}else{
+				joinFrontRateText.text = "Press Space to join Dacia";
+				joinFrontRateText.color = Color.white;
+			}
 		}else if(PlayerMovement.location == "Quaestura Exercitus"){
-			joinFrontRateText.text = "Press Space to joint Quaestura Exercitus";
-			joinFrontRateText.color = Color.white;
+			if(hasWonQuaesturaExercitus){
+				joinFrontRateText.text = "Already won Quaestura Exercitus";
+				joinFrontRateText.color = Color.green;
+			}else{
+				joinFrontRateText.text = "Press Space to join Quaestura Exercitus";
+				joinFrontRateText.color = Color.white;
+			}
 		}else if(PlayerMovement.location == "Illyricum"){
-			joinFrontRateText.text = "Press Space to joint Illyricum";
-			joinFrontRateText.color = Color.white;
+			if(hasWonIllyricum){
+				joinFrontRateText.text = "Already won Illyricum";
+				joinFrontRateText.color = Color.green;
+			}else{
+				joinFrontRateText.text = "Press Space to join Illyricum";
+				joinFrontRateText.color = Color.white;
+			}
 		}else if(PlayerMovement.location == "Italia Annonaria"){
-			joinFrontRateText.text = "Press Space to joint Italia Annonaria";
-			joinFrontRateText.color = Color.white;
+			if(hasWonItaliaAnnonaria){
+				joinFrontRateText.text = "Already won Italia Annonaria";
+				joinFrontRateText.color = Color.green;
+			}else{
+				joinFrontRateText.text = "Press Space to join Italia Annonaria";
+				joinFrontRateText.color = Color.white;
+			}
 		}else if(PlayerMovement.location == "Italia Suburbicaria"){
-			joinFrontRateText.text = "Press Space to joint Italia Suburbicaria";
-			joinFrontRateText.color = Color.white;
+			if(hasWonItaliaSuburbicaria){
+				joinFrontRateText.text = "Already won Italia Suburbicaria";
+				joinFrontRateText.color = Color.green;
+			}else{
+				joinFrontRateText.text = "Press Space to join Italia Suburbicaria";
+				joinFrontRateText.color = Color.white;
+			}
 		}else if(PlayerMovement.location == "Pontica"){
-			joinFrontRateText.text = "Press Space to joint Pontica";
-			joinFrontRateText.color = Color.white;
+			if(hasWonPontica){
+				joinFrontRateText.text = "Already won Pontica";
+				joinFrontRateText.color = Color.green;
+			}else{
+				joinFrontRateText.text = "Press Space to join Pontica";
+				joinFrontRateText.color = Color.white;
+			}
 		}else if(PlayerMovement.location == "Asiana"){
-			joinFrontRateText.text = "Press Space to joint Asiana";
-			joinFrontRateText.color = Color.white;
+			if(hasWonAsiana){
+				joinFrontRateText.text = "Already won Asiana";
+				joinFrontRateText.color = Color.green;
+			}else{
+				joinFrontRateText.text = "Press Space to join Asiana";
+				joinFrontRateText.color = Color.white;
+			}
 		}else if(PlayerMovement.location == "Oriens"){
-			joinFrontRateText.text = "Press Space to joint Oriens";
-			joinFrontRateText.color = Color.white;
+			if(hasWonOriens){
+				joinFrontRateText.text = "Already won Oriens";
+				joinFrontRateText.color = Color.green;
+			}else{
+				joinFrontRateText.text = "Press Space to join Oriens";
+				joinFrontRateText.color = Color.white;
+			}
 		}else if(PlayerMovement.location == "Aegyptus"){
-			joinFrontRateText.text = "Press Space to joint Aegyptus";
-			joinFrontRateText.color = Color.white;
+			if(hasWonAegyptus){
+				joinFrontRateText.text = "Already won Aegyptus";
+				joinFrontRateText.color = Color.green;
+			}else{
+				joinFrontRateText.text = "Press Space to join Aegyptus";
+				joinFrontRateText.color = Color.white;
+			}
 		}else if(PlayerMovement.location == "Africa"){
-			joinFrontRateText.text = "Press Space to joint Africa";
-			joinFrontRateText.color = Color.white;
+			if(hasWonAfrica){
+				joinFrontRateText.text = "Already won Africa";
+				joinFrontRateText.color = Color.green;
+			}else{
+				joinFrontRateText.text = "Press Space to join Africa";
+				joinFrontRateText.color = Color.white;
+			}
 		}else if(PlayerMovement.location == "Spaniae"){
-			joinFrontRateText.text = "Press Space to joint Spaniae";
-			joinFrontRateText.color = Color.white;
+			if(hasWonSpaniae){
+				joinFrontRateText.text = "Already won Spaniae";
+				joinFrontRateText.color = Color.green;
+			}else{
+				joinFrontRateText.text = "Press Space to join Spaniae";
+				joinFrontRateText.color = Color.white;
+			}
 		}else if(PlayerMovement.location == "Dara"){
-			joinFrontRateText.text = "Press Space to joint the Battle of Dara";
-			joinFrontRateText.color = Color.red;
+			if(hasWonSassanids){
+				joinFrontRateText.text = "Already won Battle of Dara";
+				joinFrontRateText.color = Color.green;
+			}else{
+				joinFrontRateText.text = "Press Space to join the Battle of Dara";
+				joinFrontRateText.color = Color.red;
+			}
 		}else if(PlayerMovement.location == "Taginae"){
-			joinFrontRateText.text = "Press Space to joint the Battle of Taginae";
-			joinFrontRateText.color = Color.red;
+			if(hasWonOstrogoths){
+				joinFrontRateText.text = "Already won Battle of Taginae";
+				joinFrontRateText.color = Color.green;
+			}else{
+				joinFrontRateText.text = "Press Space to join the Battle of Taginae";
+				joinFrontRateText.color = Color.red;
+			}
 		}
 	}
 }
