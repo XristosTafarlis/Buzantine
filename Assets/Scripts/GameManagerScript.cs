@@ -1,12 +1,13 @@
 using UnityEngine;
 
-public class GameManagerScript : MonoBehaviour{
+public class GameManagerScript : MonoBehaviour {
 	AudioSource soundtrack;
-	[SerializeField] AudioClip[] audioClips;
+	[ SerializeField ] private AudioClip [ ] audioClips;
 
-	void Start(){
-		soundtrack = GetComponent<AudioSource>();
-		soundtrack.clip = audioClips[Random.Range(0, audioClips.Length)];
-		soundtrack.Play();
+	private void Start ( )
+	{
+		soundtrack = GetComponent<AudioSource>( );
+		soundtrack.clip = audioClips [ Random.Range ( 0, audioClips.Length ) ];
+		soundtrack.Play( );
 	}
 }
