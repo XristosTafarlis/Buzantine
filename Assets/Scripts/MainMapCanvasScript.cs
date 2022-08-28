@@ -18,6 +18,7 @@ public class MainMapCanvasScript : MonoBehaviour {
 
 	[ SerializeField ] private GameObject sassanids;
 	[ SerializeField ] private GameObject ostrogoths;
+	
 	public static bool hasWonSassanids;
 	public static bool hasWonOstrogoths;
 
