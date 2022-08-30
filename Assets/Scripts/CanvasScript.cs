@@ -42,13 +42,6 @@ public class CanvasScript : MonoBehaviour {
 	//	Destroy(formations);
 	//}
 
-	private void CrosshairFollowMouse ( )
-	{
-		Vector2 pos;
-		RectTransformUtility.ScreenPointToLocalPointInRectangle ( myCanvas.transform as RectTransform, Input.mousePosition, myCanvas.worldCamera, out pos );
-		crosshair.transform.position = myCanvas.transform.TransformPoint ( pos );
-	}
-
 	private void TextUpdater ( )
 	{
 		if ( player.GetComponent<PlayerScript>( ).endTheGame == true )
@@ -63,6 +56,13 @@ public class CanvasScript : MonoBehaviour {
 				text.color = new Color ( 0.88f, 0.36f, 0.42f, 1f );
 			}
 		}
+	}
+
+	private void CrosshairFollowMouse ( )
+	{
+		Vector2 pos;
+		RectTransformUtility.ScreenPointToLocalPointInRectangle ( myCanvas.transform as RectTransform, Input.mousePosition, myCanvas.worldCamera, out pos );
+		crosshair.transform.position = myCanvas.transform.TransformPoint ( pos );
 	}
 
 	private void FireIndicator ( )

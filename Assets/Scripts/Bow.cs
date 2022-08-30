@@ -15,7 +15,7 @@ public class Bow : MonoBehaviour {
 	private float zRotation;
 
 	private void Awake ( ) {
-		FireRate ( );
+		SetFireRate ( );
 	}
 
 	private void Start ( )
@@ -46,7 +46,7 @@ public class Bow : MonoBehaviour {
 		}
 	}
 
-	private void FireRate ( )
+	private void SetFireRate ( )
 	{
 		if ( LevelSystem.level == 1 )
 		{
