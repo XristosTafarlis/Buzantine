@@ -4,8 +4,8 @@ using UnityEngine.UI;
 public class MainMapCanvasScript : MonoBehaviour {
 
 	[ Header ( "Refferences" ) ]
-	[ SerializeField ] private GameObject GAMEMANAGER;
-	[ Space ( 20 ) ]
+	[ SerializeField ] private LevelSystem GameManagerObj;
+	[ Space ( 10 ) ]
 
 	[ SerializeField ] private Text xpText;
 	[ SerializeField ] private Text levelText;
@@ -36,13 +36,11 @@ public class MainMapCanvasScript : MonoBehaviour {
 	public static bool hasWonAegyptus;
 	public static bool hasWonAfrica;
 
-	private void Start ( )
-	{
+	private void Start ( ) {
 		SetPlayerPrefs ( );
 	}
 
-	private void Update ( )
-	{
+	private void Update ( ) {
 		LevelText ( );
 		XPText ( );
 		LifeText ( );
@@ -51,8 +49,7 @@ public class MainMapCanvasScript : MonoBehaviour {
 		ShowBattles ( );
 	}
 
-	private void SetPlayerPrefs ( )
-	{
+	private void SetPlayerPrefs ( ) {
 		hasWonSpaniae = ( PlayerPrefs.GetInt ( "hasWonSpaniae" ) != 0 );
 		hasWonItaliaAnnonaria = ( PlayerPrefs.GetInt ( "hasWonItaliaAnnonaria" ) != 0 );
 		hasWonItaliaSuburbicaria = ( PlayerPrefs.GetInt ( "hasWonItaliaSuburbicaria" ) != 0 );
@@ -69,328 +66,250 @@ public class MainMapCanvasScript : MonoBehaviour {
 		hasWonSassanids = ( PlayerPrefs.GetInt ( "hasWonSassanids" ) != 0 );
 	}
 
-	private void LevelText ( )
-	{
-		if ( LevelSystem.level < 10 )
-		{
+	private void LevelText ( ) {
+		if ( LevelSystem.level < 10 ) {
 			levelText.text = "Level " + LevelSystem.level;
 		}
-		else
-		{
+		else {
 			levelText.text = "Level 10 (Max)";
 		}
 	}
 
-	private void XPText ( )
-	{
-		if ( LevelSystem.level < 10 )
-		{
-			xpText.text = GAMEMANAGER.GetComponent<LevelSystem>( ).currentXp + " of " + GAMEMANAGER.GetComponent<LevelSystem>( ).requiredXp;
+	private void XPText ( ) {
+		if ( LevelSystem.level < 10 ) {
+			xpText.text = GameManagerObj.currentXp + " of " + GameManagerObj.requiredXp;
 		}
-		else
-		{
+		else {
 			xpText.text = "Max XP";
 		}
 	}
 
-	private void ShowBattles( )
-	{
-		if ( hasWonOstrogoths )
-		{
+	private void ShowBattles( ) {
+		if ( hasWonOstrogoths ) {
 			ostrogoths.SetActive ( true );
 		}
-		if ( hasWonSassanids )
-		{
+		if ( hasWonSassanids ) {
 			sassanids.SetActive ( true );
 		}
 	}
 
-	private void LifeText ( )
-	{
-		if ( LevelSystem.level == 1 )
-		{
+	private void LifeText ( ) {
+		if ( LevelSystem.level == 1 ) {
 			lifeText.text = "Life : 100";
 		}
-		else if ( LevelSystem.level == 2 )
-		{
+		else if ( LevelSystem.level == 2 ) {
 			lifeText.text = "Life : 110";
 		}
-		else if ( LevelSystem.level == 3 )
-		{
+		else if ( LevelSystem.level == 3 ) {
 			lifeText.text = "Life : 120";
 		}
-		else if ( LevelSystem.level == 4 )
-		{
+		else if ( LevelSystem.level == 4 ) {
 			lifeText.text = "Life : 130";
 		}
-		else if ( LevelSystem.level == 5 )
-		{
+		else if ( LevelSystem.level == 5 ) {
 			lifeText.text = "Life : 150";
 		}
-		else if ( LevelSystem.level == 6 )
-		{
+		else if ( LevelSystem.level == 6 ) {
 			lifeText.text = "Life : 180";
 		}
-		else if ( LevelSystem.level == 7 )
-		{
+		else if ( LevelSystem.level == 7 ) {
 			lifeText.text = "Life : 230";
 		}
-		else if ( LevelSystem.level == 8 )
-		{
+		else if ( LevelSystem.level == 8 ) {
 			lifeText.text = "Life : 310";
 		}
-		else if ( LevelSystem.level == 9 )
-		{
+		else if ( LevelSystem.level == 9 ) {
 			lifeText.text = "Life : 440";
 		}
-		else if ( LevelSystem.level >= 10 )
-		{
+		else if ( LevelSystem.level >= 10 ) {
 			lifeText.text = "Life : 650 (Max)";
 		}
 	}
 
-	private void FireRateText ( )
-	{
-		if ( LevelSystem.level == 1 )
-		{
+	private void FireRateText ( ) {
+		if ( LevelSystem.level == 1 ) {
 			fireRateText.text = "1 arrow per second";
 		}
-		else if ( LevelSystem.level == 2 )
-		{
+		else if ( LevelSystem.level == 2 ) {
 			fireRateText.text = "1.05 arrows per second";
 		}
-		else if ( LevelSystem.level == 3 )
-		{
+		else if ( LevelSystem.level == 3 ) {
 			fireRateText.text = "1.1 arrows per second";
 		}
-		else if ( LevelSystem.level == 4 )
-		{
+		else if ( LevelSystem.level == 4 ) {
 			fireRateText.text = "1.2 arrows per second";
 		}
-		else if ( LevelSystem.level == 5 )
-		{
+		else if ( LevelSystem.level == 5 ) {
 			fireRateText.text = "1.25 arrows per second";
 		}
-		else if ( LevelSystem.level == 6 )
-		{
+		else if ( LevelSystem.level == 6 ) {
 			fireRateText.text = "1.35 arrows per second";
 		}
-		else if ( LevelSystem.level == 7 )
-		{
+		else if ( LevelSystem.level == 7 ) {
 			fireRateText.text = "1.5 arrows per second";
 		}
-		else if ( LevelSystem.level == 8 )
-		{
+		else if ( LevelSystem.level == 8 ) {
 			fireRateText.text = "1.8 arrows per second";
 		}
-		else if ( LevelSystem.level == 9 )
-		{
+		else if ( LevelSystem.level == 9 ) {
 			fireRateText.text = "2 arrows per second";
 		}
-		else if ( LevelSystem.level >= 10 )
-		{
+		else if ( LevelSystem.level >= 10 ) {
 			fireRateText.text = "3.5 arrows per second (Max)";
 		}
 	}
 
-	private void JoinFrontRateText ( )
-	{
-		if ( PlayerMovement.location == null )
-		{
+	private void JoinFrontRateText ( ) {
+		if ( PlayerMovement.location == null ) {
 			joinFrontRateText.text = " ";
 			joinFrontRateText.color = Color.white;
 		}
-		else if ( PlayerMovement.location == "Macedonia" )
-		{
-			if ( hasWonMacedonia == true)
-			{
+		else if ( PlayerMovement.location == "Macedonia" ) {
+			if ( hasWonMacedonia == true) {
 				joinFrontRateText.text = "Already won Macedonia";
 				joinFrontRateText.color = Color.green;
 			}
-			else
-			{
+			else {
 				joinFrontRateText.text = "Press Space to join Macedonia";
 				joinFrontRateText.color = Color.white;
 			}
 		}
-		else if ( PlayerMovement.location == "Thracia" )
-		{
-			if ( hasWonThracia == true )
-			{
+		else if ( PlayerMovement.location == "Thracia" ) {
+			if ( hasWonThracia == true ) {
 				joinFrontRateText.text = "Already won Thracia";
 				joinFrontRateText.color = Color.green;
 			}
-			else
-			{
+			else {
 				joinFrontRateText.text = "Press Space to join Thracia";
 				joinFrontRateText.color = Color.white;
 			}
 		}
-		else if ( PlayerMovement.location == "Dacia" )
-		{
-			if ( hasWonDacia == true )
-			{
+		else if ( PlayerMovement.location == "Dacia" ) {
+			if ( hasWonDacia == true ) {
 				joinFrontRateText.text = "Already won Dacia";
 				joinFrontRateText.color = Color.green;
 			}
-			else
-			{
+			else {
 				joinFrontRateText.text = "Press Space to join Dacia";
 				joinFrontRateText.color = Color.white;
 			}
 		}
-		else if ( PlayerMovement.location == "Quaestura Exercitus" )
-		{
-			if ( hasWonQuaesturaExercitus == true )
-			{
+		else if ( PlayerMovement.location == "Quaestura Exercitus" ) {
+			if ( hasWonQuaesturaExercitus == true ) {
 				joinFrontRateText.text = "Already won Quaestura Exercitus";
 				joinFrontRateText.color = Color.green;
 			}
-			else
-			{
+			else {
 				joinFrontRateText.text = "Press Space to join Quaestura Exercitus";
 				joinFrontRateText.color = Color.white;
 			}
 		}
-		else if ( PlayerMovement.location == "Illyricum" )
-		{
-			if ( hasWonIllyricum == true )
-			{
+		else if ( PlayerMovement.location == "Illyricum" ) {
+			if ( hasWonIllyricum == true ) {
 				joinFrontRateText.text = "Already won Illyricum";
 				joinFrontRateText.color = Color.green;
 			}
-			else
-			{
+			else {
 				joinFrontRateText.text = "Press Space to join Illyricum";
 				joinFrontRateText.color = Color.white;
 			}
 		}
-		else if ( PlayerMovement.location == "Italia Annonaria" )
-		{
-			if ( hasWonItaliaAnnonaria == true )
-			{
+		else if ( PlayerMovement.location == "Italia Annonaria" ) {
+			if ( hasWonItaliaAnnonaria == true ) {
 				joinFrontRateText.text = "Already won Italia Annonaria";
 				joinFrontRateText.color = Color.green;
 			}
-			else
-			{
+			else {
 				joinFrontRateText.text = "Press Space to join Italia Annonaria";
 				joinFrontRateText.color = Color.white;
 			}
 		}
-		else if ( PlayerMovement.location == "Italia Suburbicaria" )
-		{
-			if ( hasWonItaliaSuburbicaria == true )
-			{
+		else if ( PlayerMovement.location == "Italia Suburbicaria" ) {
+			if ( hasWonItaliaSuburbicaria == true ) {
 				joinFrontRateText.text = "Already won Italia Suburbicaria";
 				joinFrontRateText.color = Color.green;
 			}
-			else
-			{
+			else {
 				joinFrontRateText.text = "Press Space to join Italia Suburbicaria";
 				joinFrontRateText.color = Color.white;
 			}
 		}
-		else if ( PlayerMovement.location == "Pontica" )
-		{
-			if ( hasWonPontica == true )
-			{
+		else if ( PlayerMovement.location == "Pontica" ) {
+			if ( hasWonPontica == true ) {
 				joinFrontRateText.text = "Already won Pontica";
 				joinFrontRateText.color = Color.green;
 			}
-			else
-			{
+			else {
 				joinFrontRateText.text = "Press Space to join Pontica";
 				joinFrontRateText.color = Color.white;
 			}
 		}
-		else if ( PlayerMovement.location == "Asiana" )
-		{
-			if ( hasWonAsiana == true )
-			{
+		else if ( PlayerMovement.location == "Asiana" ) {
+			if ( hasWonAsiana == true ) {
 				joinFrontRateText.text = "Already won Asiana";
 				joinFrontRateText.color = Color.green;
 			}
-			else
-			{
+			else {
 				joinFrontRateText.text = "Press Space to join Asiana";
 				joinFrontRateText.color = Color.white;
 			}
 		}
-		else if ( PlayerMovement.location == "Oriens" )
-		{
-			if( hasWonOriens == true )
-			{
+		else if ( PlayerMovement.location == "Oriens" ) {
+			if( hasWonOriens == true ) {
 				joinFrontRateText.text = "Already won Oriens";
 				joinFrontRateText.color = Color.green;
 			}
-			else
-			{
+			else {
 				joinFrontRateText.text = "Press Space to join Oriens";
 				joinFrontRateText.color = Color.white;
 			}
 		}
-		else if ( PlayerMovement.location == "Aegyptus" )
-		{
-			if ( hasWonAegyptus == true )
-			{
+		else if ( PlayerMovement.location == "Aegyptus" ) {
+			if ( hasWonAegyptus == true ) {
 				joinFrontRateText.text = "Already won Aegyptus";
 				joinFrontRateText.color = Color.green;
 			}
-			else
-			{
+			else {
 				joinFrontRateText.text = "Press Space to join Aegyptus";
 				joinFrontRateText.color = Color.white;
 			}
 		}
-		else if ( PlayerMovement.location == "Africa" )
-		{
-			if ( hasWonAfrica == true )
-			{
+		else if ( PlayerMovement.location == "Africa" ) {
+			if ( hasWonAfrica == true ) {
 				joinFrontRateText.text = "Already won Africa";
 				joinFrontRateText.color = Color.green;
 			}
-			else
-			{
+			else {
 				joinFrontRateText.text = "Press Space to join Africa";
 				joinFrontRateText.color = Color.white;
 			}
 		}
-		else if ( PlayerMovement.location == "Spaniae" )
-		{
-			if ( hasWonSpaniae == true )
-			{
+		else if ( PlayerMovement.location == "Spaniae" ) {
+			if ( hasWonSpaniae == true ) {
 				joinFrontRateText.text = "Already won Spaniae";
 				joinFrontRateText.color = Color.green;
 			}
-			else
-			{
+			else {
 				joinFrontRateText.text = "Press Space to join Spaniae";
 				joinFrontRateText.color = Color.white;
 			}
 		}
-		else if ( PlayerMovement.location == "Dara" )
-		{
-			if ( hasWonSassanids == true )
-			{
+		else if ( PlayerMovement.location == "Dara" ) {
+			if ( hasWonSassanids == true ) {
 				joinFrontRateText.text = "Already won Battle of Dara";
 				joinFrontRateText.color = Color.green;
 			}
-			else
-			{
+			else {
 				joinFrontRateText.text = "Press Space to join the Battle of Dara";
 				joinFrontRateText.color = Color.red;
 			}
 		}
-		else if ( PlayerMovement.location == "Taginae" )
-		{
-			if ( hasWonOstrogoths == true )
-			{
+		else if ( PlayerMovement.location == "Taginae" ) {
+			if ( hasWonOstrogoths == true ) {
 				joinFrontRateText.text = "Already won Battle of Taginae";
 				joinFrontRateText.color = Color.green;
 			}
-			else
-			{
+			else {
 				joinFrontRateText.text = "Press Space to join the Battle of Taginae";
 				joinFrontRateText.color = Color.red;
 			}
