@@ -48,7 +48,7 @@ public class MainMapCanvasScript : MonoBehaviour {
 		JoinFrontRateText ( );
 		ShowBattles ( );
 	}
-
+	
 	private void SetPlayerPrefs ( ) {
 		hasWonSpaniae = ( PlayerPrefs.GetInt ( "hasWonSpaniae" ) != 0 );
 		hasWonItaliaAnnonaria = ( PlayerPrefs.GetInt ( "hasWonItaliaAnnonaria" ) != 0 );
