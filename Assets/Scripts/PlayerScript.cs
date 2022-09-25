@@ -55,19 +55,19 @@ public class PlayerScript : MonoBehaviour {
 			life = 150;
 		}
 		else if ( LevelSystem.level == 6 ) {
-			life = 180;
+			life = 170;
 		}
 		else if ( LevelSystem.level == 7 ) {
-			life = 230;
+			life = 200;
 		}
 		else if ( LevelSystem.level == 8 ) {
-			life = 310;
+			life = 230;
 		}
 		else if ( LevelSystem.level == 9 ) {
-			life = 440;
+			life = 270;
 		}
 		else if ( LevelSystem.level >= 10 ) {
-			life = 650;
+			life = 310;
 		}
 	}
 
@@ -88,79 +88,79 @@ public class PlayerScript : MonoBehaviour {
 
 	private void XpWon ( ) {
 		if ( SceneManager.GetActiveScene( ).name == "Spaniae" ) {
-			LevelSystem.xpOnWin = 20;
+			LevelSystem.xpOnWin = 30;
 			MainMapCanvasScript.hasWonSpaniae = true;
 			PlayerPrefs.SetInt ( "hasWonSpaniae", ( MainMapCanvasScript.hasWonSpaniae ? 1 : 0 ) );
 		}
 		else if ( SceneManager.GetActiveScene( ).name == "Italia Annonaria" ) {
-			LevelSystem.xpOnWin = 25;
+			LevelSystem.xpOnWin = 35;
 			MainMapCanvasScript.hasWonItaliaAnnonaria = true;
 			PlayerPrefs.SetInt ( "hasWonItaliaAnnonaria", ( MainMapCanvasScript.hasWonItaliaAnnonaria ? 1 : 0 ) );
 		}
 		else if ( SceneManager.GetActiveScene( ).name == "Italia Suburbicaria" ) {
-			LevelSystem.xpOnWin = 32;
+			LevelSystem.xpOnWin = 42;
 			MainMapCanvasScript.hasWonItaliaSuburbicaria = true;
 			PlayerPrefs.SetInt ( "hasWonItaliaSuburbicaria", ( MainMapCanvasScript.hasWonItaliaSuburbicaria ? 1 : 0 ) );
 		}
 		else if ( SceneManager.GetActiveScene( ).name == "Illyricum" ) {
-			LevelSystem.xpOnWin = 40;
+			LevelSystem.xpOnWin = 50;
 			MainMapCanvasScript.hasWonIllyricum = true;
 			PlayerPrefs.SetInt ( "hasWonIllyricum", ( MainMapCanvasScript.hasWonIllyricum ? 1 : 0 ) );
 		}
 		else if ( SceneManager.GetActiveScene( ).name == "Dacia" ) {
-			LevelSystem.xpOnWin = 50;
+			LevelSystem.xpOnWin = 60;
 			MainMapCanvasScript.hasWonDacia = true;
 			PlayerPrefs.SetInt ( "hasWonDacia", ( MainMapCanvasScript.hasWonDacia ? 1 : 0 ) );
 		}
 		else if ( SceneManager.GetActiveScene( ).name == "Macedonia" ) {
-			LevelSystem.xpOnWin = 65;
+			LevelSystem.xpOnWin = 75;
 			MainMapCanvasScript.hasWonMacedonia = true;
 			PlayerPrefs.SetInt ( "hasWonMacedonia", ( MainMapCanvasScript.hasWonMacedonia ? 1 : 0 ) );
 		}
 		else if ( SceneManager.GetActiveScene( ).name == "Thracia" ) {
-			LevelSystem.xpOnWin = 75;
+			LevelSystem.xpOnWin = 92;
 			MainMapCanvasScript.hasWonThracia = true;
 			PlayerPrefs.SetInt ( "hasWonThracia", ( MainMapCanvasScript.hasWonThracia ? 1 : 0 ) );
 		}
 		else if ( SceneManager.GetActiveScene( ).name == "Quaestura Exercitus" ) {
-			LevelSystem.xpOnWin = 80;
+			LevelSystem.xpOnWin = 90;
 			MainMapCanvasScript.hasWonQuaesturaExercitus = true;
 			PlayerPrefs.SetInt ( "hasWonQuaesturaExercitus", ( MainMapCanvasScript.hasWonQuaesturaExercitus ? 1 : 0 ) );
 		}
 		else if ( SceneManager.GetActiveScene( ).name == "Pontica" ) {
-			LevelSystem.xpOnWin = 83;
+			LevelSystem.xpOnWin = 93;
 			MainMapCanvasScript.hasWonPontica = true;
 			PlayerPrefs.SetInt ( "hasWonPontica", ( MainMapCanvasScript.hasWonPontica ? 1 : 0 ) );
 		}
 		else if ( SceneManager.GetActiveScene( ).name == "Asiana" ) {
-			LevelSystem.xpOnWin = 85;
+			LevelSystem.xpOnWin = 95;
 			MainMapCanvasScript.hasWonAsiana = true;
 			PlayerPrefs.SetInt ( "hasWonAsiana", ( MainMapCanvasScript.hasWonAsiana ? 1 : 0 ) );
 		}
 		else if ( SceneManager.GetActiveScene( ).name == "Oriens" ) {
-			LevelSystem.xpOnWin = 90;
+			LevelSystem.xpOnWin = 100;
 			MainMapCanvasScript.hasWonOriens = true;
 			PlayerPrefs.SetInt ( "hasWonOriens", ( MainMapCanvasScript.hasWonOriens ? 1 : 0 ) );
 		}
 		else if ( SceneManager.GetActiveScene( ).name == "Aegyptus" ) {
-			LevelSystem.xpOnWin = 100;
+			LevelSystem.xpOnWin = 110;
 			MainMapCanvasScript.hasWonAegyptus = true;
 			PlayerPrefs.SetInt ( "hasWonAegyptus", ( MainMapCanvasScript.hasWonAegyptus ? 1 : 0 ) );
 		}
 		else if ( SceneManager.GetActiveScene( ).name == "Africa" ) {
-			LevelSystem.xpOnWin = 120;
+			LevelSystem.xpOnWin = 130;
 			MainMapCanvasScript.hasWonAfrica = true;
 			PlayerPrefs.SetInt ( "hasWonAfrica", ( MainMapCanvasScript.hasWonAfrica ? 1 : 0 ) );
 		}
 		else if ( SceneManager.GetActiveScene( ).name == "Taginae" ) {
 			MainMapCanvasScript.hasWonOstrogoths = true;
 			PlayerPrefs.SetInt ( "hasWonOstrogoths", ( MainMapCanvasScript.hasWonOstrogoths ? 1 : 0 ) );
-			LevelSystem.xpOnWin = 110;
+			LevelSystem.xpOnWin = 120;
 		}
 		else if ( SceneManager.GetActiveScene( ).name == "Dara" ) {
 			MainMapCanvasScript.hasWonSassanids = true;
 			PlayerPrefs.SetInt ( "hasWonSassanids", ( MainMapCanvasScript.hasWonSassanids ? 1 : 0 ) );
-			LevelSystem.xpOnWin = 150;
+			LevelSystem.xpOnWin = 160;
 		}
 	}
 

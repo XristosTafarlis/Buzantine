@@ -2,26 +2,31 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class MainMapCanvasScript : MonoBehaviour {
-
+	
 	[ Header ( "Refferences" ) ]
 	[ SerializeField ] private LevelSystem GameManagerObj;
 	[ Space ( 10 ) ]
-
+	
 	[ SerializeField ] private Text xpText;
 	[ SerializeField ] private Text levelText;
 	[ SerializeField ] private Text lifeText;
 	[ SerializeField ] private Text fireRateText;
 	[ Space ( 10 ) ]
-
+	
 	[ SerializeField ] private Text joinFrontRateText;
-	[ Space ( 20 ) ]
-
+	
+	[ Header ( "Images" ) ]
 	[ SerializeField ] private GameObject sassanids;
 	[ SerializeField ] private GameObject ostrogoths;
+	[ SerializeField ] private GameObject sassanidsPositions;
+	[ SerializeField ] private GameObject ostrogothsPositions;
+	
+	[ Header ( "Sounds" ) ]
+	[ SerializeField ] private AudioClip image;
 	
 	public static bool hasWonSassanids;
 	public static bool hasWonOstrogoths;
-
+	
 	public static bool hasWonSpaniae;
 	public static bool hasWonItaliaAnnonaria;
 	public static bool hasWonItaliaSuburbicaria;
@@ -35,11 +40,11 @@ public class MainMapCanvasScript : MonoBehaviour {
 	public static bool hasWonOriens;
 	public static bool hasWonAegyptus;
 	public static bool hasWonAfrica;
-
+	
 	private void Start ( ) {
 		SetPlayerPrefs ( );
 	}
-
+	
 	private void Update ( ) {
 		LevelText ( );
 		XPText ( );
@@ -65,7 +70,7 @@ public class MainMapCanvasScript : MonoBehaviour {
 		hasWonOstrogoths = ( PlayerPrefs.GetInt ( "hasWonOstrogoths" ) != 0 );
 		hasWonSassanids = ( PlayerPrefs.GetInt ( "hasWonSassanids" ) != 0 );
 	}
-
+	
 	private void LevelText ( ) {
 		if ( LevelSystem.level < 10 ) {
 			levelText.text = "Level " + LevelSystem.level;
@@ -74,7 +79,7 @@ public class MainMapCanvasScript : MonoBehaviour {
 			levelText.text = "Level 10 (Max)";
 		}
 	}
-
+	
 	private void XPText ( ) {
 		if ( LevelSystem.level < 10 ) {
 			xpText.text = GameManagerObj.currentXp + " of " + GameManagerObj.requiredXp;
@@ -83,8 +88,8 @@ public class MainMapCanvasScript : MonoBehaviour {
 			xpText.text = "Max XP";
 		}
 	}
-
-	private void ShowBattles( ) {
+	
+	private void ShowBattles ( ) {
 		if ( hasWonOstrogoths ) {
 			ostrogoths.SetActive ( true );
 		}
@@ -92,7 +97,29 @@ public class MainMapCanvasScript : MonoBehaviour {
 			sassanids.SetActive ( true );
 		}
 	}
-
+	
+	public void ShowSassanidsPositions ( ) {
+		sassanidsPositions.SetActive( true );
+		if( !GetComponent<AudioSource>( ).isPlaying ) {
+			GetComponent<AudioSource>( ).PlayOneShot( image );
+		}
+	}
+	
+	public void HideSassanidsPositions( ){
+		sassanidsPositions.SetActive( false );
+	}
+	
+	public void ShowOstrogothsPositions( ){
+		ostrogothsPositions.SetActive( true );
+		if( !GetComponent<AudioSource>( ).isPlaying ) {
+			GetComponent<AudioSource>( ).PlayOneShot( image );
+		}
+	}
+	
+	public void hideOstrogothsPositions(){
+		ostrogothsPositions.SetActive( false );
+	}
+	
 	private void LifeText ( ) {
 		if ( LevelSystem.level == 1 ) {
 			lifeText.text = "Life : 100";
@@ -125,7 +152,7 @@ public class MainMapCanvasScript : MonoBehaviour {
 			lifeText.text = "Life : 650 (Max)";
 		}
 	}
-
+	
 	private void FireRateText ( ) {
 		if ( LevelSystem.level == 1 ) {
 			fireRateText.text = "1 arrow per second";
@@ -158,7 +185,7 @@ public class MainMapCanvasScript : MonoBehaviour {
 			fireRateText.text = "3.5 arrows per second (Max)";
 		}
 	}
-
+	
 	private void JoinFrontRateText ( ) {
 		if ( PlayerMovement.location == null ) {
 			joinFrontRateText.text = " ";
