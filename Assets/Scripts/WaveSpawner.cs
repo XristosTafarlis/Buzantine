@@ -30,7 +30,7 @@ public class WaveSpawner : MonoBehaviour {
 	}
 
 	void Update ( ) {
-		if(Input.GetKeyDown(KeyCode.G)) {
+		if(Input.GetKeyDown(KeyCode.Backspace)) {
 			wavesFinished = true;
 		}
 

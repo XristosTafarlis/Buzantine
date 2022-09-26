@@ -26,10 +26,10 @@ public class LevelSystem : MonoBehaviour {
 	}
 
 	private void Update ( ) {
-		if(Input.GetKeyDown(KeyCode.F)){
+		if(Input.GetKeyDown(KeyCode.Equals)){
 			GainExperienceFlatRate(50);
 		}
-		if(Input.GetKeyDown(KeyCode.R)){
+		if(Input.GetKeyDown(KeyCode.Minus)){
 			GainExperienceFlatRate(-50);
 		}
 		UpdateXpUI ( );
