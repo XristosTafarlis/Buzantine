@@ -155,12 +155,12 @@ public class PlayerScript : MonoBehaviour {
 		else if ( SceneManager.GetActiveScene( ).name == "Taginae" ) {
 			MainMapCanvasScript.hasWonOstrogoths = true;
 			PlayerPrefs.SetInt ( "hasWonOstrogoths", ( MainMapCanvasScript.hasWonOstrogoths ? 1 : 0 ) );
-			LevelSystem.xpOnWin = 120;
+			LevelSystem.xpOnWin = 80;
 		}
 		else if ( SceneManager.GetActiveScene( ).name == "Dara" ) {
 			MainMapCanvasScript.hasWonSassanids = true;
 			PlayerPrefs.SetInt ( "hasWonSassanids", ( MainMapCanvasScript.hasWonSassanids ? 1 : 0 ) );
-			LevelSystem.xpOnWin = 160;
+			LevelSystem.xpOnWin = 118;
 		}
 	}
 

@@ -30,10 +30,10 @@ public class Bow : MonoBehaviour {
 
 	private void SetLaunchForce ( ) {
 		if ( MainMapCanvasScript.hasWonOstrogoths && MainMapCanvasScript.hasWonSassanids ) {
-			launchForce = 13f;
+			launchForce = 12f;
 		}
 		else if ( MainMapCanvasScript.hasWonOstrogoths || MainMapCanvasScript.hasWonSassanids ) {
-			launchForce = 11.5f;
+			launchForce = 11f;
 		}
 		else {
 			launchForce = 10f;

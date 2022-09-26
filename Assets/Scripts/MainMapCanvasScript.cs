@@ -11,6 +11,7 @@ public class MainMapCanvasScript : MonoBehaviour {
 	[ SerializeField ] private Text levelText;
 	[ SerializeField ] private Text lifeText;
 	[ SerializeField ] private Text fireRateText;
+	[ SerializeField ] private Text victoryText;
 	[ Space ( 10 ) ]
 	
 	[ SerializeField ] private Text joinFrontRateText;
@@ -52,6 +53,7 @@ public class MainMapCanvasScript : MonoBehaviour {
 		FireRateText ( );
 		JoinFrontRateText ( );
 		ShowBattles ( );
+		ShowVictoryText ( );
 	}
 	
 	private void SetPlayerPrefs ( ) {
@@ -120,6 +122,17 @@ public class MainMapCanvasScript : MonoBehaviour {
 		ostrogothsPositions.SetActive( false );
 	}
 	
+	public void ShowVictoryText(){
+		if(victoryText && hasWonSassanids && hasWonOstrogoths){
+			victoryText.enabled = true;
+			Invoke("HidedVictoryText", 3);
+		}
+	}
+	
+	private void HidedVictoryText(){
+		Destroy(victoryText);
+	}
+	
 	private void LifeText ( ) {
 		if ( LevelSystem.level == 1 ) {
 			lifeText.text = "Life : 100";
@@ -137,19 +150,19 @@ public class MainMapCanvasScript : MonoBehaviour {
 			lifeText.text = "Life : 150";
 		}
 		else if ( LevelSystem.level == 6 ) {
-			lifeText.text = "Life : 180";
+			lifeText.text = "Life : 170";
 		}
 		else if ( LevelSystem.level == 7 ) {
-			lifeText.text = "Life : 230";
+			lifeText.text = "Life : 200";
 		}
 		else if ( LevelSystem.level == 8 ) {
-			lifeText.text = "Life : 310";
+			lifeText.text = "Life : 230";
 		}
 		else if ( LevelSystem.level == 9 ) {
-			lifeText.text = "Life : 440";
+			lifeText.text = "Life : 270";
 		}
 		else if ( LevelSystem.level >= 10 ) {
-			lifeText.text = "Life : 650 (Max)";
+			lifeText.text = "Life : 310 (Max)";
 		}
 	}
 	
