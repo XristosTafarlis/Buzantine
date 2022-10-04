@@ -15,6 +15,10 @@ public class MainMapCanvasScript : MonoBehaviour {
 	[ Space ( 10 ) ]
 	
 	[ SerializeField ] private Text joinFrontRateText;
+	[ SerializeField ] private Text FPSText;
+	private float pollingTime = 0.3f;
+	private float time;
+	private int frameCount;
 	
 	[ Header ( "Images" ) ]
 	[ SerializeField ] private GameObject sassanids;
@@ -50,10 +54,13 @@ public class MainMapCanvasScript : MonoBehaviour {
 		LevelText ( );
 		XPText ( );
 		LifeText ( );
+		UpdateFPS( );
 		FireRateText ( );
 		JoinFrontRateText ( );
 		ShowBattles ( );
 		ShowVictoryText ( );
+		
+		if( Input.GetKey( KeyCode.Escape ) ) Application.Quit();
 	}
 	
 	private void SetPlayerPrefs ( ) {
@@ -88,6 +95,19 @@ public class MainMapCanvasScript : MonoBehaviour {
 		}
 		else {
 			xpText.text = "Max XP";
+		}
+	}
+	
+	private void UpdateFPS( ){
+		time += Time.deltaTime;
+		frameCount ++;
+		
+		if( time >= pollingTime ) {	//If enough time has passed, show the frame Count
+			int frameRate = Mathf.RoundToInt( frameCount / time );
+			FPSText.text = "FPS : " + frameRate.ToString( );
+			
+			time -= pollingTime;	//Reset the time
+			frameCount = 0;
 		}
 	}
 	
