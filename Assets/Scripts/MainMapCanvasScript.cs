@@ -45,6 +45,7 @@ public class MainMapCanvasScript : MonoBehaviour {
 	public static bool hasWonOriens;
 	public static bool hasWonAegyptus;
 	public static bool hasWonAfrica;
+	public static int dota 13;
 	
 	private void Start ( ) {
 		SetPlayerPrefs ( );
