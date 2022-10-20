@@ -1,8 +1,11 @@
-# The Buzantine Quest
+# The Buzantine Quest 
 
 Παιχνίδι πτυχιακής με θέμα την βυζαντινή ιστορία.
 
 Game based on Byzantine History for my thesis.
+
+
+### Play [here](https://xristostafarlis.github.io/Byzantine/Build/index.html)
 
 ## **Keybinds**
 - Movement 
