@@ -13,6 +13,6 @@ public class GameManagerScript : MonoBehaviour {
 	}
 
 	void Update() {
-		if (Input.GetKeyDown(KeyCode.Escape)) SceneManager.LoadScene(0);
+		if (Input.GetKeyDown(KeyCode.Escape)) SceneManager.LoadScene(0);	//This must be changed after implementing a pause menu
 	}
 }

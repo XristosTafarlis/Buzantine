@@ -59,8 +59,6 @@ public class MainMapCanvasScript : MonoBehaviour {
 		JoinFrontRateText();
 		ShowBattles();
 		ShowVictoryText();
-
-		if (Input.GetKey(KeyCode.Escape)) Application.Quit();
 	}
 
 	private void SetPlayerPrefs() {
