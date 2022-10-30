@@ -16,6 +16,8 @@ Game based on Byzantine History for my thesis.
   > Left click
 - Join Battle
   > Space Bar
+- Pause Menu
+  > Escape
 
 
 - ***Cheats***
