@@ -13,7 +13,7 @@ Game based on Byzantine History for my thesis.
   >
   > Run : Left Shift
 - Attack
-  > Left click
+  > Left Click
 - Join Battle
   > Space Bar
 - Pause Menu
@@ -23,4 +23,4 @@ Game based on Byzantine History for my thesis.
 - ***Cheats***
   > Plus (+) : Adds XP
   >
-  > Backspace : Instant win
+  > Backspace : Instantly win a battle
