@@ -14,6 +14,10 @@ public class MainGamePauseMenu : MonoBehaviour{
 
 	void Update(){
 		PauseUnpase();
+		CheckColor();
+	}
+	
+	void CheckColor(){
 		if(MainMapCanvasScript.hasWonSpaniae == true){
 			locationText[0].color = Color.green;
 		}
