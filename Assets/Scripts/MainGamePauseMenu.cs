@@ -1,23 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MainGamePauseMenu : MonoBehaviour{
+	[Header("Main Categories")]
 	[SerializeField] GameObject mainText;
 	[SerializeField] GameObject pauseText;
-	[SerializeField] GameObject player;
+	
+	[Header("Buttons")]
 	[SerializeField] GameObject keybinds;
+	[SerializeField] GameObject sounds;
 	[SerializeField] GameObject resetConfrimation;
 	[SerializeField] GameObject exitConfrimation;
 	
+	[Header("Misc")]
+	[SerializeField] GameObject player;
 	[SerializeField] Text [] locationText;
+	[SerializeField] Slider musicVolume;
+	
 	bool isPaused;
 	bool inKeybinds;
+	bool inSounds;
 	bool inResetConfirmation;
 	bool inExitConfirmation;
-
+	
+	void Start(){
+		if(!PlayerPrefs.HasKey("musicVolume")){
+			PlayerPrefs.SetFloat("musicVolume", 1f);
+			Load();
+		}else{
+			Load();
+		}
+	}
+	
 	void Update(){
 		PauseUnpase();
 		CheckColor();
@@ -85,6 +100,8 @@ public class MainGamePauseMenu : MonoBehaviour{
 					HideResetConfirmation();
 				}else if(inExitConfirmation){	//If in Exit Confirmation
 					HideExitConfirmation();
+				}else if(inSounds){	//If in Sound Settings
+					HideSounds();
 				}else{	//Else, close pause menu
 					mainText.SetActive(true);
 					pauseText.SetActive(false);
@@ -112,6 +129,25 @@ public class MainGamePauseMenu : MonoBehaviour{
 		keybinds.SetActive(false);
 	}
 	
+	public void ShowSounds(){
+		inSounds = true;
+		sounds.SetActive(true);
+	}
+	
+	public void HideSounds(){
+		inSounds = false;
+		sounds.SetActive(false);
+	}
+	
+	public void ChangeMusicVolume(){
+		AudioListener.volume = musicVolume.value;
+		Save();
+	}
+	
+	void Load() => musicVolume.value = PlayerPrefs.GetFloat("musicVolume");
+	
+	void Save() => PlayerPrefs.SetFloat("musicVolume", musicVolume.value);
+	
 	public void ShowResetConfirmation(){
 		inResetConfirmation = true;
 		resetConfrimation.SetActive(true);
@@ -124,7 +160,9 @@ public class MainGamePauseMenu : MonoBehaviour{
 	
 	public void ResetAndRestart(){
 		Time.timeScale = 1;
+		float tempVolume = PlayerPrefs.HasKey("musicVolume") ? PlayerPrefs.GetFloat("musicVolume") : 1f;	//Keep volume level
 		PlayerPrefs.DeleteAll();
+		PlayerPrefs.SetFloat("musicVolume", tempVolume);
 		player.transform.position = new Vector3(-62f, -10f, 0);
 		mainText.SetActive(true);
 		pauseText.SetActive(false);
