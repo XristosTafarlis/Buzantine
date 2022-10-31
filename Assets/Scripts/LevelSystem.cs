@@ -8,55 +8,55 @@ public class LevelSystem : MonoBehaviour {
 	[HideInInspector] public int currentXp;
 	[HideInInspector] public int requiredXp;
 	public static int level;
-
+	
 	private float lerpTimer;
 	private float delayTimer;
-
+	
 	[Header("UI")]
 	[SerializeField] private Image frontXpBar;
 	[SerializeField] private Image backXpBar;
-
+	
 	public static int xpOnWin;
-
+	
 	private void Start() {
 		PlayerPrefChecker();
 		CalculateRequiredXp();
 		SetXpFillAmount();
 		GainExperienceFlatRate(xpOnWin);
 	}
-
+	
 	private void Update() {
 		if (Input.GetKeyDown(KeyCode.Equals)) {
 			GainExperienceFlatRate(50);
-		}
-		if (Input.GetKeyDown(KeyCode.Minus)) {
+		}if (Input.GetKeyDown(KeyCode.Minus)) {
 			GainExperienceFlatRate(-50);
 		}
 		UpdateXpUI();
 	}
-
+	
 	private void SetXpFillAmount() {
 		frontXpBar.fillAmount = currentXp / requiredXp;
 		backXpBar.fillAmount = currentXp / requiredXp;
 	}
-
+	
 	private void PlayerPrefChecker() {
 		if (PlayerPrefs.HasKey("xp") == true) {
 			currentXp = PlayerPrefs.GetInt("xp");
 		} else {
 			currentXp = 0;
 		}
+		
 		if (PlayerPrefs.HasKey("lvl") == true) {
 			level = PlayerPrefs.GetInt("lvl");
 		} else {
 			level = 1;
 		}
 	}
-
+	
 	public void UpdateXpUI() {
 		float xpFraction = (float)currentXp / (float)requiredXp;
 		float FXP = frontXpBar.fillAmount;
-
+		
 		if (level < 10) {
 			if (FXP < xpFraction) {
 				delayTimer = delayTimer + Time.deltaTime;
@@ -67,7 +67,7 @@ public class LevelSystem : MonoBehaviour {
 					frontXpBar.fillAmount = Mathf.Lerp(FXP, backXpBar.fillAmount, percentComplete);
 				}
 			}
-		} else {
+		}else{
 			frontXpBar.fillAmount = 1;
 		}
 	}
@@ -78,9 +78,7 @@ public class LevelSystem : MonoBehaviour {
 		lerpTimer = 0f;
 		delayTimer = 0f;
 		PlayerPrefs.SetInt("xp", currentXp);
-		if (currentXp >= requiredXp) {
-			LevelUp();
-		}
+		if (currentXp >= requiredXp) LevelUp();
 	}
 
 	private void LevelUp() {
@@ -89,7 +87,7 @@ public class LevelSystem : MonoBehaviour {
 		backXpBar.fillAmount = 0f;
 		currentXp = Mathf.RoundToInt(currentXp - requiredXp);
 		CalculateRequiredXp();
-
+		
 		PlayerPrefs.SetInt("lvl", level);
 		PlayerPrefs.SetInt("xp", currentXp);
 	}

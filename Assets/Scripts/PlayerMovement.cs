@@ -7,37 +7,35 @@ public class PlayerMovement : MonoBehaviour {
 	[Header("Variables")]
 	[SerializeField] private float moveSpeed = 5f;
 	[SerializeField] private float runSpeed = 8f;
-
+	
 	public static string location = null;
-
+	
 	private Rigidbody2D rigidBody;
 	private AudioSource declineSound;
 	private Vector2 movement;
 	private float finalSpeed;
-
+	
 	private void Start() {
 		LoadPosition();
 		Initializations();
 	}
-
+	
 	void Initializations() {
 		GetComponent<TrailRenderer>().enabled = true;
 		rigidBody = GetComponent<Rigidbody2D>();
 		declineSound = GetComponent<AudioSource>();
 		finalSpeed = moveSpeed;
 	}
-
+	
 	private void Update() {
 		MovementRead();
 		LocationUpdate();
 		Run();
 		Save();
 	}
-
-	private void FixedUpdate() {
-		rigidBody.velocity = new Vector2(movement.x * finalSpeed, movement.y * finalSpeed);
-	}
-
+	
+	private void FixedUpdate() => rigidBody.velocity = new Vector2(movement.x * finalSpeed, movement.y * finalSpeed);
+	
 	private void OnTriggerEnter2D(Collider2D collider) {
 		if (collider.name == "Macedonia") {
 			location = "Macedonia";
@@ -71,16 +69,14 @@ public class PlayerMovement : MonoBehaviour {
 			location = "Taginae";
 		}
 	}
-
-	private void OnTriggerExit2D(Collider2D collider) {
-		location = null;
-	}
-
+	
+	private void OnTriggerExit2D(Collider2D collider) => location = null;
+	
 	private void MovementRead() {
 		movement.x = Input.GetAxis("Horizontal");
 		movement.y = Input.GetAxis("Vertical");
 	}
-
+	
 	private void Run() {
 		if (Input.GetKeyUp(KeyCode.LeftShift)) {
 			finalSpeed = moveSpeed;
@@ -89,7 +85,7 @@ public class PlayerMovement : MonoBehaviour {
 			finalSpeed = runSpeed;
 		}
 	}
-
+	
 	private void LoadPosition() {
 		if (PlayerPrefs.HasKey("X") == true || PlayerPrefs.HasKey("Y") == true) {
 			transform.position = new Vector3(PlayerPrefs.GetFloat("X"), PlayerPrefs.GetFloat("Y"), 0);
@@ -97,12 +93,12 @@ public class PlayerMovement : MonoBehaviour {
 			transform.position = new Vector3(-62f, -10f, 0);
 		}
 	}
-
+	
 	private void Save() {
 		PlayerPrefs.SetFloat("X", transform.position.x);
 		PlayerPrefs.SetFloat("Y", transform.position.y);
 	}
-
+	
 	private void LocationUpdate() {
 		if (Input.GetKey(KeyCode.Space)) {
 			if (location == "Spaniae") {

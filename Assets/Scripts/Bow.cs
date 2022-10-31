@@ -14,13 +14,9 @@ public class Bow : MonoBehaviour {
 	private float nextFire = 0f;
 	private float zRotation;
 
-	private void Awake() {
-		SetFireRate();
-	}
+	private void Awake() => SetFireRate();
 
-	private void Start() {
-		SetLaunchForce();
-	}
+	private void Start() => SetLaunchForce();
 
 	private void Update() {
 		MouseLook();

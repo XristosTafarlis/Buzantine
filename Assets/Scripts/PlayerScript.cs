@@ -11,33 +11,33 @@ public class PlayerScript : MonoBehaviour {
 	[SerializeField] private AudioSource audioSource;
 	[SerializeField] private AudioClip[] playerPainSounds;
 	[Space(10)]
-
+	
 	public bool wonTheGame; //Used for text when level finishes
 	public bool endTheGame;
-
+	
 	[Header("Variables")]
 	public int damage = 5;
 	public int life;
 	private int maxLife;
 	private GameObject[] enemys;
-
+	
 	private void Start() {
 		SetPlayerLife();
 		maxLife = life;
 	}
-
+	
 	private void Update() {
 		GameFinished();
 		HealthRender();
 		Death();
 	}
-
+	
 	private void HealthRender() {
 		if (healthBar != null) {
 			healthBar.fillAmount = Mathf.Lerp(healthBar.fillAmount, (float)life / maxLife, 0.05f);
 		}
 	}
-
+	
 	private void SetPlayerLife() {
 		if (LevelSystem.level == 1) {
 			life = 100;
@@ -61,12 +61,12 @@ public class PlayerScript : MonoBehaviour {
 			life = 310;
 		}
 	}
-
+	
 	public void TakeDamage(int dmg) {
 		audioSource.PlayOneShot(playerPainSounds[Random.Range(0, playerPainSounds.Length)]);
 		life = life - dmg;
 	}
-
+	
 	private void GameFinished() {
 		if (WaveSpawner.wavesFinished == true) {
 			WaveSpawner.wavesFinished = false;
@@ -76,7 +76,7 @@ public class PlayerScript : MonoBehaviour {
 			Invoke("MainMenu", 2f);
 		}
 	}
-
+	
 	private void XpWon() {
 		if (SceneManager.GetActiveScene().name == "Spaniae") {
 			LevelSystem.xpOnWin = 30;
@@ -140,18 +140,16 @@ public class PlayerScript : MonoBehaviour {
 			LevelSystem.xpOnWin = 118;
 		}
 	}
-
-	private void MainMenu() {
-		SceneManager.LoadScene(0);
-	}
-
+	
+	private void MainMenu() => SceneManager.LoadScene(0);
+	
 	private void Death() {
 		if (life <= 0) {
 			endTheGame = true;
 			wonTheGame = false;
-
+			
 			rotationPoint.GetComponent<Bow>().enabled = false;
-
+			
 			enemys = GameObject.FindGameObjectsWithTag("Enemy");
 			foreach (GameObject enemy in enemys) {  //Freeze enemies
 				enemy.GetComponent<Animator>().SetBool("EnemyIsStill", true);

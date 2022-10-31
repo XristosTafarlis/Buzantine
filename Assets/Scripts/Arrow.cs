@@ -7,9 +7,7 @@ public class Arrow : MonoBehaviour {
 	private Rigidbody2D rb;
 	private bool hasHit;
 
-	private void Start() {
-		rb = GetComponent<Rigidbody2D>();
-	}
+	private void Start() => rb = GetComponent<Rigidbody2D>();
 
 	private void Update() {
 		//Arrow rotation mathematics

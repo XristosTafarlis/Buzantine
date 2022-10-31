@@ -2,9 +2,9 @@ using System.Collections;
 using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour {
-
+	
 	public enum SpawnState { SPAWNING, WAITING, COUNTING };
-
+	
 	[System.Serializable]
 	[SerializeField]
 	private class Wave {
@@ -13,28 +13,28 @@ public class WaveSpawner : MonoBehaviour {
 		public int count;
 		public float rate;
 	}
-
+	
 	[SerializeField] private Wave[] waves;
 	[SerializeField] private Transform spawnPoint;
 	[SerializeField] private float timeBetweenWaves = 2f;
 	[HideInInspector] public int waveCount;
 	public static bool wavesFinished = false;
-
+	
 	private int nextWave = 0;
 	private float waveCountdown;
 	private float searchCountdown = 1f;
 	SpawnState state = SpawnState.COUNTING;
-
+	
 	void Start() {
 		waveCount = waves.Length;
 		waveCountdown = timeBetweenWaves;
 	}
-
+	
 	void Update() {
 		if (Input.GetKeyDown(KeyCode.Backspace)) {
 			wavesFinished = true;
 		}
-
+		
 		if (state == SpawnState.WAITING) {
 			//Check if enemies are still alive
 			if (EnemyIsAlive() == false) {
@@ -46,7 +46,7 @@ public class WaveSpawner : MonoBehaviour {
 				return;
 			}
 		}
-
+		
 		if (waveCountdown <= 0) {
 			if (state != SpawnState.SPAWNING) {
 				StartCoroutine(SpawnWave(waves[nextWave]));
@@ -55,11 +55,11 @@ public class WaveSpawner : MonoBehaviour {
 			waveCountdown = waveCountdown - Time.deltaTime;
 		}
 	}
-
+	
 	void WaveCompleted() {
 		state = SpawnState.COUNTING;
 		waveCountdown = timeBetweenWaves;
-
+		
 		if (nextWave + 1 > waves.Length - 1) {
 			nextWave = 0;
 			wavesFinished = true;
@@ -68,7 +68,7 @@ public class WaveSpawner : MonoBehaviour {
 			nextWave++;
 		}
 	}
-
+	
 	bool EnemyIsAlive() {
 		searchCountdown = searchCountdown - Time.deltaTime;
 		if (searchCountdown <= 0) {
@@ -79,7 +79,7 @@ public class WaveSpawner : MonoBehaviour {
 		}
 		return true;
 	}
-
+	
 	IEnumerator SpawnWave(Wave _wave) {
 		state = SpawnState.SPAWNING;
 		//Spawning
@@ -87,12 +87,12 @@ public class WaveSpawner : MonoBehaviour {
 			SpawnEnemy(_wave.enemy);
 			yield return new WaitForSeconds(1f / _wave.rate);
 		}
-
+		
 		//Waiting
 		state = SpawnState.WAITING;
 		yield break;
 	}
-
+	
 	void SpawnEnemy(Transform _enemy) {
 		Instantiate(_enemy, spawnPoint.position, spawnPoint.rotation);
 	}

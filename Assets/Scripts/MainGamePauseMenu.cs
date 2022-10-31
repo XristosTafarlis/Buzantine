@@ -9,10 +9,14 @@ public class MainGamePauseMenu : MonoBehaviour{
 	[SerializeField] GameObject pauseText;
 	[SerializeField] GameObject player;
 	[SerializeField] GameObject keybinds;
+	[SerializeField] GameObject resetConfrimation;
+	[SerializeField] GameObject exitConfrimation;
 	
 	[SerializeField] Text [] locationText;
 	bool isPaused;
 	bool inKeybinds;
+	bool inResetConfirmation;
+	bool inExitConfirmation;
 
 	void Update(){
 		PauseUnpase();
@@ -75,9 +79,13 @@ public class MainGamePauseMenu : MonoBehaviour{
 				Time.timeScale = 0;
 				isPaused = true;
 			}else{	//If in pause menu
-				if(inKeybinds){
+				if(inKeybinds){	//If in Keybinds section
 					HideKeybinds();
-				}else{
+				}else if(inResetConfirmation){	//If in Reset Confirmation
+					HideResetConfirmation();
+				}else if(inExitConfirmation){	//If in Exit Confirmation
+					HideExitConfirmation();
+				}else{	//Else, close pause menu
 					mainText.SetActive(true);
 					pauseText.SetActive(false);
 					Time.timeScale = 1;
@@ -104,6 +112,16 @@ public class MainGamePauseMenu : MonoBehaviour{
 		keybinds.SetActive(false);
 	}
 	
+	public void ShowResetConfirmation(){
+		inResetConfirmation = true;
+		resetConfrimation.SetActive(true);
+	}
+	
+	public void HideResetConfirmation(){
+		inResetConfirmation = false;
+		resetConfrimation.SetActive(false);
+	}
+	
 	public void ResetAndRestart(){
 		Time.timeScale = 1;
 		PlayerPrefs.DeleteAll();
@@ -113,7 +131,15 @@ public class MainGamePauseMenu : MonoBehaviour{
 		SceneManager.LoadScene(SceneManager.GetActiveScene().name);	// Resets game
 	}
 	
-	public void Exit(){
-		Application.Quit();
+	public void ShowExitConfirmation(){
+		inExitConfirmation = true;
+		exitConfrimation.SetActive(true);
 	}
+	
+	public void HideExitConfirmation(){
+		inExitConfirmation = false;
+		exitConfrimation.SetActive(false);
+	}
+	
+	public void Exit() => Application.Quit();
 }
