@@ -1,4 +1,4 @@
-# The Buzantine Quest 
+# The Byzantine Quest 
 
 Παιχνίδι πτυχιακής με θέμα την βυζαντινή ιστορία.
 
