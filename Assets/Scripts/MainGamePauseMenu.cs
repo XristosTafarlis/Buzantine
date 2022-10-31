@@ -8,9 +8,11 @@ public class MainGamePauseMenu : MonoBehaviour{
 	[SerializeField] GameObject mainText;
 	[SerializeField] GameObject pauseText;
 	[SerializeField] GameObject player;
+	[SerializeField] GameObject keybinds;
 	
 	[SerializeField] Text [] locationText;
 	bool isPaused;
+	bool inKeybinds;
 
 	void Update(){
 		PauseUnpase();
@@ -67,16 +69,20 @@ public class MainGamePauseMenu : MonoBehaviour{
 	
 	void PauseUnpase(){
 		if(Input.GetKeyDown(KeyCode.Escape)){
-			if(!isPaused){
+			if(!isPaused){	//If is playing
 				mainText.SetActive(false);
 				pauseText.SetActive(true);
 				Time.timeScale = 0;
 				isPaused = true;
-			}else{
-				mainText.SetActive(true);
-				pauseText.SetActive(false);
-				Time.timeScale = 1;
-				isPaused = false;
+			}else{	//If in pause menu
+				if(inKeybinds){
+					HideKeybinds();
+				}else{
+					mainText.SetActive(true);
+					pauseText.SetActive(false);
+					Time.timeScale = 1;
+					isPaused = false;
+				}
 			}
 		}
 	}
@@ -86,6 +92,16 @@ public class MainGamePauseMenu : MonoBehaviour{
 		pauseText.SetActive(false);
 		Time.timeScale = 1;
 		isPaused = false;
+	}
+	
+	public void ShowKeybinds(){
+		inKeybinds = true;
+		keybinds.SetActive(true);
+	}
+	
+	public void HideKeybinds(){
+		inKeybinds = false;
+		keybinds.SetActive(false);
 	}
 	
 	public void ResetAndRestart(){
