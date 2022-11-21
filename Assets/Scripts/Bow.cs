@@ -55,6 +55,8 @@ public class Bow : MonoBehaviour {
 			fireRate = 2f;
 		} else if (LevelSystem.level >= 10) {
 			fireRate = 3.5f;
+		}else{
+			fireRate = 2f; // Used when testing a single level
 		}
 	}
 
