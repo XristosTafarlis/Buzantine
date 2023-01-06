@@ -9,6 +9,7 @@ public class RangedEnemy : MonoBehaviour {
 	[Header("References")]
 	[SerializeField] private Transform groundCheck;
 	[SerializeField] private LayerMask groundLayer;
+	[SerializeField] private LayerMask playerLayer;
 	[SerializeField] private LayerMask enemyLayer;
 	//[SerializeField] private Image healthBar;
 	[SerializeField] private GameObject bloodEffect;
@@ -24,6 +25,7 @@ public class RangedEnemy : MonoBehaviour {
 	[SerializeField] private float speed;										//Enemy speed
 	[SerializeField] private int damage;										//Enemy damage
 	[SerializeField] private int life;											//Enemy life
+	[SerializeField] private float range;											//Enemy range
 	private int maxLife;
 	
 	[Header("Circle")]
@@ -43,9 +45,11 @@ public class RangedEnemy : MonoBehaviour {
 		//anim = GetComponent<Animator>();
 		rb = GetComponent<Rigidbody2D>();
 		//anim.Play("Enemy_Walking", -1, Random.Range(0.0f, 1.0f));
+		range = Random.Range(9f, 13f);
 	}
 	
 	private void Update() {
+		PlayerCheck();
 		GroundCheck();
 		Walk();
 		CheckForEnemy();
@@ -80,6 +84,26 @@ public class RangedEnemy : MonoBehaviour {
 		//if (healthBar != null) {
 		//	healthBar.fillAmount = Mathf.Lerp(healthBar.fillAmount, (float)life / maxLife, 0.05f);
 		//}
+	}
+	
+	void PlayerCheck(){
+		bool inRange = Physics2D.OverlapCircle(transform.position, range, playerLayer);
+		if (inRange == true){
+			//Debug.Log("In");
+			speed = 0f;
+			InvokeRepeating("RandomMove", 1.5f, 1.5f);
+		}else{
+			//Debug.Log("Out");
+		}
+	}
+	
+	void RandomMove(){
+		int chance = Random.Range(0, 2);
+		
+		if (chance == 1){
+			speed = 0.7f;
+		 }else
+			speed = 0f;
 	}
 	
 	private void GroundCheck() {
@@ -160,5 +184,6 @@ public class RangedEnemy : MonoBehaviour {
 		Gizmos.DrawWireSphere(stopCheckUpper.position, length);						//Debug gizmos
 		Gizmos.DrawWireSphere(stopCheckMiddle.position, length);
 		Gizmos.DrawWireSphere(groundCheck.position, 0.1f);
+		Gizmos.DrawWireSphere(transform.position, range);
 	}
 }

@@ -151,7 +151,7 @@ public class PlayerScript : MonoBehaviour {
 			rotationPoint.GetComponent<Bow>().enabled = false;
 			
 			enemys = GameObject.FindGameObjectsWithTag("Enemy");
-			foreach (GameObject enemy in enemys) {  //Freeze enemies
+			foreach (GameObject enemy in enemys) {	//Freeze enemies
 				enemy.GetComponent<Animator>().SetBool("EnemyIsStill", true);
 				enemy.GetComponent<Animator>().SetBool("EnemyAttacks", false);
 				enemy.GetComponent<Enemy>().enabled = false;

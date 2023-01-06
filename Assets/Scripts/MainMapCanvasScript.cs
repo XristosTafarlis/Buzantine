@@ -98,11 +98,11 @@ public class MainMapCanvasScript : MonoBehaviour {
 		time += Time.deltaTime;
 		if(Time.timeScale > 0f) frameCount++;
 		
-		if (time >= pollingTime) {  //If enough time has passed, show the frame Count
+		if (time >= pollingTime) {	//If enough time has passed, show the frame Count
 			int frameRate = Mathf.RoundToInt(frameCount / time);
 			FPSText.text = "FPS : " + frameRate.ToString();
 			
-			time -= pollingTime;    //Reset the time
+			time -= pollingTime;	//Reset the time
 			frameCount = 0;
 		}
 	}
