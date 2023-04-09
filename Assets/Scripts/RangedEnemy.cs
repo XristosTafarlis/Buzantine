@@ -25,7 +25,10 @@ public class RangedEnemy : MonoBehaviour {
 	[SerializeField] private float speed;										//Enemy speed
 	[SerializeField] private int damage;										//Enemy damage
 	[SerializeField] private int life;											//Enemy life
-	[SerializeField] private float range;											//Enemy range
+	[SerializeField] private float fireRate = 1f;								//Enemy life
+	private float range;														//Enemy range
+	private bool canFire = false;												//Enemy can shoot
+	private float nextFire = 0f;												//Enemy next shot
 	private int maxLife;
 	
 	[Header("Circle")]
@@ -65,7 +68,8 @@ public class RangedEnemy : MonoBehaviour {
 		}
 	}
 	
-	private void OnCollisionEnter2D(Collision2D other) {
+	// Won't work for ranged enemies ->
+	/*private void OnCollisionEnter2D(Collision2D other) {
 		if (other.gameObject.tag.Equals("Player")) {
 			//anim.SetBool("EnemyAttacks", true);								//Playing attack animation
 			target = other.gameObject;										//Passing player object on a variable
@@ -78,7 +82,7 @@ public class RangedEnemy : MonoBehaviour {
 		if (other.gameObject.tag.Equals("Enemy")) {
 			//anim.SetBool("EnemyIsStill", false);							//Ending idling animation
 		}
-	}
+	}*/
 	
 	private void HealthRender() {
 		//if (healthBar != null) {
@@ -89,23 +93,21 @@ public class RangedEnemy : MonoBehaviour {
 	void PlayerCheck(){
 		bool inRange = Physics2D.OverlapCircle(transform.position, range, playerLayer);
 		if (inRange == true){
-			//Debug.Log("In");
 			speed = 0f;
-			InvokeRepeating("RandomMove", 1.5f, 1.5f);
-		}else{
-			//Debug.Log("Out");
+			
+			//Enemy fires acording to fire rate when in range of the player
+			if (canFire == false && Time.time >= nextFire) {
+				canFire = true;
+			}
+			if (canFire == true) {
+				canFire = false;
+				nextFire = Time.time + 1f / fireRate;
+				Debug.Log("Add the shooting mechanic");
+			}
 		}
 	}
 	
-	void RandomMove(){
-		int chance = Random.Range(0, 2);
-		
-		if (chance == 1){
-			speed = 0.7f;
-		 }else
-			speed = 0f;
-	}
-	
+	//Increase gravity on heavy slopes 
 	private void GroundCheck() {
 		if (groundCheck != null) {
 			isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
@@ -155,7 +157,7 @@ public class RangedEnemy : MonoBehaviour {
 		}
 	}
 	
-	private void AttackEnable() {   //Called in animator
+	private void AttackEnable() {	//Called in animator
 		Instantiate(bloodEffect, new Vector3(target.transform.position.x + 0.4f, target.transform.position.y), Quaternion.Euler(0f, 0f, 180f));
 		target.GetComponent<PlayerScript>().TakeDamage(damage);
 		//swordHitAudioSource.PlayOneShot(swordHitSounds[Random.Range(0, swordHitSounds.Length)]);
