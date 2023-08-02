@@ -3,7 +3,7 @@ using UnityEngine;
 public class CloudScroller : MonoBehaviour {
 	private float scrollSpeed;
 	private float offset;
-	private Material mat;
+	private Material mat;	
 
 	private void Start() {
 		scrollSpeed = Random.Range(0.3f, 0.7f) * (Random.Range(0, 2) * 2 - 1);
