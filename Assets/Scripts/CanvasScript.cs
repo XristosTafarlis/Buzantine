@@ -10,7 +10,7 @@ public class CanvasScript : MonoBehaviour {
 	[SerializeField] private Text text;
 	[SerializeField] private Text wavesText;
 	[SerializeField] private Image crosshair;
-	[Space(10)]
+	[Space(10)] 
 
 	private float fireRate;
 	private float count;
